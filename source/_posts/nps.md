@@ -1,0 +1,68 @@
+---
+title: 【nps】记录一次内网穿透搭建隧道代理过程
+date: 2022-11-17 18:26:14
+tags: 
+categories: 工具
+---
+
+# 这里图片我随便放的 以后再换正确的
+
+# 工具选择
+目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 `**nps**`
+**github页面地址：**[**点击这里**](https://github.com/ehang-io/nps)
+
+# 准备工作
+## 打开官网
+> [官方文档地址](https://ehang-io.github.io/nps/#/?id=nps)
+
+这里面其实写的都很详细，但是！！里面很多东西概念很模糊，不理解原理直接看官方文档的话，可能会浪费时间
+**所以接下来我们就来理解理解~**
+# 原理
+**VPS 因为会一直换IP 没有对外使用的公网，所以VPS上面放的是客户端**
+**所以我们需要一台有公网的服务器来挂服务端  **所以公网得有，还得开你要开的端口的**安全组**
+**客户端和服务端保持链接，由服务端来进行分发**
+原理大概如此，接下来就是一些简单的配置操作
+# 配置
+## 公网服务器-服务端
+下载对应系统版本的服务包 然后解压出来，解压出来的东西是可以直接使用的话，如果你要修改配置，可以到**conf**目录下找到`nps.conf`然后在里面修改你想要修改的，这里我就只改web端的密码，其他的不作修改。
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/08/0B/ChMkJlbZOHGIQPkpAA-T3dOxKtsAAMhjwHmJocAD5P1844.jpg)
+然后在外面目录下有一个`nps`的可执行文件
+我们先按照官网的教程 `nps install` 然后 `nps start`（这个后台启动）或者直接 `nps`这样子可以看见日志，我这里直接用`nps`启动观察日志。
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJlbWVk2IOtpkAB28FVL-QM8AAMRbAANAFsAHbwt859.jpg)
+随后通过`公网:端口`访问web页面，登录上后 我们要做的事情很简单，在客户端位置，创建一个东西
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJ1bWVliIVS06AFHxmRXqNYQAAMRbQORHqkAUfGx868.jpg)
+创建好了后我们点项目前面的 `+`可以展开，下面会有一个客户端命令，这里就是要我们在vps服务器上面启动的东西
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJ1bWVl6IfUxDAA56LFs9qCwAAMRbgMM0SQADnpE320.jpg)
+## VPS-客户端
+这边很简单，我们要做的就是
+
+1. 如果要搭建`http`代理的话，我们在web端页面HTTP代理位置新增一个
+2. ![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJlah6XmIYC1_AA_mAyQe9GEAAHjsgMqgakAD-Yb054.jpg)
+3. vps首先得拨号，有网络才可以
+4. 直接执行上面说的客户端命令
+5. ![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJlah6X2IFUmnAAvz2hvALAwAAHjswFkjPoAC_Py963.jpg)
+6. 如果出现这种就是链接成功了，这个时候web客户端位置会有链接信息
+
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJ1ah6X6IBEJrAAEjCnzS6XkAAHjswJTRF0AASMi461.jpg)
+### 测试一下
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJ1ah6YWIIlhbACQoXtBMeuQAAHjtAK3UyUAJCh2978.jpg)
+上面的账号密码就是上面**新增客户端**位置设置的，公网ip后面的端口是后面设置HTTP代理那里设置的**开放的端口**
+## 注意：
+只要是需要对接的端口，记住需要开放公网服务器的安全组端口，要不然没有网，现在服务器基本都是默认关闭了对应端口的.
+
+
+# 内网搭建API
+## 适合需求
+有些时候我们在内网服务器搭建了一个服务，但是我们想让其他人访问，这时候就可以通过这里下面的方案进行别人走一个公网，然后让别人访问到我们要访问的api啥的
+## web端配置
+### 第一步
+我们要在客户端那里建立一个服务，现在这里不要设置账号密码了
+别忘记在内网服务器也得执行一个那个**+号**下面的那个命令客户端保持连接哦，如果用了之前的，那么就不用了
+### 第二步
+我们这次要在**TCP隧道**位置创建一个服务
+![image.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/01/04/ChMkJ1g2YQeIbYQRABTlVmUrO4AAAYB0gGpqwMAFOVu246.jpg)
+### 服务部署
+在内网部署一个服务
+然后在外面通过公网访问测试一下，ok就没有问题啦
+
+

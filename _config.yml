@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:
@@ -95,7 +95,7 @@ include:
 exclude:
 ignore:
 
-marked:
+# marked:
   # gfm: true
   # pedantic: false
   # breaks: true
@@ -110,8 +110,8 @@ marked:
   # dompurify: false
   # headerIds: true
   # lazyload: false
-  prependRoot: true
-  postAsset: true
+  # prependRoot: false
+  # postAsset: false
   # external_link:
   #   enable: false
   #   exclude: []
