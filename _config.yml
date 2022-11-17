@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: HeartfiliaのBlogs
+subtitle: '个人博客啦'
+description: '往下滑动可以浏览更多啦~'
+keywords: 
+author: Lodge Heartfilia
+language: zh
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: http://litetools.top
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -44,7 +44,7 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
@@ -97,9 +97,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: particlex
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'git'
+  repo: git@github.com:Heartfilia/Heartfilia.github.io.git
+  branch: pages
