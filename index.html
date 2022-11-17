@@ -8,7 +8,7 @@
         <meta name="author" content="Lodge Heartfilia">
         <meta name="description" content="往下滑动可以浏览更多啦~">
         <meta name="keywords" content="">
-        <link rel="icon" href="http://rkcp8aqss.hn-bkt.clouddn.com/avatar/1000%20%281%29.jpg?e=1668650529&token=CxktOJJDdpzPVVDzQ7bq2qvUEQSupZE6zcALdG67:a7AKuizkDo2gY-5C84HUPbSlI2Q=">
+        <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
         <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
         <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
         
@@ -120,7 +120,7 @@
                     </div>
                     <div id="main">
                         <div id="home-head">
-    <div id="home-background" style="background-image: url(http://rkcp8aqss.hn-bkt.clouddn.com/wallpaper/miku.jpg?e=1668650564&token=CxktOJJDdpzPVVDzQ7bq2qvUEQSupZE6zcALdG67:ly7iiGYF78lbp-rtCghC4S_ISm8=)"></div>
+    <div id="home-background" style="background-image: url(http://t15.baidu.com/it/u=9850533220822613081,3077838423486355867&fm=3008&app=3011&f=JPEG)"></div>
     
     <div id="home-info" class="home-info" @click="home_click">
         <span class="loop"></span>
@@ -144,7 +144,84 @@
             
 
 <div class="post">
-    <a href="/2022/11/17/【nps】记录一次内网穿透搭建隧道代理过程/">
+    <a href="/2022/11/17/litetools/">
+        <h2 class="post-title">【Lite-Tools】一个python包的使用目录</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/教程/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                教程
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/17
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h1 id="下面的图片随便放的，我以后再弄"><a href="#下面的图片随便放的，我以后再弄" class="headerlink" title="下面的图片随便放的，我以后再弄"></a>下面的图片随便放的，我以后再弄</h1><blockquote>
+<p>这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>这里一般来说国内国外镜像都可以，不过我这个更新太随意了，有些时候国内镜像更新会慢几小时<br><code>pip install lite-tools</code> 如果有其他需求可以<code>pip install lite-tools[all]</code>不过这个<code>all</code>版本我没有搞完，没时间，哈哈哈</p>
+<h1 id="命令行版块"><a href="#命令行版块" class="headerlink" title="命令行版块"></a>命令行版块</h1><p>这里我们可以直接 <code>lite-tools -h</code>获取一些详细的操作</p>
+<blockquote>
+<p>如果遇到pip安装了之后 lite-tools还是命令行不可使用，那是你python的scripts目录不在环境变量里面,需要手动添加一下,因为不添加你的<code>scrapy``feapder</code>这些工具也不可以命令行使用，具体操作自己百度即可。</p>
+</blockquote>
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/01/04/ChMkJlg2YRGIXrtCABy9qCTYS60AAYB1AAAAAAAHL3A605.png" alt="1.png"></p>
+<h2 id="lite-tools-fish"><a href="#lite-tools-fish" class="headerlink" title="lite-tools fish"></a>lite-tools fish</h2><p>这是一个人生日历，没有搞农历节日那些东西，所以这里是标准的<strong>上五休二</strong>制度</p>
+<h2 id="lite-tools-say"><a href="#lite-tools-say" class="headerlink" title="lite-tools say"></a>lite-tools say</h2><p>这里基于 <a target="_blank" rel="noopener" href="http://hi.pcmoe.net/roar.html">熊与论道兽音</a> 版块修改算法改成python版本后实现的，并做了智能识别，大概操作如下<br><img src="https://desk-fd.zol-img.com.cn/t_s1440x900c5/g5/M00/00/07/ChMkJl3qNKaIDNA2AARqqK0FxbEAAvnJAJbLQMABGrA592.jpg" alt="2.png"></p>
+<h2 id="lite-tools-acg"><a href="#lite-tools-acg" class="headerlink" title="lite-tools acg"></a>lite-tools acg</h2><p>这里我没有弄好，主要是这里需要一个自动校准数据这里我没有弄，后面再弄，不复杂，想提前体验可以终端输入自己试一下</p>
+<h2 id="lite-tools-news"><a href="#lite-tools-news" class="headerlink" title="lite-tools news"></a>lite-tools news</h2><ol>
+<li>这里默认是获取国内新闻</li>
+<li><code>lite-tools news weibo</code> 这样子可以获取此时此刻的微博热榜榜单</li>
+<li><code>lite-tools news china/world</code>后面跟<code>china</code>或者<code>world</code>可以获取此时此刻中国或者世界上的最新的新闻</li>
+</ol>
+<h2 id="lite-tools-today"><a href="#lite-tools-today" class="headerlink" title="lite-tools today"></a>lite-tools today</h2><ol>
+<li>默认获取今天的黄历，也可以获取今年的节假日，并看经过情况</li>
+<li><code>lite-tools today history</code>获取历史上的今天的信息</li>
+<li><code>lite-tools today oil</code>获取今天的油价</li>
+</ol>
+<h2 id="lite-tools-weather"><a href="#lite-tools-weather" class="headerlink" title="lite-tools weather"></a>lite-tools weather</h2><p>默认根据当前请求IP获取当地的天气，当然有可能请求失败，然后会默认返回北京的天气<br>可以手动指定 **市区县 **然后获取对应地点的天气，后面不用写市区县，如下</p>
+<blockquote>
+<p>lite-tools weather 天河     获取天河区的天气，如果全国有同名的区就不知道是哪个地方了<br>lite-tools weather 广州     这样子就可以获取广州市的 </p>
+</blockquote>
+<h2 id="lite-tools-trans"><a href="#lite-tools-trans" class="headerlink" title="lite-tools trans"></a>lite-tools trans</h2><p>这里需要安装额外的包 <code>pip install lite-tools[all]</code>才可以实现以下功能。<br><strong>这里是比较复杂的，这里面很多功能我没有实现，目前我只搞了一个图片转pdf。</strong><br>**具体的操作可以看 **<code>**lite-tools trans -h**</code><br><img src="https://desk-fd.zol-img.com.cn/t_s1440x900c5/g5/M00/00/07/ChMkJ13qNJeIcWlLAAXZO1T9wbMAAvnJACT_eMABdlT817.jpg" alt="4.png"><br>这里<code>-i</code>或者<code>--input</code>后面必须要跟输入路径，这后面可以跟文件夹，也可以跟单个图片<br><code>-o</code>或者<code>--output</code>后面是输入文件的位置，这里可以定义输出文件的名称，不写默认同输入文件的名字<br>示例:<br><img src="https://desk-fd.zol-img.com.cn/t_s1440x900c5/g5/M00/00/07/ChMkJl3qNJ2IFiI6AAOv3s2X_20AAvnJAFb2ZcAA6_2818.jpg" alt="11.png"><br>上面<code>-i</code>后面跟了这个文件夹路径  后面<code>-o</code>后面自定义了输出的文件名称 这里的<code>-o</code>要是不写后面输出的文件就是 和文件夹同名的一个<code>pdf</code></p>
+<blockquote>
+<p>这里有个问题，这里是一个图片一页纸 我没有做密度排版，那样子要做很多计算，太麻烦了，反正平时大多数图片都是一页一页的</p>
+</blockquote>
+<h1 id="代码里面使用"><a href="#代码里面使用" class="headerlink" title="代码里面使用"></a>代码里面使用</h1>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/python/" style="color: #ff7d73">
+                python
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/17/litetools/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/17/nps/">
         <h2 class="post-title">【Nps】记录一次内网穿透搭建隧道代理过程</h2>
     </a>
     <div class="category-and-date">
@@ -168,28 +245,28 @@
     <div class="excerpt">
         <div class="content" v-pre>
             
-            <h1 id="工具选择"><a href="#工具选择" class="headerlink" title="工具选择"></a>工具选择</h1><p>目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 <code>**nps**</code><br><strong>github页面地址：</strong><a target="_blank" rel="noopener" href="https://github.com/ehang-io/nps"><strong>点击这里</strong></a></p>
+            <h1 id="这里图片我随便放的-以后再换正确的"><a href="#这里图片我随便放的-以后再换正确的" class="headerlink" title="这里图片我随便放的 以后再换正确的"></a>这里图片我随便放的 以后再换正确的</h1><h1 id="工具选择"><a href="#工具选择" class="headerlink" title="工具选择"></a>工具选择</h1><p>目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 <code>**nps**</code><br><strong>github页面地址：</strong><a target="_blank" rel="noopener" href="https://github.com/ehang-io/nps"><strong>点击这里</strong></a></p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="打开官网"><a href="#打开官网" class="headerlink" title="打开官网"></a>打开官网</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://ehang-io.github.io/nps/#/?id=nps">官方文档地址</a></p>
 </blockquote>
 <p>这里面其实写的都很详细，但是！！里面很多东西概念很模糊，不理解原理直接看官方文档的话，可能会浪费时间<br><strong>所以接下来我们就来理解理解~</strong></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><strong>VPS 因为会一直换IP 没有对外使用的公网，所以VPS上面放的是客户端</strong><br><strong>所以我们需要一台有公网的服务器来挂服务端  <strong>所以公网得有，还得开你要开的端口的</strong>安全组</strong><br><strong>客户端和服务端保持链接，由服务端来进行分发</strong><br>原理大概如此，接下来就是一些简单的配置操作</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="公网服务器-服务端"><a href="#公网服务器-服务端" class="headerlink" title="公网服务器-服务端"></a>公网服务器-服务端</h2><p>下载对应系统版本的服务包 然后解压出来，解压出来的东西是可以直接使用的话，如果你要修改配置，可以到<strong>conf</strong>目录下找到<code>nps.conf</code>然后在里面修改你想要修改的，这里我就只改web端的密码，其他的不作修改。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787085424-e68602aa-caaf-48c6-9e21-32657950397d.png#averageHue=%2320201f&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=205&id=u60e7967c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=205&originWidth=329&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10450&status=done&style=none&taskId=u7a7a67d8-87cc-462a-bd74-10201703463&title=&width=329" alt="image.png"><br>然后在外面目录下有一个<code>nps</code>的可执行文件<br>我们先按照官网的教程 <code>nps install</code> 然后 <code>nps start</code>（这个后台启动）或者直接 <code>nps</code>这样子可以看见日志，我这里直接用<code>nps</code>启动观察日志。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787210655-4133a48d-125a-4eaf-aad3-c2b55f66d230.png#averageHue=%2323477d&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=155&id=u6547fc87&margin=%5Bobject%20Object%5D&name=image.png&originHeight=155&originWidth=724&originalType=binary&ratio=1&rotation=0&showTitle=false&size=174099&status=done&style=none&taskId=u46c67a85-29a7-4875-86e3-9c0d2978808&title=&width=724" alt="image.png"><br>随后通过<code>公网:端口</code>访问web页面，登录上后 我们要做的事情很简单，在客户端位置，创建一个东西<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787355961-6fa3385c-8366-4002-b635-d55625710624.png#averageHue=%23fefcfc&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=766&id=u1bce9a49&margin=%5Bobject%20Object%5D&name=image.png&originHeight=766&originWidth=463&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31351&status=done&style=none&taskId=uc7032e95-92ce-450d-bded-b7eabe9279c&title=&width=463" alt="image.png"><br>创建好了后我们点项目前面的 <code>+</code>可以展开，下面会有一个客户端命令，这里就是要我们在vps服务器上面启动的东西<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787428391-6a83c875-3e70-4786-9a05-2f28d8aa46a5.png#averageHue=%23d7b889&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=265&id=uc90d3756&margin=%5Bobject%20Object%5D&name=image.png&originHeight=265&originWidth=681&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26455&status=done&style=none&taskId=uada8d4c9-6b4e-46af-8e59-0ea0c470370&title=&width=681" alt="image.png"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="公网服务器-服务端"><a href="#公网服务器-服务端" class="headerlink" title="公网服务器-服务端"></a>公网服务器-服务端</h2><p>下载对应系统版本的服务包 然后解压出来，解压出来的东西是可以直接使用的话，如果你要修改配置，可以到<strong>conf</strong>目录下找到<code>nps.conf</code>然后在里面修改你想要修改的，这里我就只改web端的密码，其他的不作修改。<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/08/0B/ChMkJlbZOHGIQPkpAA-T3dOxKtsAAMhjwHmJocAD5P1844.jpg" alt="image.png"><br>然后在外面目录下有一个<code>nps</code>的可执行文件<br>我们先按照官网的教程 <code>nps install</code> 然后 <code>nps start</code>（这个后台启动）或者直接 <code>nps</code>这样子可以看见日志，我这里直接用<code>nps</code>启动观察日志。<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJlbWVk2IOtpkAB28FVL-QM8AAMRbAANAFsAHbwt859.jpg" alt="image.png"><br>随后通过<code>公网:端口</code>访问web页面，登录上后 我们要做的事情很简单，在客户端位置，创建一个东西<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJ1bWVliIVS06AFHxmRXqNYQAAMRbQORHqkAUfGx868.jpg" alt="image.png"><br>创建好了后我们点项目前面的 <code>+</code>可以展开，下面会有一个客户端命令，这里就是要我们在vps服务器上面启动的东西<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/04/0A/ChMkJ1bWVl6IfUxDAA56LFs9qCwAAMRbgMM0SQADnpE320.jpg" alt="image.png"></p>
 <h2 id="VPS-客户端"><a href="#VPS-客户端" class="headerlink" title="VPS-客户端"></a>VPS-客户端</h2><p>这边很简单，我们要做的就是</p>
 <ol>
 <li>如果要搭建<code>http</code>代理的话，我们在web端页面HTTP代理位置新增一个</li>
-<li><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787776039-0f9db4d0-aeba-4505-8ed1-ba2e43d2643b.png#averageHue=%23fefcfb&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=516&id=u6953e955&margin=%5Bobject%20Object%5D&name=image.png&originHeight=516&originWidth=547&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24416&status=done&style=none&taskId=u35520670-206a-42d1-b9bc-e98fe926d97&title=&width=547" alt="image.png"></li>
+<li><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJlah6XmIYC1_AA_mAyQe9GEAAHjsgMqgakAD-Yb054.jpg" alt="image.png"></li>
 <li>vps首先得拨号，有网络才可以</li>
 <li>直接执行上面说的客户端命令</li>
-<li><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787871622-251f694b-7eca-4a22-a08f-d3b19e4d00c5.png#averageHue=%23d7bca1&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=126&id=u59fb001e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=126&originWidth=993&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16135&status=done&style=none&taskId=udfe21af3-e3cc-4a43-a3db-8ff0367f3ed&title=&width=993" alt="image.png"></li>
+<li><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJlah6X2IFUmnAAvz2hvALAwAAHjswFkjPoAC_Py963.jpg" alt="image.png"></li>
 <li>如果出现这种就是链接成功了，这个时候web客户端位置会有链接信息</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667787921190-ad2aa0aa-4f67-48ad-95b8-a769a393444e.png#averageHue=%23e2e4cb&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=120&id=u4058c18e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=120&originWidth=1614&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16711&status=done&style=none&taskId=u89a9206c-17c2-453d-9405-3217130dce2&title=&width=1614" alt="image.png"></p>
-<h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667788043804-1115900f-0262-4194-81d3-58ee010ce32c.png#averageHue=%23323a43&clientId=u98bed93f-60e0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=238&id=u2a4532e8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=238&originWidth=656&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25425&status=done&style=none&taskId=u8509e9d3-96d5-4b63-b18d-79a98bbabf9&title=&width=656" alt="image.png"><br>上面的账号密码就是上面<strong>新增客户端</strong>位置设置的，公网ip后面的端口是后面设置HTTP代理那里设置的<strong>开放的端口</strong></p>
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJ1ah6X6IBEJrAAEjCnzS6XkAAHjswJTRF0AASMi461.jpg" alt="image.png"></p>
+<h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/09/02/ChMkJ1ah6YWIIlhbACQoXtBMeuQAAHjtAK3UyUAJCh2978.jpg" alt="image.png"><br>上面的账号密码就是上面<strong>新增客户端</strong>位置设置的，公网ip后面的端口是后面设置HTTP代理那里设置的<strong>开放的端口</strong></p>
 <h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>只要是需要对接的端口，记住需要开放公网服务器的安全组端口，要不然没有网，现在服务器基本都是默认关闭了对应端口的.</p>
 <h1 id="内网搭建API"><a href="#内网搭建API" class="headerlink" title="内网搭建API"></a>内网搭建API</h1><h2 id="适合需求"><a href="#适合需求" class="headerlink" title="适合需求"></a>适合需求</h2><p>有些时候我们在内网服务器搭建了一个服务，但是我们想让其他人访问，这时候就可以通过这里下面的方案进行别人走一个公网，然后让别人访问到我们要访问的api啥的</p>
 <h2 id="web端配置"><a href="#web端配置" class="headerlink" title="web端配置"></a>web端配置</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>我们要在客户端那里建立一个服务，现在这里不要设置账号密码了<br>别忘记在内网服务器也得执行一个那个**+号**下面的那个命令客户端保持连接哦，如果用了之前的，那么就不用了</p>
-<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>我们这次要在<strong>TCP隧道</strong>位置创建一个服务<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667967821465-1c37e471-5839-4721-be3d-32922f8d9658.png#averageHue=%23fef9f7&clientId=u7d72f69b-2de0-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=593&id=u04efc54d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=593&originWidth=751&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46204&status=done&style=none&taskId=u22ca8cc9-0a0a-48bd-a214-502a1ec4b54&title=&width=751" alt="image.png"></p>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>我们这次要在<strong>TCP隧道</strong>位置创建一个服务<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/01/04/ChMkJ1g2YQeIbYQRABTlVmUrO4AAAYB0gGpqwMAFOVu246.jpg" alt="image.png"></p>
 <h3 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h3><p>在内网部署一个服务<br>然后在外面通过公网访问测试一下，ok就没有问题啦</p>
 
             
@@ -197,24 +274,13 @@
     </div>
     <div class="post-tags">
         
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/穿透/" style="color: #00bcd4">
-                穿透
-            </a>
-        </span>
         
     </div>
-    <a href="/2022/11/17/【nps】记录一次内网穿透搭建隧道代理过程/" class="go-post">阅读全文</a>
+    <a href="/2022/11/17/nps/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2022/11/17/【chfs】文件共享服务搭建/">
+    <a href="/2022/11/17/chfs/">
         <h2 class="post-title">【Chfs】文件共享服务搭建</h2>
     </a>
     <div class="category-and-date">
@@ -238,17 +304,17 @@
     <div class="excerpt">
         <div class="content" v-pre>
             
-            <p>构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？<br>现在我们用一个工具 <code>chfs</code> 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦<br>这里我们选用的工具官网是 <code>[http://iscute.cn/chfs](http://iscute.cn/chfs)</code> 网站很简陋，因为要实现的功能很简单，操作也比较简单</p>
-<h1 id="windows局域网"><a href="#windows局域网" class="headerlink" title="windows局域网"></a>windows局域网</h1><p>直接在这个网站上面下载 <code>[gui-chfs-windows.zip](http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip)</code><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667484235620-31b717fc-d941-439e-9651-03f664224fa5.png#clientId=u004c58fe-dcd8-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=ua6b2d087&margin=%5Bobject%20Object%5D&name=1.png&originHeight=218&originWidth=534&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15003&status=done&style=none&taskId=ue3fe428d-f068-42bc-b49e-58efe7e9c7b&title=" alt="1.png"><br>然后解压后得到一个<code>exe</code>文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。<br><strong>当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可</strong></p>
+            <h1 id="下面都没有图片-我先随便放一些图片-以后再补上"><a href="#下面都没有图片-我先随便放一些图片-以后再补上" class="headerlink" title="下面都没有图片 我先随便放一些图片 以后再补上"></a>下面都没有图片 我先随便放一些图片 以后再补上</h1><p>构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？<br>现在我们用一个工具 <code>chfs</code> 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦<br>这里我们选用的工具官网是 <code>[http://iscute.cn/chfs](http://iscute.cn/chfs)</code> 网站很简陋，因为要实现的功能很简单，操作也比较简单</p>
+<h1 id="windows局域网"><a href="#windows局域网" class="headerlink" title="windows局域网"></a>windows局域网</h1><p>直接在这个网站上面下载 <code>[gui-chfs-windows.zip](http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip)</code><br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJlxQHTuITnj2AAYCw7Gt4uAAAuopQEvH3UABgLb032.jpg" alt="1.png"><br>然后解压后得到一个<code>exe</code>文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。<br><strong>当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可</strong></p>
 <h1 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h1><blockquote>
 <p>下面只负责能直接命令行启动 具体部署由你安排</p>
 </blockquote>
-<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>还是去网站下载对应版本的软件<br>这里我下载的是linux版本，<strong>其它版本是一样的</strong>，在这里可以找到对应你服务器的版本<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667542086426-905d54a2-c95e-4ab0-9e6d-7671dfedeec3.png#clientId=u9a71a0f8-b7e5-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u00b67fa3&margin=%5Bobject%20Object%5D&name=1.png&originHeight=396&originWidth=721&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20488&status=done&style=none&taskId=u2a3dccbc-dfe8-4a24-9e24-cc1712d0c18&title=" alt="1.png"></p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>还是去网站下载对应版本的软件<br>这里我下载的是linux版本，<strong>其它版本是一样的</strong>，在这里可以找到对应你服务器的版本<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJlxQHUGINTFXAAIWKIW_G7kAAuopQFzoXIAAhZA282.jpg" alt="1.png"></p>
 <h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>然后把它解压出来，里面会有一个文件<br><strong>如果按照官方的教程，是可以很轻松的就部署的</strong><br><strong>但是我们要使用配置文件的方案，这样子可以把配置都记录下来</strong></p>
 <h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p><strong>我这里放到服务器一个位置</strong></p>
 <h3 id="第一步我们先给这个文件一个可执行的权限"><a href="#第一步我们先给这个文件一个可执行的权限" class="headerlink" title="第一步我们先给这个文件一个可执行的权限"></a>第一步我们先给这个文件一个可执行的权限</h3><pre><code class="bash">chmod +x chfs
 </code></pre>
-<h3 id="第二步我们直接创建一个空文件的配置文件-config-ini"><a href="#第二步我们直接创建一个空文件的配置文件-config-ini" class="headerlink" title="第二步我们直接创建一个空文件的配置文件 config.ini"></a>第二步我们直接创建一个空文件的配置文件 <code>config.ini</code></h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667542359932-248977d2-b3e5-4d59-9c5e-498e6a286ed0.png#clientId=u9a71a0f8-b7e5-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u43cc37e6&margin=%5Bobject%20Object%5D&name=2.png&originHeight=118&originWidth=713&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13850&status=done&style=none&taskId=u7cf29e10-3043-488c-8dc4-f30e8ea9de3&title=" alt="2.png"></p>
+<h3 id="第二步我们直接创建一个空文件的配置文件-config-ini"><a href="#第二步我们直接创建一个空文件的配置文件-config-ini" class="headerlink" title="第二步我们直接创建一个空文件的配置文件 config.ini"></a>第二步我们直接创建一个空文件的配置文件 <code>config.ini</code></h3><p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJ1xQHU2IK1_5AAzX0CR5picAAuopQI3iE4ADNfo498.jpg" alt="2.png"></p>
 <h3 id="官方的教程"><a href="#官方的教程" class="headerlink" title="官方的教程"></a>官方的教程</h3><table>
 <thead>
 <tr>
@@ -307,7 +373,7 @@ rule=&quot;:::pic:r:com:r|username:userpass:rwd&quot;
 <li><code>log</code>这里可以配置日志存放的目录，如果不配置，默认当前文件所在目录(如果你用了配置文件不写也不会有日志,命令行启动会这样)</li>
 </ol>
 <p><strong>其它配置比如证书啥的都必须放在配置文件里面</strong><br>这里自己看<a target="_blank" rel="noopener" href="http://iscute.cn/chfs">官网教程</a></p>
-<h2 id="挂载服务"><a href="#挂载服务" class="headerlink" title="挂载服务"></a>挂载服务</h2><p>这个自己安排<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667544542982-e7b2fe10-82d9-44f8-9b30-82148c028303.png#clientId=u9a71a0f8-b7e5-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uac2f1bb8&margin=%5Bobject%20Object%5D&name=3.png&originHeight=398&originWidth=581&originalType=binary&ratio=1&rotation=0&showTitle=false&size=312968&status=done&style=none&taskId=ue4791d33-6ae9-4700-b6af-cf4a7e1c408&title=" alt="3.png"><br>上面是我展示的配置执行后显示的情况</p>
+<h2 id="挂载服务"><a href="#挂载服务" class="headerlink" title="挂载服务"></a>挂载服务</h2><p>这个自己安排<br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJlxQKy2IXFAsAAVJZNgF7bwAAuotgIdWrUABUl8935.jpg" alt="3.png"><br>上面是我展示的配置执行后显示的情况</p>
 <h1 id="无网情况"><a href="#无网情况" class="headerlink" title="无网情况"></a>无网情况</h1><ol>
 <li><strong>你服务器没有开对应端口的安全组，基本都是这个问题啦</strong></li>
 <li>暂时没有想到</li>
@@ -320,84 +386,7 @@ rule=&quot;:::pic:r:com:r|username:userpass:rwd&quot;
         
         
     </div>
-    <a href="/2022/11/17/【chfs】文件共享服务搭建/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/11/17/【lite-tools】一个python包的使用目录/">
-        <h2 class="post-title">【Lite-Tools】一个python包的使用目录</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/教程/">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                </span>
-                教程
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <blockquote>
-<p>这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本</p>
-</blockquote>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>这里一般来说国内国外镜像都可以，不过我这个更新太随意了，有些时候国内镜像更新会慢几小时<br><code>pip install lite-tools</code> 如果有其他需求可以<code>pip install lite-tools[all]</code>不过这个<code>all</code>版本我没有搞完，没时间，哈哈哈</p>
-<h1 id="命令行版块"><a href="#命令行版块" class="headerlink" title="命令行版块"></a>命令行版块</h1><p>这里我们可以直接 <code>lite-tools -h</code>获取一些详细的操作</p>
-<blockquote>
-<p>如果遇到pip安装了之后 lite-tools还是命令行不可使用，那是你python的scripts目录不在环境变量里面,需要手动添加一下,因为不添加你的<code>scrapy``feapder</code>这些工具也不可以命令行使用，具体操作自己百度即可。</p>
-</blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667484957427-ce6d246e-2578-4609-8022-be6c93eccbd7.png#clientId=u1986c96e-1d89-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u1eb24f65&margin=%5Bobject%20Object%5D&name=1.png&originHeight=804&originWidth=1322&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1025932&status=done&style=none&taskId=u4d66f4c4-8cf0-4cbd-a7ea-b674d22802b&title=" alt="1.png"></p>
-<h2 id="lite-tools-fish"><a href="#lite-tools-fish" class="headerlink" title="lite-tools fish"></a>lite-tools fish</h2><p>这是一个人生日历，没有搞农历节日那些东西，所以这里是标准的<strong>上五休二</strong>制度</p>
-<h2 id="lite-tools-say"><a href="#lite-tools-say" class="headerlink" title="lite-tools say"></a>lite-tools say</h2><p>这里基于 <a target="_blank" rel="noopener" href="http://hi.pcmoe.net/roar.html">熊与论道兽音</a> 版块修改算法改成python版本后实现的，并做了智能识别，大概操作如下<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667485321678-91327844-4272-41fa-913e-fe9ed377981d.png#clientId=u1986c96e-1d89-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u45e20484&margin=%5Bobject%20Object%5D&name=2.png&originHeight=330&originWidth=1152&originalType=binary&ratio=1&rotation=0&showTitle=false&size=308300&status=done&style=none&taskId=u389420c9-0dc9-429a-a68c-5f9c6a9e823&title=" alt="2.png"></p>
-<h2 id="lite-tools-acg"><a href="#lite-tools-acg" class="headerlink" title="lite-tools acg"></a>lite-tools acg</h2><p>这里我没有弄好，主要是这里需要一个自动校准数据这里我没有弄，后面再弄，不复杂，想提前体验可以终端输入自己试一下</p>
-<h2 id="lite-tools-news"><a href="#lite-tools-news" class="headerlink" title="lite-tools news"></a>lite-tools news</h2><ol>
-<li>这里默认是获取国内新闻</li>
-<li><code>lite-tools news weibo</code> 这样子可以获取此时此刻的微博热榜榜单</li>
-<li><code>lite-tools news china/world</code>后面跟<code>china</code>或者<code>world</code>可以获取此时此刻中国或者世界上的最新的新闻</li>
-</ol>
-<h2 id="lite-tools-today"><a href="#lite-tools-today" class="headerlink" title="lite-tools today"></a>lite-tools today</h2><ol>
-<li>默认获取今天的黄历，也可以获取今年的节假日，并看经过情况</li>
-<li><code>lite-tools today history</code>获取历史上的今天的信息</li>
-<li><code>lite-tools today oil</code>获取今天的油价</li>
-</ol>
-<h2 id="lite-tools-weather"><a href="#lite-tools-weather" class="headerlink" title="lite-tools weather"></a>lite-tools weather</h2><p>默认根据当前请求IP获取当地的天气，当然有可能请求失败，然后会默认返回北京的天气<br>可以手动指定 **市区县 **然后获取对应地点的天气，后面不用写市区县，如下</p>
-<blockquote>
-<p>lite-tools weather 天河     获取天河区的天气，如果全国有同名的区就不知道是哪个地方了<br>lite-tools weather 广州     这样子就可以获取广州市的 </p>
-</blockquote>
-<h2 id="lite-tools-trans"><a href="#lite-tools-trans" class="headerlink" title="lite-tools trans"></a>lite-tools trans</h2><p>这里需要安装额外的包 <code>pip install lite-tools[all]</code>才可以实现以下功能。<br><strong>这里是比较复杂的，这里面很多功能我没有实现，目前我只搞了一个图片转pdf。</strong><br>**具体的操作可以看 **<code>**lite-tools trans -h**</code><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667486368577-ac679a51-6769-4653-8229-2a2f0b951f7d.png#clientId=u1986c96e-1d89-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u8108887d&margin=%5Bobject%20Object%5D&name=4.png&originHeight=396&originWidth=1204&originalType=binary&ratio=1&rotation=0&showTitle=false&size=230007&status=done&style=none&taskId=ubf197c51-e887-4756-a61b-609832d7500&title=" alt="4.png"><br>这里<code>-i</code>或者<code>--input</code>后面必须要跟输入路径，这后面可以跟文件夹，也可以跟单个图片<br><code>-o</code>或者<code>--output</code>后面是输入文件的位置，这里可以定义输出文件的名称，不写默认同输入文件的名字<br>示例:<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2975862/1667487069574-235531c3-8b64-48f4-9e30-8192eeaf18c7.png#clientId=u1986c96e-1d89-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u7fff0105&margin=%5Bobject%20Object%5D&name=11.png&originHeight=580&originWidth=1346&originalType=binary&ratio=1&rotation=0&showTitle=false&size=179087&status=done&style=none&taskId=u5b6963c2-b7a1-4643-ae26-9b550d94b27&title=" alt="11.png"><br>上面<code>-i</code>后面跟了这个文件夹路径  后面<code>-o</code>后面自定义了输出的文件名称 这里的<code>-o</code>要是不写后面输出的文件就是 和文件夹同名的一个<code>pdf</code></p>
-<blockquote>
-<p>这里有个问题，这里是一个图片一页纸 我没有做密度排版，那样子要做很多计算，太麻烦了，反正平时大多数图片都是一页一页的</p>
-</blockquote>
-<h1 id="代码里面使用"><a href="#代码里面使用" class="headerlink" title="代码里面使用"></a>代码里面使用</h1>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/python/" style="color: #03a9f4">
-                python
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/11/17/【lite-tools】一个python包的使用目录/" class="go-post">阅读全文</a>
+    <a href="/2022/11/17/chfs/" class="go-post">阅读全文</a>
 </div>
 
              
@@ -423,7 +412,7 @@ rule=&quot;:::pic:r:com:r|username:userpass:rwd&quot;
         <div id="card-div">
     <div class="card-style" style="width: 300px">
         <div class="avatar">
-            <img src="http://rkcp8aqss.hn-bkt.clouddn.com/avatar/1000%20%281%29.jpg?e=1668650529&token=CxktOJJDdpzPVVDzQ7bq2qvUEQSupZE6zcALdG67:a7AKuizkDo2gY-5C84HUPbSlI2Q= " alt="avatar">
+            <img src="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg " alt="avatar">
         </div>
         <div class="name">
             Lodge Heartfilia
@@ -436,6 +425,18 @@ rule=&quot;:::pic:r:com:r|username:userpass:rwd&quot;
             
         </div>
         <div class="icon-links">
+            
+            <span class="icon-link">
+                <a href="function link() { [native code] }">
+                    <i class="fa- fa- fa-fw"></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="function link() { [native code] }">
+                    <i class="fa- fa- fa-fw"></i>
+                </a>
+            </span>
             
         </div>
         <div class="friend-links">
