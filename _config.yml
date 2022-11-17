@@ -13,7 +13,8 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://litetools.top
+url: https://heartfilia.github.io
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -40,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -94,6 +95,30 @@ include:
 exclude:
 ignore:
 
+marked:
+  # gfm: true
+  # pedantic: false
+  # breaks: true
+  # smartLists: true
+  # smartypants: true
+  # quotes: '“”‘’'
+  # modifyAnchors: 0
+  # anchorAlias: false
+  # autolink: true
+  # mangle: true
+  # sanitizeUrl: false
+  # dompurify: false
+  # headerIds: true
+  # lazyload: false
+  prependRoot: true
+  postAsset: true
+  # external_link:
+  #   enable: false
+  #   exclude: []
+  #   nofollow: false
+  # disableNunjucks: false
+  # descriptionLists: true
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
@@ -105,3 +130,6 @@ deploy:
   type: 'git'
   repo: git@github.com:Heartfilia/Heartfilia.github.io.git
   branch: pages
+
+
+
