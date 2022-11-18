@@ -9,6 +9,14 @@
         <meta name="description" content="往下滑动可以浏览更多啦~">
         <meta name="keywords" content="">
         <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+        
+        <!--JS-->
+        <script src="/particlex"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="/particlex" />
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <!-- <script src="/js/anime.min.js"></script>  和上面二选一即可-->   
+
         <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
         <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
         
@@ -16,8 +24,11 @@
         <link rel="stylesheet" href="/css/particlex.css">
         
         <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+        
+        <!-- <link rel="stylesheet" src="/css//cursor.css"> -->
     <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
+
         <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
         <div id="layout">
             <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
@@ -149,7 +160,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #ff7d73">
+                <a href="/tags/python/" style="color: #03a9f4">
                     python
                 </a>
             </span>
@@ -161,6 +172,9 @@
         <h1 id="下面的图片随便放的，我以后再弄"><a href="#下面的图片随便放的，我以后再弄" class="headerlink" title="下面的图片随便放的，我以后再弄"></a>下面的图片随便放的，我以后再弄</h1><blockquote>
 <p>这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本</p>
 </blockquote>
+<span id="more"></span>
+
+
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>这里一般来说国内国外镜像都可以，不过我这个更新太随意了，有些时候国内镜像更新会慢几小时<br><code>pip install lite-tools</code> 如果有其他需求可以<code>pip install lite-tools[all]</code>不过这个<code>all</code>版本我没有搞完，没时间，哈哈哈</p>
 <h1 id="命令行版块"><a href="#命令行版块" class="headerlink" title="命令行版块"></a>命令行版块</h1><p>这里我们可以直接 <code>lite-tools -h</code>获取一些详细的操作</p>
 <blockquote>
@@ -188,7 +202,8 @@
 <blockquote>
 <p>这里有个问题，这里是一个图片一页纸 我没有做密度排版，那样子要做很多计算，太麻烦了，反正平时大多数图片都是一页一页的</p>
 </blockquote>
-<h1 id="代码里面使用"><a href="#代码里面使用" class="headerlink" title="代码里面使用"></a>代码里面使用</h1>
+<h1 id="代码里面使用"><a href="#代码里面使用" class="headerlink" title="代码里面使用"></a>代码里面使用</h1><p>没有写 后面再写</p>
+
     </div>
     
     
@@ -244,5 +259,14 @@
     });
 </script>
 
-    </body>
+
+        <!-- <div id="cursor"></div>
+        <script src="/js/cursor.js"></script>
+        <script src="/css/cursor.css"></script>  如果要修改鼠标样式把这里打开就好了-->
+        
+        <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <script src="/js/fireworks.js"></script>
+        <canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script></body>
 </html>

@@ -9,6 +9,14 @@
         <meta name="description" content="往下滑动可以浏览更多啦~">
         <meta name="keywords" content="">
         <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+        
+        <!--JS-->
+        <script src="/particlex"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="/particlex" />
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <!-- <script src="/js/anime.min.js"></script>  和上面二选一即可-->   
+
         <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
         <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
         
@@ -16,8 +24,11 @@
         <link rel="stylesheet" href="/css/particlex.css">
         
         <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+        
+        <!-- <link rel="stylesheet" src="/css//cursor.css"> -->
     <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
+
         <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
         <div id="layout">
             <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
@@ -144,7 +155,10 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="下面都没有图片-我先随便放一些图片-以后再补上"><a href="#下面都没有图片-我先随便放一些图片-以后再补上" class="headerlink" title="下面都没有图片 我先随便放一些图片 以后再补上"></a>下面都没有图片 我先随便放一些图片 以后再补上</h1><p>构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？<br>现在我们用一个工具 <code>chfs</code> 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦<br>这里我们选用的工具官网是 <code>[http://iscute.cn/chfs](http://iscute.cn/chfs)</code> 网站很简陋，因为要实现的功能很简单，操作也比较简单</p>
+        <h1 id="下面都没有图片-我先随便放一些图片-以后再补上"><a href="#下面都没有图片-我先随便放一些图片-以后再补上" class="headerlink" title="下面都没有图片 我先随便放一些图片 以后再补上"></a>下面都没有图片 我先随便放一些图片 以后再补上</h1><p>构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？</p>
+<span id="more"></span>
+
+<p>现在我们用一个工具 <code>chfs</code> 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦<br>这里我们选用的工具官网是 <code>[http://iscute.cn/chfs](http://iscute.cn/chfs)</code> 网站很简陋，因为要实现的功能很简单，操作也比较简单</p>
 <h1 id="windows局域网"><a href="#windows局域网" class="headerlink" title="windows局域网"></a>windows局域网</h1><p>直接在这个网站上面下载 <code>[gui-chfs-windows.zip](http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip)</code><br><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJlxQHTuITnj2AAYCw7Gt4uAAAuopQEvH3UABgLb032.jpg" alt="1.png"><br>然后解压后得到一个<code>exe</code>文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。<br><strong>当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可</strong></p>
 <h1 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h1><blockquote>
 <p>下面只负责能直接命令行启动 具体部署由你安排</p>
@@ -274,5 +288,14 @@ rule=&quot;:::pic:r:com:r|username:userpass:rwd&quot;
     });
 </script>
 
-    </body>
+
+        <!-- <div id="cursor"></div>
+        <script src="/js/cursor.js"></script>
+        <script src="/css/cursor.css"></script>  如果要修改鼠标样式把这里打开就好了-->
+        
+        <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <script src="/js/fireworks.js"></script>
+        <canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script></body>
 </html>

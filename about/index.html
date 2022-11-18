@@ -9,6 +9,14 @@
         <meta name="description" content="往下滑动可以浏览更多啦~">
         <meta name="keywords" content="">
         <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+        
+        <!--JS-->
+        <script src="/particlex"></script>
+        <!--CSS-->
+        <link rel="stylesheet" href="/particlex" />
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <!-- <script src="/js/anime.min.js"></script>  和上面二选一即可-->   
+
         <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
         <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
         
@@ -16,8 +24,11 @@
         <link rel="stylesheet" href="/css/particlex.css">
         
         <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+        
+        <!-- <link rel="stylesheet" src="/css//cursor.css"> -->
     <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
+
         <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
         <div id="layout">
             <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
@@ -174,5 +185,14 @@
         <script src="/js/showimg.js"></script>
         
 
-    </body>
+
+        <!-- <div id="cursor"></div>
+        <script src="/js/cursor.js"></script>
+        <script src="/css/cursor.css"></script>  如果要修改鼠标样式把这里打开就好了-->
+        
+        <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+        <script src="/js/fireworks.js"></script>
+        <canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+        <script src="/js/background.js"></script>
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script></body>
 </html>
