@@ -6,11 +6,13 @@ categories: 工具
 ---
 
 # 下面都没有图片 我先随便放一些图片 以后再补上
-
-
 构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？
+
+<!-- more -->
+
 现在我们用一个工具 `chfs` 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦
 这里我们选用的工具官网是 `[http://iscute.cn/chfs](http://iscute.cn/chfs)` 网站很简陋，因为要实现的功能很简单，操作也比较简单
+
 # windows局域网
 直接在这个网站上面下载 `[gui-chfs-windows.zip](http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip)`
 ![1.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/06/0A/ChMkJlxQHTuITnj2AAYCw7Gt4uAAAuopQEvH3UABgLb032.jpg)

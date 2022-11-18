@@ -10,12 +10,16 @@ categories: 教程
 
 > 这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本
 
+<!-- more -->
+
+
 # 安装
 这里一般来说国内国外镜像都可以，不过我这个更新太随意了，有些时候国内镜像更新会慢几小时
 `pip install lite-tools` 如果有其他需求可以`pip install lite-tools[all]`不过这个`all`版本我没有搞完，没时间，哈哈哈
 # 命令行版块
 这里我们可以直接 `lite-tools -h`获取一些详细的操作
 > 如果遇到pip安装了之后 lite-tools还是命令行不可使用，那是你python的scripts目录不在环境变量里面,需要手动添加一下,因为不添加你的`scrapy``feapder`这些工具也不可以命令行使用，具体操作自己百度即可。
+
 
 ![1.png](https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/01/04/ChMkJlg2YRGIXrtCABy9qCTYS60AAYB1AAAAAAAHL3A605.png)
 ## lite-tools fish
@@ -55,3 +59,4 @@ categories: 教程
 
 # 代码里面使用
 
+没有写 后面再写
