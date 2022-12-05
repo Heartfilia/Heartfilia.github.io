@@ -1,377 +1,627 @@
-
 <!DOCTYPE html>
 <html lang="zh">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>HeartfiliaのBlogs</title>
-        <meta name="author" content="Lodge Heartfilia">
-        <meta name="description" content="往下滑动可以浏览更多啦~">
-        <meta name="keywords" content="">
-        <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
-        
-        <!--JS-->
-        <script src="/particlex"></script>
-        <!--CSS-->
-        <link rel="stylesheet" href="/particlex" />
-        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
-        <!-- <script src="/js/anime.min.js"></script>  和上面二选一即可-->   
-
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.2.0/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-        
-        <!-- <link rel="stylesheet" src="/css//cursor.css"> -->
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">HeartfiliaのBlogs</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Heartfilia</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于我</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;博客总览</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;HeartfiliaのBlogs</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Heartfilia</div>
-                </div>
-            </a>
-            
-            <a href="/about">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于我</div>
-                </div>
-            </a>
-            
-            <a href="/archives">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-box-archive fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">博客总览</div>
-                </div>
-            </a>
-            
-            <a href="/categories">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-bookmark fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
-                </div>
-            </a>
-            
-            <a href="/tags">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        <div id="home-head">
-    <div id="home-background" style="background-image: url(http://t15.baidu.com/it/u=9850533220822613081,3077838423486355867&fm=3008&app=3011&f=JPEG)"></div>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>HeartfiliaのBlogs</title>
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="往下滑动可以浏览更多啦~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HeartfiliaのBlogs">
+<meta property="og:url" content="https://heartfilia.github.io/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="往下滑动可以浏览更多啦~">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
     
-    <div id="home-info" class="home-info" @click="home_click">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>HeartfiliaのBlogs</h1>
-                <h3>个人博客啦</h3>
-                <h5>往下滑动可以浏览更多啦~</h5>
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>个人博客啦</span>
+                    </a>
+                </div>
             </div>
-        </span>
-    </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <!-- Breadcrumb for tag & category page -->
+
+
+
+
     
-</div>
-
-<div id="home-posts-wrap" class="">
-    <div id="home-posts">
-        <div id="posts">
-            
-
-<div class="post">
-    <a href="/2022/11/17/litetools/">
-        <h2 class="post-title">【Lite-Tools】一个python包的使用目录</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/教程/">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                </span>
-                教程
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="下面的图片随便放的，我以后再弄"><a href="#下面的图片随便放的，我以后再弄" class="headerlink" title="下面的图片随便放的，我以后再弄"></a>下面的图片随便放的，我以后再弄</h1><blockquote>
-<p>这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本</p>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/python/" style="color: #ffa2c4">
-                python
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/11/17/litetools/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/11/17/nps/">
-        <h2 class="post-title">【Nps】记录一次内网穿透搭建隧道代理过程</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/工具/">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                </span>
-                工具
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="这里图片我随便放的-以后再换正确的"><a href="#这里图片我随便放的-以后再换正确的" class="headerlink" title="这里图片我随便放的 以后再换正确的"></a>这里图片我随便放的 以后再换正确的</h1><h1 id="工具选择"><a href="#工具选择" class="headerlink" title="工具选择"></a>工具选择</h1><p>目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 <strong>nps</strong></p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2022/11/17/nps/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/11/17/chfs/">
-        <h2 class="post-title">【Chfs】文件共享服务搭建</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/工具/">
-                <span class="icon">
-                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
-                </span>
-                工具
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/11/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="下面都没有图片-我先随便放一些图片-以后再补上"><a href="#下面都没有图片-我先随便放一些图片-以后再补上" class="headerlink" title="下面都没有图片 我先随便放一些图片 以后再补上"></a>下面都没有图片 我先随便放一些图片 以后再补上</h1><p>构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2022/11/17/chfs/" class="go-post">阅读全文</a>
-</div>
-
-             
-<div class="page-current">
-    <div class="prev">
-        
-    </div>
-    <div class="page-index">
-        
-        <span class="current">
-            1
-        </span>
-        
-    </div>
-    <div class="next">
-        
-    </div>
-</div>
-        </div>
-    </div>
     
-    <div id="home-card">
-        <div id="card-div">
-    <div class="card-style" style="width: 300px">
-        <div class="avatar">
-            <img src="https://upload-bbs.mihoyo.com/upload/2022/11/17/72767371/2c1ba5364c73477bf9d7dccaba80177d_8768679500172847563.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg " alt="avatar">
-        </div>
-        <div class="name">
-            Lodge Heartfilia
-        </div>
-        <div class="descriptions">
-            
-            <div class="description">
-                我是一个菜鸡
+        <article class="kratos-hentry clearfix" itemscope itemtype="https://schema.org/Article">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/12/05/resoure-link/">
+                        
+                            <img class="kratos-entry-thumb-new-img" alt="">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/12/05/resoure-link/" itemprop="mainEntityOfPage"><span itemprop="name headline">资源链接分享</span></a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p itemProp="description">
+                            
+                                里面内容是我收录的一些资源链接
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <time datetime="2022-12-05T06:46:53.000Z" itemprop="datePublished">
+                            <a><i class="fa fa-calendar"></i> 2022-12-05</a>
+                        </time>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E8%A1%A8%E6%A0%BC/" rel="tag">表格</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                                <a id="/2022/12/05/resoure-link/" class="leancloud_visitors" data-flag-title="资源链接分享">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="leancloud-visitors-count"> </span> 次阅读
+                                </a>
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                                <a>
+                                    <i class="fa fa-commenting-o"></i>
+                                    <span data-xid="/2022/12/05/resoure-link/" class="waline-comment-count"> </span> 条评论
+                                </a>
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/12/05/resoure-link/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
             </div>
-            
-        </div>
-        <div class="icon-links">
-            
-        </div>
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://github.com/Heartfilia">
-                    GITHUB
-                </a>
-            </div>
-            
-        </div>
-    </div>
-</div>
-    </div>
+        </article>
     
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 2022 - 2022 HeartfiliaのBlogs
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
+
+    
+    
+        <article class="kratos-hentry clearfix" itemscope itemtype="https://schema.org/Article">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/11/17/litetools/">
+                        
+                            <img class="kratos-entry-thumb-new-img" alt="">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/11/17/litetools/" itemprop="mainEntityOfPage"><span itemprop="name headline">【lite-tools】一个python包的使用目录</span></a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p itemProp="description">
+                            
+                                下面的图片随便放的，我以后再弄
+这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本
+
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <time datetime="2022-11-17T10:31:35.000Z" itemprop="datePublished">
+                            <a><i class="fa fa-calendar"></i> 2022-11-17</a>
+                        </time>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                                <a id="/2022/11/17/litetools/" class="leancloud_visitors" data-flag-title="【lite-tools】一个python包的使用目录">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="leancloud-visitors-count"> </span> 次阅读
+                                </a>
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                                <a>
+                                    <i class="fa fa-commenting-o"></i>
+                                    <span data-xid="/2022/11/17/litetools/" class="waline-comment-count"> </span> 条评论
+                                </a>
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/11/17/litetools/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix" itemscope itemtype="https://schema.org/Article">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/11/17/nps/">
+                        
+                            <img class="kratos-entry-thumb-new-img" alt="">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/11/17/nps/" itemprop="mainEntityOfPage"><span itemprop="name headline">【nps】记录一次内网穿透搭建隧道代理过程</span></a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p itemProp="description">
+                            
+                                这里图片我随便放的 以后再换正确的工具选择目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 nps
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <time datetime="2022-11-17T10:26:14.000Z" itemprop="datePublished">
+                            <a><i class="fa fa-calendar"></i> 2022-11-17</a>
+                        </time>
+                        <a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                                <a id="/2022/11/17/nps/" class="leancloud_visitors" data-flag-title="【nps】记录一次内网穿透搭建隧道代理过程">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="leancloud-visitors-count"> </span> 次阅读
+                                </a>
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                                <a>
+                                    <i class="fa fa-commenting-o"></i>
+                                    <span data-xid="/2022/11/17/nps/" class="waline-comment-count"> </span> 条评论
+                                </a>
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/11/17/nps/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix" itemscope itemtype="https://schema.org/Article">
+            <div class="kratos-entry-border-new clearfix">
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/11/17/chfs/">
+                        
+                            <img class="kratos-entry-thumb-new-img" alt="">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/11/17/chfs/" itemprop="mainEntityOfPage"><span itemprop="name headline">【chfs】文件共享服务搭建</span></a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p itemProp="description">
+                            
+                                下面都没有图片 我先随便放一些图片 以后再补上构建局域网内文件共享是不是经常忍受不了windows服务器的协议问题，加密又不方便，又不好操作呢？
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <time datetime="2022-11-17T10:19:05.000Z" itemprop="datePublished">
+                            <a><i class="fa fa-calendar"></i> 2022-11-17</a>
+                        </time>
+                        <a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                                <a id="/2022/11/17/chfs/" class="leancloud_visitors" data-flag-title="【chfs】文件共享服务搭建">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="leancloud-visitors-count"> </span> 次阅读
+                                </a>
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                                <a>
+                                    <i class="fa fa-commenting-o"></i>
+                                    <span data-xid="/2022/11/17/chfs/" class="waline-comment-count"> </span> 条评论
+                                </a>
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/11/17/chfs/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+
+
+
+
+    <div class="hidden">
+        <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
+        
+            <div id="w-comments" class="post-comments"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Waline(Object.assign({
+                el: '#w-comments',
+                path: '/index.html'
+            }, JSON.parse('{"serverURL":"https://vercel-server-84c1v9xvl-heartfilia.vercel.app/","visitor":true}')));
+        }
+        if (typeof Waline === 'undefined') {
+            const src = '/vendors/@waline/client@1.6.0/dist/Waline.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://waline.js.org/">comments powered by Waline.</a></noscript>
+
+        
+    </div>
+
+
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">往下滑动可以浏览更多啦~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
             </span>
-            @Lodge Heartfilia
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-        <div>
-            备案号：
+            <span class="count">
+                4
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                3
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                2
+            </span>
+        </a>
+    </div>
+</aside>
             
-            <a target="_blank" rel="noopener" href="https://www.beian.gov.cn/">
-            粤ICP备2022145961号
-            </a>
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
             
-        </div>
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/12/05/resoure-link/"><i class="fa  fa-book"></i> 资源链接分享</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/11/17/litetools/"><i class="fa  fa-book"></i> 【lite-tools】一个python包的使用目录</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/11/17/nps/"><i class="fa  fa-book"></i> 【nps】记录一次内网穿透搭建隧道代理过程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/11/17/chfs/"><i class="fa  fa-book"></i> 【chfs】文件共享服务搭建</a>
+            
+          
+        
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
     </div>
 </footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
 
 
-        <!-- <div id="cursor"></div>
-        <script src="/js/cursor.js"></script>
-        <script src="/css/cursor.css"></script>  如果要修改鼠标样式把这里打开就好了-->
-        
-        <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
-        <script src="/js/fireworks.js"></script>
-        <canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
-        <script src="/js/background.js"></script>
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="2829961453"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
     <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script></body>
 </html>
