@@ -41,6 +41,8 @@
     <script src="/js/kr-dark.min.js"></script>
   
   
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
   
   <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
   <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
@@ -289,14 +291,14 @@
     <div class="hidden">
         <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
         
-            <div id="w-comments" class="post-comments"></div>
+            <div id="w-comments" class="post-comments bg-image"></div>
 <script>
     var load_comm = () => {
         const init = () => {
             new Waline(Object.assign({
                 el: '#w-comments',
                 path: '/categories/%E8%B5%84%E6%BA%90/index.html'
-            }, JSON.parse('{"serverURL":"https://vercel-server-84c1v9xvl-heartfilia.vercel.app/","visitor":true}')));
+            }, JSON.parse('{"serverURL":"https://vercel-server-nkcu67v7a-heartfilia.vercel.app/","visitor":true}')));
         }
         if (typeof Waline === 'undefined') {
             const src = '/vendors/@waline/client@1.6.0/dist/Waline.min.js';
@@ -344,7 +346,7 @@
                 文章
             </span>
             <span class="count">
-                4
+                5
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -352,7 +354,7 @@
                 分类
             </span>
             <span class="count">
-                3
+                4
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -360,7 +362,7 @@
                 标签
             </span>
             <span class="count">
-                2
+                3
             </span>
         </a>
     </div>
@@ -369,7 +371,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BE%8E%E5%8C%96/">美化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
@@ -378,7 +380,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+        <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 0.8em;">教程</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
       </div>
   </aside>
 
@@ -389,6 +391,12 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/12/06/hexo/"><i class="fa  fa-book"></i> 【hexo】从零开始搭建一个博客</a>
+            
+          
         
           
           
@@ -527,5 +535,5 @@
 <!-- Extra support for third-party plguins  -->
 
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script></body>
+    </body>
 </html>
