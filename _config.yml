@@ -5,7 +5,7 @@
 # Site
 title: HeartfiliaのBlogs
 subtitle: '个人博客啦'
-description: '往下滑动可以浏览更多啦~'
+description: '一个在追寻大佬脚步的菜鸡~'
 keywords: 
 author: Lodge Heartfilia
 language: zh
@@ -45,7 +45,7 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: false
+  enable: true
   line_number: true
   auto_detect: false
   tab_replace: ''
@@ -123,7 +123,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: particlex
-theme: tangyuxian
+theme: Kratos-Rebirth
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -134,7 +134,7 @@ deploy:
 
 
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local
   # pluginRootPath: live2dw/
   # pluginJsPath: lib/
