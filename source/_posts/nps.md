@@ -30,27 +30,27 @@ toc: true
 # 配置
 ## 公网服务器-服务端
 下载对应系统版本的服务包 然后解压出来，解压出来的东西是可以直接使用的话，如果你要修改配置，可以到**conf**目录下找到`nps.conf`然后在里面修改你想要修改的，这里我就只改web端的密码，其他的不作修改。
-![配置文件部分](http://static.litetools.top/blogs/nps/image.png)
+![配置文件部分](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image.png)
 然后在外面目录下有一个`nps`的可执行文件
 我们先按照官网的教程 `nps install` 然后 `nps start`（这个后台启动）或者直接 `nps`这样子可以看见日志，我这里直接用`nps`启动观察日志。
-![nps服务端启动](http://static.litetools.top/blogs/nps/image (1).png)
+![nps服务端启动](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (1).png)
 随后通过`公网:端口`访问web页面，登录上后 我们要做的事情很简单，在客户端位置，创建一个东西
-![新建客户端](http://static.litetools.top/blogs/nps/image (2).png)
+![新建客户端](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (2).png)
 创建好了后我们点项目前面的 `+`可以展开，下面会有一个客户端命令，这里就是要我们在vps服务器上面启动的东西
-![创建好客户端后](http://static.litetools.top/blogs/nps/image (3).png)
+![创建好客户端后](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (3).png)
 ## VPS-客户端
 这边很简单，我们要做的就是
 
 1. 如果要搭建`http`代理的话，我们在web端页面HTTP代理位置新增一个
-2. ![网站新增客户端](http://static.litetools.top/blogs/nps/image (4).png)
+2. ![网站新增客户端](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (4).png)
 3. vps首先得拨号，有网络才可以
 4. 直接执行上面说的客户端命令
-5. ![vps上面启动命令](http://static.litetools.top/blogs/nps/image (5).png)
+5. ![vps上面启动命令](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (5).png)
 6. 如果出现这种就是链接成功了，这个时候web客户端位置会有链接信息
 
-![访问ok情况](http://static.litetools.top/blogs/nps/image (6).png)
+![访问ok情况](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (6).png)
 ### 测试一下
-![测试一下代理](http://static.litetools.top/blogs/nps/image (7).png)
+![测试一下代理](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (7).png)
 上面的账号密码就是上面**新增客户端**位置设置的，公网ip后面的端口是后面设置HTTP代理那里设置的**开放的端口**
 
 推荐还是弄socket代理 配置很简单 只需要新建一个socket客户端就可以了
@@ -68,7 +68,7 @@ toc: true
 别忘记在内网服务器也得执行一个那个**+号**下面的那个命令客户端保持连接哦，如果用了之前的，那么就不用了
 ### 第二步
 我们这次要在**TCP隧道**位置创建一个服务
-![TCP隧道测试](http://static.litetools.top/blogs/nps/image (8).png)
+![TCP隧道测试](https://raw.githubusercontent.com/Heartfilia/images/main/nps/image (8).png)
 ### 服务部署
 在内网部署一个服务
 然后在外面通过公网访问测试一下，ok就没有问题啦
