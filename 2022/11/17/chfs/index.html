@@ -25,7 +25,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
 <meta property="article:published_time" content="2022-11-17T10:19:05.000Z">
-<meta property="article:modified_time" content="2022-12-06T07:49:38.236Z">
+<meta property="article:modified_time" content="2022-12-14T03:41:51.916Z">
 <meta property="article:author" content="Lodge Heartfilia">
 <meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1670312978236"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1670989311916"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -261,15 +261,15 @@
 <span id="more"></span>
 
 <p>现在我们用一个工具 <code>chfs</code> 搭建一个局域网或者公网(你得有服务器)都可以使用的基于浏览器就可以访问的磁盘共享工具啦<br>这里我们选用的工具官网是 <a target="_blank" rel="noopener" href="http://iscute.cn/chfs">点击这里</a> 网站很简陋，因为要实现的功能很简单，操作也比较简单</p>
-<h1 id="windows局域网"><a href="#windows局域网" class="headerlink" title="windows局域网"></a>windows局域网</h1><p>直接在这个网站上面下载<span class="blur">我这里是2.0版本的直接下载链接</span> <a target="_blank" rel="noopener" href="http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip">gui-chfs-windows.zip</a><br><img src="http://static.litetools.top/blogs/chfs/0.png" alt="windows界面下载"><br>然后解压后得到一个<code>exe</code>文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。<br><strong>当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可</strong></p>
+<h1 id="windows局域网"><a href="#windows局域网" class="headerlink" title="windows局域网"></a>windows局域网</h1><p>直接在这个网站上面下载<span class="blur">我这里是2.0版本的直接下载链接</span> <a target="_blank" rel="noopener" href="http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip">gui-chfs-windows.zip</a><br><img src="https://raw.githubusercontent.com/Heartfilia/images/main/chfs/0.png" alt="windows界面下载"><br>然后解压后得到一个<code>exe</code>文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。<br><strong>当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可</strong></p>
 <h1 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h1><blockquote>
 <p>下面只负责能直接命令行启动 具体部署由你安排</p>
 </blockquote>
-<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>还是去网站下载对应版本的软件<br>这里我下载的是linux版本，<strong>其它版本是一样的</strong>，在这里可以找到对应你服务器的版本<br><img src="http://static.litetools.top/blogs/chfs/1.png" alt="命令行下载工具"></p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>还是去网站下载对应版本的软件<br>这里我下载的是linux版本，<strong>其它版本是一样的</strong>，在这里可以找到对应你服务器的版本<br><img src="https://raw.githubusercontent.com/Heartfilia/images/main/chfs/1.png" alt="命令行下载工具"></p>
 <h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>然后把它解压出来，里面会有一个文件<br><strong>如果按照官方的教程，是可以很轻松的就部署的</strong><br><strong>但是我们要使用配置文件的方案，这样子可以把配置都记录下来</strong></p>
 <h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p><strong>我这里放到服务器一个位置</strong></p>
 <h3 id="第一步我们先给这个文件一个可执行的权限"><a href="#第一步我们先给这个文件一个可执行的权限" class="headerlink" title="第一步我们先给这个文件一个可执行的权限"></a>第一步我们先给这个文件一个可执行的权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x chfs</span><br></pre></td></tr></table></figure>
-<h3 id="第二步我们直接创建一个空文件的配置文件-config-ini"><a href="#第二步我们直接创建一个空文件的配置文件-config-ini" class="headerlink" title="第二步我们直接创建一个空文件的配置文件 config.ini"></a>第二步我们直接创建一个空文件的配置文件 <code>config.ini</code></h3><p><img src="http://static.litetools.top/blogs/chfs/2.png" alt="创建一个配置文件"></p>
+<h3 id="第二步我们直接创建一个空文件的配置文件-config-ini"><a href="#第二步我们直接创建一个空文件的配置文件-config-ini" class="headerlink" title="第二步我们直接创建一个空文件的配置文件 config.ini"></a>第二步我们直接创建一个空文件的配置文件 <code>config.ini</code></h3><p><img src="https://raw.githubusercontent.com/Heartfilia/images/main/chfs/2.png" alt="创建一个配置文件"></p>
 <h3 id="官方的教程"><a href="#官方的教程" class="headerlink" title="官方的教程"></a>官方的教程</h3><table>
 <thead>
 <tr>
@@ -323,7 +323,7 @@
 <li><code>log</code>这里可以配置日志存放的目录，如果不配置，默认当前文件所在目录(如果你用了配置文件不写也不会有日志,命令行启动会这样)</li>
 </ol>
 <p><strong>其它配置比如证书啥的都必须放在配置文件里面</strong><br>这里自己看<a target="_blank" rel="noopener" href="http://iscute.cn/chfs">官网教程</a></p>
-<h2 id="挂载服务"><a href="#挂载服务" class="headerlink" title="挂载服务"></a>挂载服务</h2><p>这个自己安排<br><img src="http://static.litetools.top/blogs/chfs/3.png" alt="启动后情况"><br>上面是我展示的配置执行后显示的情况</p>
+<h2 id="挂载服务"><a href="#挂载服务" class="headerlink" title="挂载服务"></a>挂载服务</h2><p>这个自己安排<br><img src="https://raw.githubusercontent.com/Heartfilia/images/main/chfs/3.png" alt="启动后情况"><br>上面是我展示的配置执行后显示的情况</p>
 <h1 id="无网情况"><a href="#无网情况" class="headerlink" title="无网情况"></a>无网情况</h1><ol>
 <li><strong>你服务器没有开对应端口的安全组，基本都是这个问题啦</strong></li>
 <li>暂时没有想到</li>
@@ -343,7 +343,7 @@
                     <a class="tag-none-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2022-12-06T07:49:38.236Z" itemprop="dateModified">最后编辑：2022-12-06</time>
+                    <time datetime="2022-12-14T03:41:51.916Z" itemprop="dateModified">最后编辑：2022-12-14</time>
                 </div>
             </div>
         </footer>
@@ -410,7 +410,7 @@
                 文章
             </span>
             <span class="count">
-                6
+                7
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -418,7 +418,7 @@
                 分类
             </span>
             <span class="count">
-                2
+                3
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -449,7 +449,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
   </aside>
 
 
@@ -458,7 +458,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/python/" style="font-size: 0.6em;">python</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.8em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+        <a href="/tags/python/" style="font-size: 0.8em;">python</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.8em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
       </div>
   </aside>
 
@@ -469,6 +469,12 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2022/12/14/codetrans/"><i class="fa  fa-book"></i> 【数据转换】python实现其它代码中轻易实现的逻辑</a>
+            
+          
         
           
           
@@ -495,11 +501,7 @@
           
         
           
-          
-            <a class="list-group-item" href="/2022/11/17/nps/"><i class="fa  fa-book"></i> 【nps】记录一次内网穿透搭建隧道代理过程</a>
             
-          
-        
           
             
       </ul>

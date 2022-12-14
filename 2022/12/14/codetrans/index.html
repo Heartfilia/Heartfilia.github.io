@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
-  <title>【nps】记录一次内网穿透搭建隧道代理过程 | HeartfiliaのBlogs</title>
+  <title>【数据转换】python实现其它代码中轻易实现的逻辑 | HeartfiliaのBlogs</title>
   <meta name="author" content="Lodge Heartfilia" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -14,20 +14,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="工具" />
+    <meta name="keywords" content="python" />
   
-  <meta name="description" content="工具选择目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 nps">
+  <meta name="description" content="一些在其它语言可以轻易实现的功能，但是在python中会有点误差的实现方案 这里的内容会持续更新，新增！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【nps】记录一次内网穿透搭建隧道代理过程">
-<meta property="og:url" content="https://heartfilia.github.io/2022/11/17/nps/index.html">
+<meta property="og:title" content="【数据转换】python实现其它代码中轻易实现的逻辑">
+<meta property="og:url" content="https://heartfilia.github.io/2022/12/14/codetrans/index.html">
 <meta property="og:site_name" content="HeartfiliaのBlogs">
-<meta property="og:description" content="工具选择目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 nps">
+<meta property="og:description" content="一些在其它语言可以轻易实现的功能，但是在python中会有点误差的实现方案 这里的内容会持续更新，新增！">
 <meta property="og:locale">
 <meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
-<meta property="article:published_time" content="2022-11-17T10:26:14.000Z">
-<meta property="article:modified_time" content="2022-12-06T07:50:05.894Z">
+<meta property="article:published_time" content="2022-12-14T02:19:22.000Z">
+<meta property="article:modified_time" content="2022-12-14T02:32:07.844Z">
 <meta property="article:author" content="Lodge Heartfilia">
-<meta property="article:tag" content="工具">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
@@ -209,15 +209,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2022/11/17/nps/">
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2022/12/14/codetrans/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">【nps】记录一次内网穿透搭建隧道代理过程</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【数据转换】python实现其它代码中轻易实现的逻辑</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2022-11-17T10:26:14.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-11-17</time></li>
+                <li><time datetime="2022-12-14T02:19:22.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-12-14</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
                 </li>
@@ -225,19 +225,19 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.60K
+                        ~3.63K
                     
                     字
                 </li>
                 
-                    <li id="/2022/11/17/nps/" class="leancloud_visitors" data-flag-title="【nps】记录一次内网穿透搭建隧道代理过程">
+                    <li id="/2022/12/14/codetrans/" class="leancloud_visitors" data-flag-title="【数据转换】python实现其它代码中轻易实现的逻辑">
                         <i class="fa fa-eye"></i>
                         <span class="leancloud-visitors-count"> </span> 次阅读
                     </li>
                     
                         <li>
                             <i class="fa fa-commenting-o"></i>
-                            <span data-xid="/2022/11/17/nps/" class="waline-comment-count"> </span> 条评论
+                            <span data-xid="/2022/12/14/codetrans/" class="waline-comment-count"> </span> 条评论
                         </li>
                     
                 
@@ -247,43 +247,47 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1670313005894"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1670985127844"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9"><span class="toc-number">1.</span> <span class="toc-text">工具选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E5%AE%98%E7%BD%91"><span class="toc-number">2.1.</span> <span class="toc-text">打开官网</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">4.1.</span> <span class="toc-text">公网服务器-服务端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">4.2.</span> <span class="toc-text">VPS-客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="toc-number">4.2.1.</span> <span class="toc-text">测试一下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-number">4.3.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%90%AD%E5%BB%BAAPI"><span class="toc-number">5.</span> <span class="toc-text">内网搭建API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E5%90%88%E9%9C%80%E6%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">适合需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">5.2.</span> <span class="toc-text">web端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-number">5.2.1.</span> <span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-number">5.2.2.</span> <span class="toc-text">第二步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2"><span class="toc-number">5.2.3.</span> <span class="toc-text">服务部署</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BD%AC%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">一. 浮点数转二进制</span></a></li></ol>
                 </div>
             
             <hr />
-            <div itemprop="articleBody"><h1 id="工具选择"><a href="#工具选择" class="headerlink" title="工具选择"></a>工具选择</h1><p>目前市面上有很多这种工具，原理其实都差不多，这里我采用黑哥推荐的 <strong>nps</strong></p>
+            <div itemprop="articleBody"><p>一些在其它语言可以轻易实现的功能，但是在python中会有点误差的实现方案</p>
+<p>这里的内容会持续更新，新增！</p>
 <span id="more"></span>
 
-<p><strong>github页面地址：</strong><a target="_blank" rel="noopener" href="https://github.com/ehang-io/nps"><strong>点击这里</strong></a></p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="打开官网"><a href="#打开官网" class="headerlink" title="打开官网"></a>打开官网</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://ehang-io.github.io/nps/#/?id=nps">官方文档地址</a></p>
-</blockquote>
-<p>这里面其实写的都很详细，但是！！里面很多东西概念很模糊，不理解原理直接看官方文档的话，可能会浪费时间<br><strong>所以接下来我们就来理解理解~</strong></p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><strong>VPS 因为会一直换IP 没有对外使用的公网，所以VPS上面放的是客户端</strong><br><strong>所以我们需要一台有公网的服务器来挂服务端  <strong>所以公网得有，还得开你要开的端口的</strong>安全组</strong><br><strong>客户端和服务端保持链接，由服务端来进行分发</strong><br>原理大概如此，接下来就是一些简单的配置操作</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="公网服务器-服务端"><a href="#公网服务器-服务端" class="headerlink" title="公网服务器-服务端"></a>公网服务器-服务端</h2><p>下载对应系统版本的服务包 然后解压出来，解压出来的东西是可以直接使用的话，如果你要修改配置，可以到<strong>conf</strong>目录下找到<code>nps.conf</code>然后在里面修改你想要修改的，这里我就只改web端的密码，其他的不作修改。<br><img src="http://static.litetools.top/blogs/nps/image.png" alt="配置文件部分"><br>然后在外面目录下有一个<code>nps</code>的可执行文件<br>我们先按照官网的教程 <code>nps install</code> 然后 <code>nps start</code>（这个后台启动）或者直接 <code>nps</code>这样子可以看见日志，我这里直接用<code>nps</code>启动观察日志。<br>![nps服务端启动](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (1).png)<br>随后通过<code>公网:端口</code>访问web页面，登录上后 我们要做的事情很简单，在客户端位置，创建一个东西<br>![新建客户端](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (2).png)<br>创建好了后我们点项目前面的 <code>+</code>可以展开，下面会有一个客户端命令，这里就是要我们在vps服务器上面启动的东西<br>![创建好客户端后](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (3).png)</p>
-<h2 id="VPS-客户端"><a href="#VPS-客户端" class="headerlink" title="VPS-客户端"></a>VPS-客户端</h2><p>这边很简单，我们要做的就是</p>
-<ol>
-<li>如果要搭建<code>http</code>代理的话，我们在web端页面HTTP代理位置新增一个</li>
-<li>![网站新增客户端](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (4).png)</li>
-<li>vps首先得拨号，有网络才可以</li>
-<li>直接执行上面说的客户端命令</li>
-<li>![vps上面启动命令](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (5).png)</li>
-<li>如果出现这种就是链接成功了，这个时候web客户端位置会有链接信息</li>
-</ol>
-<p>![访问ok情况](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (6).png)</p>
-<h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p>![测试一下代理](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (7).png)<br>上面的账号密码就是上面<strong>新增客户端</strong>位置设置的，公网ip后面的端口是后面设置HTTP代理那里设置的<strong>开放的端口</strong></p>
-<p>推荐还是弄socket代理 配置很简单 只需要新建一个socket客户端就可以了</p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>只要是需要对接的端口，记住需要开放公网服务器的安全组端口，要不然没有网，现在服务器基本都是默认关闭了对应端口的.</p>
-<h1 id="内网搭建API"><a href="#内网搭建API" class="headerlink" title="内网搭建API"></a>内网搭建API</h1><h2 id="适合需求"><a href="#适合需求" class="headerlink" title="适合需求"></a>适合需求</h2><p>有些时候我们在内网服务器搭建了一个服务，但是我们想让其他人访问，这时候就可以通过这里下面的方案进行别人走一个公网，然后让别人访问到我们要访问的api啥的</p>
-<h2 id="web端配置"><a href="#web端配置" class="headerlink" title="web端配置"></a>web端配置</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>我们要在客户端那里建立一个服务，现在这里不要设置账号密码了<br>别忘记在内网服务器也得执行一个那个**+号**下面的那个命令客户端保持连接哦，如果用了之前的，那么就不用了</p>
-<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>我们这次要在<strong>TCP隧道</strong>位置创建一个服务<br>![TCP隧道测试](<a target="_blank" rel="noopener" href="http://static.litetools.top/blogs/nps/image">http://static.litetools.top/blogs/nps/image</a> (8).png)</p>
-<h3 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h3><p>在内网部署一个服务<br>然后在外面通过公网访问测试一下，ok就没有问题啦</p>
+<h1 id="一-浮点数转二进制"><a href="#一-浮点数转二进制" class="headerlink" title="一. 浮点数转二进制"></a>一. 浮点数转二进制</h1><div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>实现方案一</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#十进制浮点数转二进制</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dectbin</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="comment"># 判断是否为浮点数</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="built_in">int</span>(num):</span><br><span class="line">        <span class="comment"># 若为整数</span></span><br><span class="line">        integer = <span class="string">&#x27;&#123;:b&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">int</span>(num))</span><br><span class="line">        <span class="keyword">return</span> integer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 若为浮点数</span></span><br><span class="line">        <span class="comment"># 取整数部分</span></span><br><span class="line">        integer_part = <span class="built_in">int</span>(num)</span><br><span class="line">        <span class="comment"># 取小数部分</span></span><br><span class="line">        decimal_part = num - integer_part</span><br><span class="line">        <span class="comment"># 整数部分进制转换</span></span><br><span class="line">        integercom = <span class="string">&#x27;&#123;:b&#125;&#x27;</span>.<span class="built_in">format</span>(integer_part)  <span class="comment">#&#123;:b&#125;.foemat中b是二进制</span></span><br><span class="line">        <span class="comment"># 小数部分进制转换</span></span><br><span class="line">        tem = decimal_part</span><br><span class="line">        tmpflo = []</span><br><span class="line">        <span class="comment"># for i in range(accuracy):</span></span><br><span class="line">        A = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">while</span> A:</span><br><span class="line">            tem *= <span class="number">2</span></span><br><span class="line">            tmpflo += <span class="built_in">str</span>(<span class="built_in">int</span>(tem))  <span class="comment">#若整数部分为0则二进制部分为0，若整数部分为1则二进制部分为1 #将1或0放入列表</span></span><br><span class="line">            <span class="keyword">if</span> tem &gt; <span class="number">1</span> :   <span class="comment">#若乘以2后为大于1的小数，则要减去整数部分</span></span><br><span class="line">                tem -= <span class="built_in">int</span>(tem)</span><br><span class="line">            <span class="keyword">elif</span> tem &lt; <span class="number">1</span>:  <span class="comment">#乘以2后若仍为小于1的小数，则继续使用这个数乘2变换进制</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:    <span class="comment">#当乘以2后正好为1，则进制变换停止</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        flocom = tmpflo</span><br><span class="line">        <span class="keyword">return</span> integercom + <span class="string">&#x27;.&#x27;</span> + <span class="string">&#x27;&#x27;</span>.join(flocom)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    number = <span class="number">5</span></span><br><span class="line">    result = dectbin(number)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;number&#125;</span>的二进制数为：<span class="subst">&#123;result&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
+
+
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>实现方案二</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">xor</span>(<span class="params">x, y</span>):</span><br><span class="line">    x, y = ctypes.c_int32(x).value, ctypes.c_int32(y).value</span><br><span class="line">    <span class="keyword">return</span> ctypes.c_int(x ^ y).value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">unsigned_right_shift</span>(<span class="params">x, y</span>):</span><br><span class="line">    x, y = ctypes.c_uint32(x).value, y % <span class="number">32</span></span><br><span class="line">    <span class="keyword">return</span> ctypes.c_uint32(x &gt;&gt; y).value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">left_shift</span>(<span class="params">x, y</span>):</span><br><span class="line">    x, y = ctypes.c_int32(x).value, y % <span class="number">32</span></span><br><span class="line">    <span class="keyword">return</span> ctypes.c_int32(x &lt;&lt; y).value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right_shift</span>(<span class="params">x, y</span>):</span><br><span class="line">    x, y = ctypes.c_int32(x).value, y % <span class="number">32</span></span><br><span class="line">    <span class="keyword">return</span> ctypes.c_int32(x &gt;&gt; y).value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dectbin</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="comment"># 判断是否为浮点数</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="built_in">int</span>(num):</span><br><span class="line">        <span class="comment"># 若为整数</span></span><br><span class="line">        integer = <span class="string">&#x27;&#123;:b&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">int</span>(num))</span><br><span class="line">        <span class="keyword">return</span> integer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 若为浮点数</span></span><br><span class="line">        <span class="comment"># 取整数部分</span></span><br><span class="line">        integer_part = <span class="built_in">int</span>(num)</span><br><span class="line">        <span class="comment"># 取小数部分</span></span><br><span class="line">        decimal_part = num - integer_part</span><br><span class="line">        <span class="comment"># 整数部分进制转换</span></span><br><span class="line">        integercom = <span class="string">&#x27;&#123;:b&#125;&#x27;</span>.<span class="built_in">format</span>(integer_part)  <span class="comment">#&#123;:b&#125;.foemat中b是二进制</span></span><br><span class="line">        <span class="comment"># 小数部分进制转换</span></span><br><span class="line">        tem = decimal_part</span><br><span class="line">        tmpflo = []</span><br><span class="line">        <span class="comment"># for i in range(accuracy):</span></span><br><span class="line">        A = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">while</span> A:</span><br><span class="line">            tem *= <span class="number">2</span></span><br><span class="line">            tmpflo += <span class="built_in">str</span>(<span class="built_in">int</span>(tem))  <span class="comment">#若整数部分为0则二进制部分为0，若整数部分为1则二进制部分为1 #将1或0放入列表</span></span><br><span class="line">            <span class="keyword">if</span> tem &gt; <span class="number">1</span> :   <span class="comment">#若乘以2后为大于1的小数，则要减去整数部分</span></span><br><span class="line">                tem -= <span class="built_in">int</span>(tem)</span><br><span class="line">            <span class="keyword">elif</span> tem &lt; <span class="number">1</span>:  <span class="comment">#乘以2后若仍为小于1的小数，则继续使用这个数乘2变换进制</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:    <span class="comment">#当乘以2后正好为1，则进制变换停止</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        flocom = tmpflo</span><br><span class="line">        <span class="keyword">return</span> integercom + <span class="string">&#x27;.&#x27;</span> + <span class="string">&#x27;&#x27;</span>.join(flocom)</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
+
+
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>实现方案三</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">conversion_of_binary</span>(<span class="params">number</span>):</span><br><span class="line">    <span class="keyword">global</span> binary_integer_part, binary_fractional_part, binary_total, integer_part, fractional_part</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 整数部分</span></span><br><span class="line">    integer_part = <span class="built_in">int</span>(number)</span><br><span class="line">    binary_integer_part = <span class="built_in">bin</span>(integer_part)[<span class="number">2</span>:]  <span class="comment"># a[2:]</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 小数部分</span></span><br><span class="line">    fractional_part = number - integer_part</span><br><span class="line">    binary_fractional_part = conversion_of_fraction(fractional_part, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 拼接</span></span><br><span class="line">    binary_total = binary_integer_part + <span class="string">&#x27;.&#x27;</span> + binary_fractional_part</span><br><span class="line">    <span class="keyword">return</span> binary_total</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># CONVERSION TO FRACTION PART TO BINARY</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">conversion_of_fraction</span>(<span class="params">num, base</span>):</span><br><span class="line">    binary = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">while</span> num != <span class="number">0</span>:</span><br><span class="line">        num = num * base</span><br><span class="line">        binary = binary + <span class="built_in">str</span>(<span class="built_in">int</span>(num))</span><br><span class="line">        num = num - <span class="built_in">int</span>(num)</span><br><span class="line">    <span class="keyword">return</span> binary</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">	result = conversion_of_binary(<span class="number">2.8</span>)</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
 </div>
         </div>
         
@@ -296,10 +300,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
+                    <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2022-12-06T07:50:05.894Z" itemprop="dateModified">最后编辑：2022-12-06</time>
+                    <time datetime="2022-12-14T02:32:07.844Z" itemprop="dateModified">最后编辑：2022-12-14</time>
                 </div>
             </div>
         </footer>
@@ -308,13 +312,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 【chfs】文件共享服务搭建" href="/2022/11/17/chfs/">&lt; 上一篇</a>
+                <a title=" 【应用破解】Navicat重置试用" href="/2022/12/08/navicat-reset/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 【lite-tools】一个python包的使用目录" href="/2022/11/17/litetools/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
@@ -325,7 +325,7 @@
         const init = () => {
             new Waline(Object.assign({
                 el: '#w-comments',
-                path: '/2022/11/17/nps/'
+                path: '/2022/12/14/codetrans/'
             }, JSON.parse('{"serverURL":"https://vercel-server-nkcu67v7a-heartfilia.vercel.app/","visitor":true}')));
         }
         if (typeof Waline === 'undefined') {
@@ -402,7 +402,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9"><span class="toc-text">工具选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E5%AE%98%E7%BD%91"><span class="toc-text">打开官网</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">公网服务器-服务端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">VPS-客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="toc-text">测试一下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%90%AD%E5%BB%BAAPI"><span class="toc-text">内网搭建API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E5%90%88%E9%9C%80%E6%B1%82"><span class="toc-text">适合需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">web端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2"><span class="toc-text">服务部署</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BD%AC%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-text">一. 浮点数转二进制</span></a></li></ol>
     </div>
 </aside>
                 
