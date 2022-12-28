@@ -12,7 +12,10 @@ toc: true
 
 <!-- more -->
 
-# 一. 浮点数转二进制
+# JS板块
+
+
+## 一. 浮点数转二进制
 
 {% collapse 实现方案一 %}
 
@@ -153,3 +156,42 @@ if __name__ == "__main__":
 ```
 
 {% endcollapse %}
+
+
+
+## 二、逻辑运算转换
+
+在 JavaScript 内部，数值都是以 64 位浮点数的形式储存，但是做位运算的时候，是以 32 位带符号的整数进行运算的，并且返回值也是一个 32 位带符号的整数。目的是使在 python 中的显示和 js 中的显示相同，就在 Python 中做一次从 uint32 到 int32 的转换。
+
+
+### 1.逻辑符号 ^
+
+{% collapse 实现方案一 %}
+
+```python
+import struct
+
+num = 3988292384 ^ 127
+print(num)                                           # 3988292447
+
+print(struct.unpack('i', struct.pack('I', num))[0])  # -306674849
+```
+
+{% endcollapse %}
+
+
+
+{% collapse 实现方案二 %}
+
+```python
+def int_overflow(val):
+    maxint = 2147483647
+    if not -maxint-1 <= val <= maxint:
+        val = (val + (maxint + 1)) % (2 * (maxint + 1)) - maxint - 1
+    return val
+
+print(int_overflow(3988292384 ^ 127))                # -306674849
+```
+
+{% endcollapse %}
+
