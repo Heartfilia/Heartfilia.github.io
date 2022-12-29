@@ -22,11 +22,14 @@ def write_md(content: str, path: str):
 
 
 def get_files(src: str, dst: str):
-	for name in os.listdir("_posts"):
-		path = os.path.join("source", "_posts", name)
+	base_path = os.path.join('source', '_posts')
+	for name in os.listdir(base_path):
+		path = os.path.join(base_path, name)
 		content = get_md(path)
 		new_content = change(content, src, dst)
-		write_md(new_content, path)
+		# write_md(new_content, path)
+		print(new_content)
+		break
 
 
 if __name__ == "__main__":
