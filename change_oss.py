@@ -27,9 +27,7 @@ def get_files(src: str, dst: str):
 		path = os.path.join(base_path, name)
 		content = get_md(path)
 		new_content = change(content, src, dst)
-		# write_md(new_content, path)
-		print(new_content)
-		break
+		write_md(new_content, path)
 
 
 if __name__ == "__main__":
