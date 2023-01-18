@@ -195,3 +195,68 @@ print(int_overflow(3988292384 ^ 127))                # -306674849
 
 {% endcollapse %}
 
+
+
+### 2.无符号右移 >>>
+
+这里目前还没有完美的方案，数据量非常大的时候可能需要加上 板块二 **逻辑符号 ^** 里面数据量过大情况进行数据修正，大概意思就是这个得出来的结果再套一层。
+
+**示例**：采用逻辑符号 ^ 方案二 --> `int_overflow(这里就是无符号右移得出来的结果)`
+
+{% collapse 实现方案一 %}
+
+```python
+def unsinged_right_shift(x, y):
+    x = x & 0xffffffff
+    signed = False
+    if x < 0:
+        signed = True
+    x = x.to_bytes(4, byteorder='big', signed=signed)  # 有符号
+    x = int.from_bytes(x, byteorder='big', signed=False)  # 无符号
+    return x >> (y & 0xf)
+```
+
+{% endcollapse %}
+
+
+
+{% collapse 实现方案二 %}
+
+```python
+import ctypes
+
+
+def unsinged_right_shift(x, y):
+    x,y = ctypes.c_uint32(x).value,y % 32
+    return ctypes.c_uint32(x >> y).value
+```
+
+{% endcollapse %}
+
+
+
+{% collapse 实现方案三 %}
+
+```python
+MAX32INT = 4294967295
+
+def unsinged_right_shift(num, bit=0) -> int:
+    # example: 
+    #   javascript: -1 >>> 1 === python: right_without_sign(-1, 1)
+    val = ctypes.c_uint32(num).value >> bit
+    return (val + (MAX32INT + 1)) % (2 * (MAX32INT + 1)) - MAX32INT - 1
+```
+
+{% endcollapse %}
+
+
+
+{% collapse 实现方案四-小小白提供 %}
+
+```python
+def unsinged_right_shift(signed, i=0):
+    shift = signed % 0x100000000
+    return shift >> i
+```
+
+{% endcollapse %}

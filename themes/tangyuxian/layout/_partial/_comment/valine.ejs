@@ -1,0 +1,32 @@
+<!-- <div class="valine"></div>
+<script src='<%- theme.cdn.valine.js %>'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: '<%= theme.valine.appId %>',
+        appKey: '<%= theme.valine.appKey %>'
+    })
+</script> -->
+
+<head>
+    <!-- ... -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+    />
+    <!-- ... -->
+    <script src='<%- theme.cdn.valine.js %>'></script>
+</head>
+<body>
+    <!-- ... -->
+    <div id="waline"></div>
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+
+        init({
+            el: '#waline',
+            serverURL: '<%= theme.valine.service %>',
+        });
+    </script>
+</body>
