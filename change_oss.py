@@ -27,12 +27,10 @@ def get_files(src: str, dst: str):
 		path = os.path.join(base_path, name)
 		content = get_md(path)
 		new_content = change(content, src, dst)
-		print(new_content)
-		break
-		# write_md(new_content, path)
+		write_md(new_content, path)
 
 
 if __name__ == "__main__":
-	get_files("https://raw.githubusercontent.com/Heartfilia/images/main/", "https://cdn.jsdelivr.net/gh/Heartfilia/images/")
-	# get_files("https://raw.githubusercontent.com/Heartfilia/images/main/", "https://static.litetools.top/blogs/")
+	# get_files("https://raw.githubusercontent.com/Heartfilia/images/main/", "https://cdn.jsdelivr.net/gh/Heartfilia/images/")
+	get_files("https://raw.githubusercontent.com/Heartfilia/images/main/", "https://static.litetools.top/blogs/")
 	# get_files("https://static.litetools.top/blogs/", "https://raw.githubusercontent.com/Heartfilia/images/main/")
