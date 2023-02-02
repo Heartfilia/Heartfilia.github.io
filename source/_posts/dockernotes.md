@@ -24,7 +24,7 @@ toc: true
 
 > 传统的虚拟机方案
 
-![image-20230118163412308](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230118163412308.png)
+![image-20230118163412308](https://static.litetools.top/blogs/docker_notes/image-20230118163412308.png)
 
 虚拟机技术缺点:
 
@@ -36,7 +36,7 @@ toc: true
 
 **容器化技术不是模拟的一个完整的操作系统**
 
-![image-20230118163853525](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230118163853525.png)
+![image-20230118163853525](https://static.litetools.top/blogs/docker_notes/image-20230118163853525.png)
 
 比较docker和虚拟机技术的不同：
 
@@ -57,7 +57,7 @@ toc: true
 
 **docker的架构图：**
 
-![image-20230118170123233](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230118170123233.png)
+![image-20230118170123233](https://static.litetools.top/blogs/docker_notes/image-20230118170123233.png)
 
 - 镜像(image)：
 
@@ -139,7 +139,7 @@ yum makecache fast
 
 1. 识别版本异常 我们打开`/etc/yum.repos.d/docker-ce.repo`  会发现 `/$releasever/` 有这个东西，这东西是要你去匹配系统版本的，我这里异常示例
 
-   ![image-20230118182129419](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230118182129419.png)
+   ![image-20230118182129419](https://static.litetools.top/blogs/docker_notes/image-20230118182129419.png)
 
 2. 所以我们手动修改那个数据为对应版本的系统版本，如你的centos版本号
 
@@ -206,7 +206,7 @@ Server:
 
 我这里服务器是华为的欧拉服务器
 
-![image-20230119084915033](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119084915033.png)
+![image-20230119084915033](https://static.litetools.top/blogs/docker_notes/image-20230119084915033.png)
 
 需要更改一下源
 
@@ -231,7 +231,7 @@ Server:
 [root@heartfilia /]# docker run hello-world
 ```
 
-![image-20230119091001621](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119091001621.png)
+![image-20230119091001621](https://static.litetools.top/blogs/docker_notes/image-20230119091001621.png)
 
 然后可以通过，以下命令查看运行情况
 
@@ -269,7 +269,7 @@ hello-world         latest              feb5d9fea6a5        16 months ago       
 
 #### 1) docker run 原理
 
-![image-20230119095853421](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119095853421.png)
+![image-20230119095853421](https://static.litetools.top/blogs/docker_notes/image-20230119095853421.png)
 
 #### 2) docker工作原理
 
@@ -279,7 +279,7 @@ Docker 是一个`client-server` 结果的系统，Docker的守护进程运行在
 
 > 下图可以看到 docker容器是和linux服务器是独立的 连通后面再讲
 
-![image-20230119100722712](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119100722712.png)
+![image-20230119100722712](https://static.litetools.top/blogs/docker_notes/image-20230119100722712.png)
 
 
 
@@ -288,11 +288,11 @@ Docker 是一个`client-server` 结果的系统，Docker的守护进程运行在
 1. Docker有着比虚拟机更少的抽象层
 2. Docker 利用的是宿主机的内核，vm需要GuestOS
 
-![image-20230119100953979](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119100953979.png)
+![image-20230119100953979](https://static.litetools.top/blogs/docker_notes/image-20230119100953979.png)
 
 所以说，新建一个容器的时候，docker不需要像虚拟机一样重新加载一个操作系统内核，避免引导，虚拟机是需要加载guestos，分钟级别的，而Docker是利用宿主机的操作系统，省略了这个复杂的过程是秒级的~
 
-![image-20230119101610852](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119101610852.png)
+![image-20230119101610852](https://static.litetools.top/blogs/docker_notes/image-20230119101610852.png)
 
  
 
@@ -520,7 +520,7 @@ ctrl + p + q     # 容器退出但不停止
 [root@heartfilia ~]# docker inspect 容器id
 ```
 
-![image-20230119121510098](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119121510098.png)
+![image-20230119121510098](https://static.litetools.top/blogs/docker_notes/image-20230119121510098.png)
 
 #### 5) [docker exec](https://docs.docker.com/engine/reference/commandline/exec/)  【重要】
 
@@ -533,7 +533,7 @@ ctrl + p + q     # 容器退出但不停止
 /bin/bash   用什么shell运行可以改其他的 我这里是bash 因为linux自带的
 ```
 
-![image-20230119122222769](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119122222769.png)
+![image-20230119122222769](https://static.litetools.top/blogs/docker_notes/image-20230119122222769.png)
 
 #### 6) [docker attach](https://docs.docker.com/engine/reference/commandline/attach/)
 
@@ -560,13 +560,13 @@ ctrl + p + q     # 容器退出但不停止
 [root@heartfilia ~]# docker cp 容器id:容器内路径 容器外路径   # 拷贝内容和容器是否在运行无关，只要容器在内容就在
 ```
 
-![image-20230119141656800](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119141656800.png)
+![image-20230119141656800](https://static.litetools.top/blogs/docker_notes/image-20230119141656800.png)
 
 > 目前拷贝是一个手动过程，后续我们可以使用 `-v` 卷的技术，可以实现，自动同步
 
 **文件操作流程图**
 
-![image-20230119142013844](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119142013844.png)
+![image-20230119142013844](https://static.litetools.top/blogs/docker_notes/image-20230119142013844.png)
 
 #### 8) [docker stats](https://docs.docker.com/engine/reference/commandline/stats/)
 
@@ -586,13 +586,13 @@ docker stats [容器id]
 
 ### 2.1 安装nginx
 
-![image-20230119144019842](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119144019842.png)
+![image-20230119144019842](https://static.litetools.top/blogs/docker_notes/image-20230119144019842.png)
 
 **端口暴露原理如图**
 
-![image-20230119144553449](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119144553449.png)
+![image-20230119144553449](https://static.litetools.top/blogs/docker_notes/image-20230119144553449.png)
 
-![image-20230119145502033](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119145502033.png)
+![image-20230119145502033](https://static.litetools.top/blogs/docker_notes/image-20230119145502033.png)
 
 
 
@@ -721,7 +721,7 @@ Docker的镜像实际上由一层一层的文件系统组成，这种层级的�
 
 **即**：镜像启动之后的一个小的底层系统，这就是我们之前所说的，容器就是一个小的虚拟机环境，比如Ubuntu，Centos等，这个小的虚拟机环境就相当于rootfs。
 
-![image-20230119163633975](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119163633975.png)
+![image-20230119163633975](https://static.litetools.top/blogs/docker_notes/image-20230119163633975.png)
 
 > 根据架构图来深度理解一下
 
@@ -731,28 +731,28 @@ Docker的镜像实际上由一层一层的文件系统组成，这种层级的�
 
 该镜像当前已经包含3个镜像层，如下图所示（这只是一个用于演示的很简单的例子）。
 
-![image-20230119164503363](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119164503363.png)
+![image-20230119164503363](https://static.litetools.top/blogs/docker_notes/image-20230119164503363.png)
 
 在添加额外的镜像层的同时，镜像始终保持是当前所有镜像的组合，理解这一点非常重要。下图中举了一个简单的例子，每个镜像层包含3个文件，而整体的镜像包含了来自两个镜像层的6个文件
 
-![image-20230119164826939](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119164826939.png)
+![image-20230119164826939](https://static.litetools.top/blogs/docker_notes/image-20230119164826939.png)
 
 上图中的鏡像层跟之前图中的略有区别，主要目的是便于展示文件。
 
 下图中展示了一个稍微复杂的三层镜像，在外部看来整个镜像只有6个文件，这是因为最上层中的文件7是文件5的一个更新版本。
 
-![image-20230119164853554](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119164853554.png)
+![image-20230119164853554](https://static.litetools.top/blogs/docker_notes/image-20230119164853554.png)
 
 这种情况下，上层镜像层中的文件覆盖了底层镜像层中的文件。这样就使得文件的更新版本作为一个新镜像层添加到镜像当中。
 Docker通过存储引擎（新版本采用快照机制）的方式来实现镜像层堆栈，并保证多镜像层对外展示为统一的文件系统。
 
-![image-20230119165211018](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119165211018.png)
+![image-20230119165211018](https://static.litetools.top/blogs/docker_notes/image-20230119165211018.png)
 
 > 特点
 
 docker 的镜像是只读的，容器启动时，一个新的可写层被加载到镜像的顶部，这一层就是容器层，容器之下的都叫镜像层
 
-![image-20230119165325057](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119165325057.png)
+![image-20230119165325057](https://static.litetools.top/blogs/docker_notes/image-20230119165325057.png)
 
 
 
@@ -797,7 +797,7 @@ MySQL的容器，容器删了，删库跑路？                需求: **MySql�
 
 这就是卷技术，目录的挂载，将我们容器内的目录，挂载到linux上面~
 
-![image-20230119172954403](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230119172954403.png)
+![image-20230119172954403](https://static.litetools.top/blogs/docker_notes/image-20230119172954403.png)
 
 **总结**：容器的持久化和同步操作，容器间也可以数据共享。
 
@@ -904,7 +904,7 @@ local               juming-nginx                                                
 # 可以通过 docker volume inspect 卷名 查看详细信息
 ```
 
-![image-20230120093652832](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120093652832.png)
+![image-20230120093652832](https://static.litetools.top/blogs/docker_notes/image-20230120093652832.png)
 
 >  所有docker容器内的卷，没有指定目录的情况下都是在 `/var/lib/docker/volumes/xxxxxxxx/_data` 这个目录下
 
@@ -972,7 +972,7 @@ Successfully built 4ec26fdbf056
 Successfully tagged heartfilia/centos:latest
 ```
 
-![image-20230120102003424](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120102003424.png)
+![image-20230120102003424](https://static.litetools.top/blogs/docker_notes/image-20230120102003424.png)
 
 我们可以通过 `docker inspect 容器id` 查看一下 `Mounts` 挂载的两个目录，测试一下在容器内修改内容 容器外的目录内容情况
 
@@ -986,7 +986,7 @@ Successfully tagged heartfilia/centos:latest
 
 多个容器内进行沟通，数据同步
 
-![image-20230120102751642](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120102751642.png)
+![image-20230120102751642](https://static.litetools.top/blogs/docker_notes/image-20230120102751642.png)
 
 ```shell
 # 启动几个容器，用我们自己的镜像启动
@@ -1056,7 +1056,7 @@ Successfully tagged heartfilia/centos:latest
 
 ### 2.3 指令
 
-![image-20230120111144095](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120111144095.png)
+![image-20230120111144095](https://static.litetools.top/blogs/docker_notes/image-20230120111144095.png)
 
 ```dockerfile
 FROM          # 基础镜像，一切从这里开始构建
@@ -1169,7 +1169,7 @@ home
 但是执行下面操作 就是追加命令操作会报错
 ```
 
-![image-20230120150337717](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120150337717.png)
+![image-20230120150337717](https://static.litetools.top/blogs/docker_notes/image-20230120150337717.png)
 
 
 
@@ -1202,7 +1202,7 @@ home
 到这里和CMD输出结果都是一致的  不同在追加命令
 ```
 
-![image-20230120150557540](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120150557540.png)
+![image-20230120150557540](https://static.litetools.top/blogs/docker_notes/image-20230120150557540.png)
 
 
 
@@ -1212,7 +1212,7 @@ home
 
 1. 准备镜像文件 tomcat 压缩包，jdk压缩包（我这里网络不好就没有下载 直接用截图了）
 
-![image-20230120152053420](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120152053420.png)
+![image-20230120152053420](https://static.litetools.top/blogs/docker_notes/image-20230120152053420.png)
 
 2. 编写dockerfile文件，官方命名 `Dockerfile` ,如果用这个 build的时候就会自动去用这个文件 就不用 `-f dockerfile名字`了
 
@@ -1280,19 +1280,19 @@ CMD /usr/local/apache-tomcat-9.0.22/bin/startup.sh && tail -F /usr/local/apache-
 [root@heartfilia ~]# docker tag 镜像id 新名字:tag号
 ```
 
-![image-20230120160335220](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120160335220.png)
+![image-20230120160335220](https://static.litetools.top/blogs/docker_notes/image-20230120160335220.png)
 
 > 发布到自己的镜像服务的话 我这里直接截图别人的操作了
 
-![image-20230120160844915](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120160844915.png)
+![image-20230120160844915](https://static.litetools.top/blogs/docker_notes/image-20230120160844915.png)
 
 剩下的直接按照教程就好了~
 
 
 
-## 4. 总结
+## 0. 总结
 
-![image-20230120161307998](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120161307998.png)
+![image-20230120161307998](https://static.litetools.top/blogs/docker_notes/image-20230120161307998.png)
 
 
 
@@ -1302,7 +1302,7 @@ CMD /usr/local/apache-tomcat-9.0.22/bin/startup.sh && tail -F /usr/local/apache-
 
 > 建议清空所有镜像和容器 来学习理解
 
-![image-20230120162920251](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120162920251.png)
+![image-20230120162920251](https://static.litetools.top/blogs/docker_notes/image-20230120162920251.png)
 
 ```shell
 # 我们用一个tomcat 来测试一下
@@ -1341,7 +1341,7 @@ root@1584d20cbd62:/usr/local/tomcat# apt install -y iproute2
 
 2. 再启动一个容器，发现又多了一对网卡。
 
-   ![image-20230120170617565](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120170617565.png)
+   ![image-20230120170617565](https://static.litetools.top/blogs/docker_notes/image-20230120170617565.png)
 
    - `evth-pair` 就是一对的虚拟设备接口，他们都是成对出现的，一段链接着协议，一段彼此相连
    - 正因为有这个特性，`veth-pair` 充当一个桥梁，链接着各种虚拟网络设备 
@@ -1349,7 +1349,7 @@ root@1584d20cbd62:/usr/local/tomcat# apt install -y iproute2
 
 3. 我们测试容器间是否能相互ping(容器内可能没有这个命令还是得去单独下载`apt install -y iputils-ping`)   ：可以ping通！
 
-![image-20230120171817783](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120171817783.png)
+![image-20230120171817783](https://static.litetools.top/blogs/docker_notes/image-20230120171817783.png)
 
 4. **结论** :所有的容器不指定网络的情况下，都是`docker0` 路由的，docker会给我们的容器分配一个默认的可用IP
 
@@ -1368,7 +1368,7 @@ root@1584d20cbd62:/usr/local/tomcat# apt install -y iproute2
 
 Docker 使用的`linux`的 桥接， 宿主机中的一个Docker容器的网桥 `docker0`
 
-![image-20230120172638043](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120172638043.png)
+![image-20230120172638043](https://static.litetools.top/blogs/docker_notes/image-20230120172638043.png)
 
 > Docker 中的所有的网络接口都是虚拟的，虚拟的转发效率高 (内网传递效率快)
 
@@ -1402,7 +1402,7 @@ PING tomcat01 (172.17.0.2) 56(84) bytes of data.
 
 - [docker network](https://docs.docker.com/engine/reference/commandline/network/) : 可以查看以下操作
 
-![image-20230120174245717](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120174245717.png)
+![image-20230120174245717](https://static.litetools.top/blogs/docker_notes/image-20230120174245717.png)
 
  ```shell
  # 可以看到上面的--link的操作实际就是改tomcat03的hosts文件实现的
@@ -1453,7 +1453,7 @@ e900ee535087        mynet               bridge              local
 99178c9c2957        none                null                local
 ```
 
-![image-20230120180209605](https://raw.githubusercontent.com/Heartfilia/images/main/docker_notes/image-20230120180209605.png)
+![image-20230120180209605](https://static.litetools.top/blogs/docker_notes/image-20230120180209605.png)
 
 我们创建好了一个我们自己的网络 后面就可以都用我们自己的网络来操作
 
@@ -1477,7 +1477,190 @@ e900ee535087        mynet               bridge              local
 
 ### 3.5 网络连通
 
-...
+在不同的网络的容器可以连通,如a容器在自定义网络1  b容器在自定义网络2 这样子的，a容器需要和b容器通信就需要这样子操作
+
+![image-20230202112035204](https://static.litetools.top/blogs/docker_notes/image-20230202112035204.png)
+
+> docker network connect
+
+```shell
+[root@heartfilia ~]# docker network connect --help
+
+Usage:  docker network connect [OPTIONS] NETWORK CONTAINER
+
+Connect a container to a network
+
+Options:
+      --alias strings           Add network-scoped alias for the container
+      --ip string               IPv4 address (e.g., 172.30.100.104)
+      --ip6 string              IPv6 address (e.g., 2001:db8::33)
+      --link list               Add link to another container
+      --link-local-ip strings   Add a link-local address for the container
+      
+# 连通之后就是将 tomcat01 放到了 mynet 网络下 
+# 一个容器两个地址，公网ip，私网ip
+
+# apt install -y iputils-ping   新tomcat镜像无这个工具 需要单独安装
+```
+
+```bash
+[root@heartfilia ~]# docker exec -it tomcat01 ping tomcat-net-01
+ping: tomcat-net-01: Name or service not known                  # 直接访问会报这个错误
+
+[root@heartfilia ~]# docker network connect mynet tomcat01       # 执行这个后 再次访问就通了 就把 网络和容器连接了
+[root@heartfilia ~]# docker exec -it tomcat01 ping tomcat-net-01   # tomcat02 还是不能访问成功的 原理是下面图片
+PING tomcat-net-01 (192.168.0.2) 56(84) bytes of data.
+64 bytes from tomcat-net-01.mynet (192.168.0.2): icmp_seq=1 ttl=64 time=0.061 ms
+```
+
+> tomcat01 能和 mynet通信原理
+
+```bash
+[root@heartfilia ~]# docker network inspect e900ee535087     # 我们查一下mynet的情况
+```
+
+**相当于直接把tomcat01 放到了这个网络里面来实现的**
+
+![image-20230202114255672](https://static.litetools.top/blogs/docker_notes/image-20230202114255672.png)
+
+## 4. 实战
+
+### 4.1 redis集群部署
+
+```shell
+[root@heartfilia ~]# docker network create redis --subnet 172.38.0.0/16   # 先创建一个redis专属网卡
+```
+
+**然后通过脚本创建六个redis配置**
+
+```bash
+[root@heartfilia ~]# 方便复制 我这里直接写这里表示这里是在主机操作的
+
+for port in $(seq 1 6); \
+do \
+mkdir -p /mydata/redis/node-${port}/conf 
+touch /mydata/redis/node-${port}/conf/redis.conf 
+cat << EOF >/mydata/redis/node-${port}/conf/redis.conf 
+port 6379 
+bind 0.0.0.0 
+cluster-enabled yes 
+cluster-config-file nodes.conf 
+cluster-node-timeout 5000 
+cluster-announce-ip 172.38.0.1${port} 
+cluster-announce-port 6379
+cluster-announce-bus-port 16379
+appendonly yes
+EOF
+done
+```
+
+![image-20230202121335623](https://static.litetools.top/blogs/docker_notes/image-20230202121335623.png)
+
+**然后通过命令启动六个redis**
+
+```bash
+[root@heartfilia ~]# 方便复制 我这里直接写这里表示这里是在主机操作的
+
+for port in $(seq 1 6); \
+do \
+docker run -p 637${port}:6379 -p 1637${port}:16379 --name redis-${port} \
+-v /mydata/redis/node-${port}/data:/data:rw \
+-v /mydata/redis/node-${port}/conf/redis.conf:/etc/redis/redis.conf:rw \
+-d --net redis --ip 172.38.0.1${port} redis /usr/local/bin/redis-server /etc/redis/redis.conf
+done
+```
+
+> 如果看到启动后 容器直接失效 可以通过以下命令查看一下情况
+
+```bash
+
+[root@heartfilia ~]# docker start -i 任意一个失效容器id 
+
+查看到报错的情况后修正即可~
+```
+
+**我们进入任意一个redis一下，注意很多版本的redis是没有bash的 所以我们要用sh进入**
+
+下面是我们随便进入的一个
+
+```bash
+[root@heartfilia ~]# docker exec -it redis-1 /bin/sh
+```
+
+**然后我们配置一下集群**
+
+```sh
+[redis容器]# redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379 172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1
+# 然后会看到一堆日志 然后卡住 输入yes 回车即可
+```
+
+![image-20230202152449681](https://static.litetools.top/blogs/docker_notes/image-20230202152449681.png)
+
+**链接集群**
+
+```sh
+[redis容器]# redis-cli -c    # 链接集群
+
+127.0.0.1:6379> cluster info    # 在redis里输入信息查看一下情况
+cluster_state:ok
+cluster_slots_assigned:16384
+cluster_slots_ok:16384
+cluster_slots_pfail:0
+cluster_slots_fail:0
+cluster_known_nodes:6
+cluster_size:3
+cluster_current_epoch:6
+cluster_my_epoch:1
+cluster_stats_messages_ping_sent:465
+cluster_stats_messages_pong_sent:467
+cluster_stats_messages_sent:932
+cluster_stats_messages_ping_received:462
+cluster_stats_messages_pong_received:465
+cluster_stats_messages_meet_received:5
+cluster_stats_messages_received:932
+total_cluster_links_buffer_limit_exceeded:0
+
+127.0.0.1:6379> cluster nodes      # 也可以查看主从关系
+04af8aa880076f35c367700ad63768916c7f37ce 172.38.0.14:6379@16379 slave c00fb8dadaba76708410bc681171c956a39d0d00 0 1675322942674 3 connected
+09c7cdb66bf87c5d60105d8c8c93cd0dc65ec10f 172.38.0.12:6379@16379 master - 0 1675322942000 2 connected 5461-10922
+ce2ec85c83ae7156764b53dded98b4d5ce825435 172.38.0.15:6379@16379 slave edb1280152de757c76666ee2f7825a6653a8fdcc 0 1675322941000 1 connected
+edb1280152de757c76666ee2f7825a6653a8fdcc 172.38.0.11:6379@16379 myself,master - 0 1675322940000 1 connected 0-5460
+c00fb8dadaba76708410bc681171c956a39d0d00 172.38.0.13:6379@16379 master - 0 1675322942573 3 connected 10923-16383
+c9a553fb14c57f38663a0dcc0308f8def7651b6b 172.38.0.16:6379@16379 slave 09c7cdb66bf87c5d60105d8c8c93cd0dc65ec10f 0 1675322941000 2 connecte
+```
+
+现在我们先随便存一个数据值试试
+
+```bash
+127.0.0.1:6379> set test 123
+-> Redirected to slot [6918] located at 172.38.0.12:6379    # 可以看到这个由2号主机处理了数据
+OK
+```
+
+然后我们新开一个窗口把二号redis给停了
+
+```sh
+docker stop redis-2   # 
+```
+
+```bash
+127.0.0.1:6379> get test
+-> Redirected to slot [6918] located at 172.38.0.16:6379    # 可以看到我们数据从6号redis获取的
+"123"
+172.38.0.16:6379> cluster nodes
+# 然后这里可以看到 2号redis已经死掉了  master,fail
+09c7cdb66bf87c5d60105d8c8c93cd0dc65ec10f 172.38.0.12:6379@16379 master,fail - 1675323275491 1675323273486 2 connected
+ce2ec85c83ae7156764b53dded98b4d5ce825435 172.38.0.15:6379@16379 slave edb1280152de757c76666ee2f7825a6653a8fdcc 0 1675323347000 1 connected
+# 我们的6号redis 已经从 slave 变成了 myself,master
+c9a553fb14c57f38663a0dcc0308f8def7651b6b 172.38.0.16:6379@16379 myself,master - 0 1675323347000 7 connected 5461-10922
+c00fb8dadaba76708410bc681171c956a39d0d00 172.38.0.13:6379@16379 master - 0 1675323348528 3 connected 10923-16383
+edb1280152de757c76666ee2f7825a6653a8fdcc 172.38.0.11:6379@16379 master - 0 1675323348729 1 connected 0-5460
+04af8aa880076f35c367700ad63768916c7f37ce 172.38.0.14:6379@16379 slave c00fb8dadaba76708410bc681171c956a39d0d00 0 1675323347000 3 connected
+```
+
+
+
+如果有更多镜像需要管理就需要下面的板块来搞了~
 
 
 

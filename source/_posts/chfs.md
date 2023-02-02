@@ -15,7 +15,7 @@ toc: true
 
 # windows局域网
 直接在这个网站上面下载{% blur 我这里是2.0版本的直接下载链接%} [gui-chfs-windows.zip](http://iscute.cn/tar/chfs/2.0/gui-chfs-windows.zip) 
-![windows界面下载](https://raw.githubusercontent.com/Heartfilia/images/main/chfs/0.png)
+![windows界面下载](https://static.litetools.top/blogs/chfs/0.png)
 然后解压后得到一个`exe`文件,双击运行即可，然后在主目录有一个设置共享目录的，默认了这个压缩包解压的位置，可以修改需要共享的目录。
 **当然用这个app的情况下，下次重启电脑后 你再打开这个软件，配置信息可能会丢失，所以，我们这里更加推荐下面的命令行部署方式，如果不限制很细的话，直接用这个即可**
 # 服务器部署
@@ -24,7 +24,7 @@ toc: true
 ## 第一步
 还是去网站下载对应版本的软件
 这里我下载的是linux版本，**其它版本是一样的**，在这里可以找到对应你服务器的版本
-![命令行下载工具](https://raw.githubusercontent.com/Heartfilia/images/main/chfs/1.png)
+![命令行下载工具](https://static.litetools.top/blogs/chfs/1.png)
 ## 第二步
 然后把它解压出来，里面会有一个文件
 **如果按照官方的教程，是可以很轻松的就部署的**
@@ -36,7 +36,7 @@ toc: true
 chmod +x chfs
 ```
 ### 第二步我们直接创建一个空文件的配置文件 `config.ini`
-![创建一个配置文件](https://raw.githubusercontent.com/Heartfilia/images/main/chfs/2.png)
+![创建一个配置文件](https://static.litetools.top/blogs/chfs/2.png)
 
 ### 官方的教程
 | **help:** | 显示帮助信息 |
@@ -87,7 +87,7 @@ rule=":::pic:r:com:r|username:userpass:rwd"
 这里自己看[官网教程](http://iscute.cn/chfs)
 ## 挂载服务
 这个自己安排
-![启动后情况](https://raw.githubusercontent.com/Heartfilia/images/main/chfs/3.png)
+![启动后情况](https://static.litetools.top/blogs/chfs/3.png)
 上面是我展示的配置执行后显示的情况
 
 # 无网情况

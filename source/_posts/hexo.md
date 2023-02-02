@@ -24,18 +24,18 @@ toc: true
 npm config set registry https://registry.npmmirror.com
 ```
 配置完后可以查看一下
-![查看npm的配置](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/0.png)
+![查看npm的配置](https://static.litetools.top/blogs/hexo/0.png)
 ## 2.git
 这里是教如何搭建`github pages`并和`hexo`关联
 安装git就不用这里教了，网上一大把教程 我这里还是直接  `yum install git`
 ## 3. 为啥要写这个
 **来源于hexo官网下面的评论**
 **确实很多地方看着迷迷糊糊的，都是自己去多试试，然后想记录下来**
-![官网亮点评论](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/1.png)
+![官网亮点评论](https://static.litetools.top/blogs/hexo/1.png)
 # 二、GithubPages操作
 ## 1.github设置
 在主页这里创建一个仓库 **建议先别创建README 我们就只要一个空仓库，里面会有很多绑定仓库的提示，不会玩的话搞不好会冲突哈哈哈**
-![创建github仓库](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/2.png)
+![创建github仓库](https://static.litetools.top/blogs/hexo/2.png)
 ## 2.服务器git配置
 ### 2.1配置git
 我们这里需要配置一下git，我们现在在服务器上面先绑定github啦
@@ -51,11 +51,11 @@ cat ~/.ssh/id_rsa.pub
 登录了github后，在Settings里面找到 `SSH and GPG keys`
 然后点击`New SSH key`
 标题随便取，我是要做页面的我标注一下 `github.io`  下面的`key`把上面cat出来的内容复制过来粘贴上去除首位空字符
-![github密钥](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/3.png)
+![github密钥](https://static.litetools.top/blogs/hexo/3.png)
 然后我们测试一下
 `ssh -T git@github.com`
 出现了用户名就是ok的，如下
-![测试和git的链接](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/4.png)
+![测试和git的链接](https://static.litetools.top/blogs/hexo/4.png)
 ### 2.2 如何关联到hexo
 这里我们先不描述 上面操作完了后就先等等，我们接下来看看代码那边如何配置先
 **这里是后面配置完了再翻回来看这里的**
@@ -72,9 +72,9 @@ cat ~/.ssh/id_rsa.pub
 2. Pages
 3. Branch 这里选择 我们`deploy` 那里填的那个分支，我这里填写的 `pages`
 
-![默认分支情况](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/5.png)
+![默认分支情况](https://static.litetools.top/blogs/hexo/5.png)
 后面只要`hexo d` 等传输完毕后，github这里会构建，我们可以在 github仓库页面上面的 `Actions`目录下面看到构建的进度
-![actions情况](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/6.png)
+![actions情况](https://static.litetools.top/blogs/hexo/6.png)
 **如果这里绿了就可以访问啦～**
 是不是很奇怪，这里才是文章的最终结束～
 # 三、hexo的启动部署
@@ -121,16 +121,16 @@ live2d:
 我们找到一个目录里面就专门放以后存放的各种博客网站，**不找目录**直接在 `~`目录下也可以操作
 `hexo init myBlogs`这样会初始化一个`myBlogs`目录出来，这里的名称随意
 我是**自己创建了一个blogs父目录**，然后在里面init项目，这样子方便多个项目管理好看
-![初始化目录](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/7.png)
+![初始化目录](https://static.litetools.top/blogs/hexo/7.png)
 **上面操作在配置了前期准备里面换源后是会比较快完成**
-![当前目录文件](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/8.png)
+![当前目录文件](https://static.litetools.top/blogs/hexo/8.png)
 然后进入我们刚才init好的项目这里我进入`cd myBlogs`,然后执行 `npm install`即可
 后续页面有改动那些，可以先使用`hexo cl`清理之前的缓存然后再执行下面的操作
 然后`hexo g` 计算一下文件
 然后`hexo server -p 80`在80端口开启一个服务
 最后我们直接浏览器输入ip访问一下，看看是不是会出来如下一个页面
 测试完没有问题可以直接`ctrl + c`停止服务
-![大概情况](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/9.png)
+![大概情况](https://static.litetools.top/blogs/hexo/9.png)
 如果到这里都可以，那么最基础的搭建已经完成了，接下来就是 `美化`及 `日常更新`了
 ## 3. 美化
 ### 3.1 挑选主题
@@ -147,7 +147,7 @@ live2d:
 ```bash
 git clone https://github.com/argvchs/hexo-theme-particlex.git themes\particlex
 ```
-![下载主题位置](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/10.png)
+![下载主题位置](https://static.litetools.top/blogs/hexo/10.png)
 然后返回项目主目录 我这里的 `/root/blogs/myBlogs`下面找到 `_config.yml`我们进行一些基础的配置，后面还有主题的配置我们单独再说
 ### 3.3 项目配置文件
 #### > 一些描述信息
@@ -199,7 +199,7 @@ ignore: # 忽略文件/文件夹
 - 上面两个主配置这里 `enable: false`只需要把这里设置为`false` 即可
 2. 然后把主题那里换乘我们`theme`文件夹下面的主题名称
 - 我这里是`themesparticlex`我就换成这个
-- ![主题预览](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/10_1.png)
+- ![主题预览](https://static.litetools.top/blogs/hexo/10_1.png)
 3. **每次要重新测试啥的最好都按照如下操作执行一下**
 - `hexo cl` 清理静态文件缓存
 - `hexo g`   重新生成静态文件
@@ -242,10 +242,10 @@ hexo g
 hexo s -p 80   # 如果直接用服务器或者本地部署
 hexo d   # 这里就会根据上面的配置自动把项目部署到 github pages 这里别忘记了前面还要装包哦
 ```
-![预览](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/11.png)
+![预览](https://static.litetools.top/blogs/hexo/11.png)
 ## 4.日常更新
 接下来我们就来讲讲日常的博客日志更新维护，在这之前先留意一下这里
-![标签](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/12.png)
+![标签](https://static.litetools.top/blogs/hexo/12.png)
 这里我们目前直接去点 很多东西都没有反馈的，那是因为我们没有项目填充，如果不想要这里可以直接在配置文件里面注释掉对应的板块
 ```yaml
 menu:
@@ -271,7 +271,7 @@ menu:
         src: /tags
 ```
 如果要把上面写的改成自己写的内容的话如图
-![改过后](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/13.png)
+![改过后](https://static.litetools.top/blogs/hexo/13.png)
 直接如下demo那样子修改就好了
 ```yaml
 menu:
@@ -293,7 +293,7 @@ hexo new page about         # 这里就是一个个人的介绍页面，可以�
 我们直接在主目录下面执行
 `hexo new 文章标题`   >> 这里的标题一般来说中文英文都可以建议这里用 英文 然后标题在markdown文件里面去修改
 然后我们会在主目录下面的`source/_posts`下面有一个同名的`md`文件
-![创建项目](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/14.png)
+![创建项目](https://static.litetools.top/blogs/hexo/14.png)
 这里默认会有一个`hello-world.md`存在，我这里面删除了
 接下来我们就可以直接编辑这个markdown文件了
 > 我们用hexo new 创建的文件里面会有一些默认的参数在里面
@@ -341,7 +341,7 @@ hexo d
  这里使用的是 `leancloud` 这东西国际版要科学， 国内版需要备案
 
 我们直接点页面上很明显的
-![部署](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/15.png)
+![部署](https://static.litetools.top/blogs/hexo/15.png)
 然后用github绑定登录一下就好了，按照它下面贴的那两个B站教学视频可以完成这里的操作，不懂得反复看一下就好了
 最后我们拿到属于自己的一个服务地址
 
@@ -352,7 +352,7 @@ waline:
     serverURL: https://***********.vercel.app/
 ```
 然后我们在部署好的博客的单篇文章下面就会有一个评论框了
-![评论框](https://raw.githubusercontent.com/Heartfilia/images/main/hexo/16.png)
+![评论框](https://static.litetools.top/blogs/hexo/16.png)
 
 # 题外话
 其他主题很多配置不太一样，可以根据主题的作者写出来的教程慢慢来配置就好啦

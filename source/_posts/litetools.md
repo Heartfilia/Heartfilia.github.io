@@ -18,12 +18,12 @@ toc: true
 > 如果遇到pip安装了之后 lite-tools还是命令行不可使用，那是你python的scripts目录不在环境变量里面,需要手动添加一下,因为不添加你的`scrapy``feapder`这些工具也不可以命令行使用，具体操作自己百度即可。
 
 
-![命令行帮助](https://raw.githubusercontent.com/Heartfilia/images/main/lite_tools/1.png)
+![命令行帮助](https://static.litetools.top/blogs/lite_tools/1.png)
 ## lite-tools fish
 这是一个人生日历，没有搞农历节日那些东西，所以这里是标准的**上五休二**制度
 ## lite-tools say
 这里基于 [熊与论道兽音](http://hi.pcmoe.net/roar.html) 版块修改算法改成python版本后实现的，并做了智能识别，大概操作如下
-![兽语](https://raw.githubusercontent.com/Heartfilia/images/main/lite_tools/2.png)
+![兽语](https://static.litetools.top/blogs/lite_tools/2.png)
 ## lite-tools acg
 这里我没有弄好，主要是这里需要一个自动校准数据这里我没有弄，后面再弄，不复杂，想提前体验可以终端输入自己试一下
 ## lite-tools news
@@ -46,11 +46,11 @@ toc: true
 这里需要安装额外的包 `pip install lite-tools[all]`才可以实现以下功能。
 **这里是比较复杂的，这里面很多功能我没有实现，目前我只搞了一个图片转pdf。**
 **具体的操作可以看 **`**lite-tools trans -h**`
-![转换操作](https://raw.githubusercontent.com/Heartfilia/images/main/lite_tools/4.png)
+![转换操作](https://static.litetools.top/blogs/lite_tools/4.png)
 这里`-i`或者`--input`后面必须要跟输入路径，这后面可以跟文件夹，也可以跟单个图片
 `-o`或者`--output`后面是输入文件的位置，这里可以定义输出文件的名称，不写默认同输入文件的名字
 示例:
-![示例代码](https://raw.githubusercontent.com/Heartfilia/images/main/lite_tools/11.png)
+![示例代码](https://static.litetools.top/blogs/lite_tools/11.png)
 上面`-i`后面跟了这个文件夹路径  后面`-o`后面自定义了输出的文件名称 这里的`-o`要是不写后面输出的文件就是 和文件夹同名的一个`pdf`
 
 > 这里有个问题，这里是一个图片一页纸 我没有做密度排版，那样子要做很多计算，太麻烦了，反正平时大多数图片都是一页一页的
