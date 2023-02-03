@@ -1666,13 +1666,117 @@ edb1280152de757c76666ee2f7825a6653a8fdcc 172.38.0.11:6379@16379 master - 0 16753
 
 # 四、企业实战
 
+
 ## 1. Docker Compose
+
+...
+
 
 
 
 ## 2. Docker Swarm
 
+[大概参考位置](https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/)
+
+
+1. 首先需要多台服务器，最好是在同一内网网段的(公网慢而且说不定要钱)
+
+2. 每台都安装了docker
+
+3. 概念
+
+   - 有两种节点：管理节点(操作都在manager) 和 工作节点(执行worker)
+
+   ![image-20230203092609019](https://static.litetools.top/blogs/docker_notes/image-20230203092609019.png)
+
+   - 一般10台以下可以这么玩，多了就需要k8s了
+   - manager要奇数的(类似投票机制 所以**一般**要3以上奇数)
+
+4. 搭建集群开始
+
+### 2.1 命令详解
+
+#### 1) [docker swarm](https://docs.docker.com/engine/reference/commandline/swarm/)
+
+```shell
+Usage:  docker swarm COMMAND
+
+Manage Swarm
+
+Commands:
+  ca          Display and rotate the root CA
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  leave       Leave the swarm
+  unlock      Unlock swarm
+  unlock-key  Manage the unlock key
+  update      Update the swarm
+```
+
+1. 创建一个集群
+
+```shell
+[root@ecs1 ~]# docker swarm init --help
+Options:  # 下面很多命令 就这个用的多点
+      --advertise-addr string                  Advertised address (format: <ip|interface>[:port])
+```
+
+然后我们先创建一个manager 主节点
+
+> `docker swarm init`  初始化节点
+
+```shell
+[root@ecs1 ~]# docker swarm init --advertise-addr 这台服务器内网ip   # 后面命令不写也可以
+
+Swarm initialized: current node (xxxxxxxxxxxxxxxxxx) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token 一堆串串 这台服务器内网ip:2377      默认2377端口，可以复制这一句就是添加worker到这个集群，后面添加worker需要单独运算一个令牌出来试试
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.    如果要添加
+
+# 如果遇到这种报错
+Error response from daemon: --live-restore daemon configuration is incompatible with swarm mode
+#解决办法如下：
+自己去查 大概率会查到官网这个，但是不一定有用: 
+https://forums.docker.com/t/error-response-from-daemon-live-restore-daemon-configuration-is-incompatible-with-swarm-mode/28428
+```
+
+> `docker swarm join` 加入一个节点
+
+```shell
+# 加入worker节点  我们复制上面返回的 docker swarm join --token 那里在另外一个同内网服务器执行
+[root@ecs2 ~]# docker swarm join --token 一堆串串 这台服务器内网ip:2377
+# 会得到如下反馈  这个节点就变成了一个worker节点
+This node joined a swarm as a worker.
+```
+
+我们查看以下1号服务器节点状态
+
+![image-20230203102950814](https://static.litetools.top/blogs/docker_notes/image-20230203102950814.png)
+
+```shell
+# 如果我们还要添加工作节点或者主节点 我们需要获取令牌然后在新的服务器执行一下
+docker swarm join-token manager    # 在初始化了的那台服务器执行这个后获取到manager的令牌 其它服务器执行令牌后加入manager节点
+docker swarm join-token worker     # 在初始化了的那台服务器执行这个后获取到worker的令牌 其它服务器执行令牌后加入worker节点
+```
+
+
 
 
 ## 3. CI/CD Jenkins 流水线
 
+...
+
+
+
+## 0. k8s
+
+容器单独没有什么意义，有意义的是这里需要学习的`k8s`  这个地方后面单独一个版块学习，这个docker部分将不会讲到~
+
+但是学这里需要掌握的东西先准备好：
+
+1. **Go语言** 必须掌握
+2. 一些并发语言
