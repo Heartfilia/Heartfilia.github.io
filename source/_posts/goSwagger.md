@@ -65,7 +65,7 @@ go get -u github.com/swaggo/gin-swagger/swaggerFiles
 
 ### 1.2 目录介绍
 
-这里项目名称我是随意写的，我这里是`webbase` 然后这个东西在`GOPATH/arc/LearnTest` 下面，所以后面很多包的引用目录位置是从`LearnTest/webbase/xxxxx` 这样子的
+这里项目名称我是随意写的，我这里是`webbase` 然后这个东西在`GOPATH/src/LearnTest` 下面，所以后面很多包的引用目录位置是从`LearnTest/webbase/xxxxx` 这样子的
 
 #### 1) main.go
 
