@@ -97,7 +97,19 @@ with pd.ExcelWriter("基础样式.xlsx", engine="xlsxwriter", engine_kwargs={"op
 
 下面有两种表格样式 一是基础样式: `add_format` 还有一个插入表图: `add_chart`。这两个都是会返回一个样式对象。
 
-**然后**我们通过`write_row/write (这个我们这里不常用，因为数据我们弄得一般是有了的)`、`merge_range (这里是表格合并的时候可以添加的操作)`、 `set_column  (设置列的时候添加样式)` 、 `set_row (设置行的时候添加样式)` 、`conditional_format (根据条件添加样式)`  等等操作的时候添加那个样式对象的。
+**然后**我们通过
+
+- `write_row/write (这个我们这里不常用，因为数据我们弄得一般是有了的)`
+
+- `merge_range (这里是表格合并的时候可以添加的操作)`
+
+- `set_column  (设置列的时候添加样式)` 
+
+- `set_row (设置行的时候添加样式)` 
+
+- `conditional_format (根据条件添加样式)` 
+
+等等操作的时候添加那个样式对象的。
 
 我们先逐步假设场景，然后来解决。
 
@@ -179,6 +191,17 @@ worksheet.set_row(1, 30, wrap_format)   # 设置索引1号行的样式
 worksheet.set_row(2, 30, wrap_format)   # 设置索引2号行的样式
 worksheet.set_row(3, 30, wrap_format)   # 设置索引3号行的样式
 ```
+
+
+
+这里是设置了行的属性，**如果要**设置列，更加简单
+
+```python
+worksheet.set_column("A:A", 30, wrap_format)   # 只修改A列的样式
+worksheet.set_column("B:E", 30, wrap_format)   # 修改B-E列的样式
+```
+
+
 
 后面设置样式的时候，我均只写 `workbook` 和 `worksheet` 后面的内容！因为这里的`api`和普通的`xlsx` 包无差异。
 
