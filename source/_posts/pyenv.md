@@ -41,7 +41,7 @@ date: 2023-03-31 17:19:00
 
    - `homebrew`： mac 上面一个软件包管理神器，推荐使用，如果网络好可以参考[这里](https://brew.sh/index_zh-cn),不好也可以用国内源，这里给[一篇不错的教程](https://cloud.tencent.com/developer/article/1935121)
 
-> 如果要用pyenv，电脑上最好别用官方的python了，我们都用这个了，就可以更方便管理了。主要是环境变量里面如果还有系统自带的python那么可能会有一些问题，后面会说。
+> 【如果是mac通过homebrew安装 或者linux通过官方安装的 不用考虑兼容问题，测试完美运行，尤其你用的是windows需要注意后面问题】如果要用pyenv，电脑上最好别用官方的python了，我们都用这个了，就可以更方便管理了。主要是环境变量里面如果还有系统自带的python那么可能会有一些问题，后面会说。
 
 ## 2. 安装
 
@@ -49,7 +49,7 @@ date: 2023-03-31 17:19:00
 
 ### 2.1 mac
 
-我们已经基于第一点说了那个homebrew，并且按照教程配置了国内源。所以这里安装就很轻松。
+我们已经基于第一点说了那个homebrew，并且按照教程**配置了国内源**。所以这里安装就很轻松。
 
 ```zsh
 brew install pyenv
@@ -249,9 +249,91 @@ pyenv install 3.11.2   # 优先读取 cache 目录里面的已经有的包，没
 
    ```bash
    git clone https://gitee.com/cosynet/pyenv.git $(pyenv root)/plugins/pyenv-virtualenv
+   
+   # 我这里是写入到bash的 可以根据你的终端类型更换  ~/.zshrc
+   echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+   
+   exec "$SHELL"
    ```
-
+   
    然后其他的按照官方弄，我这里不讲了
+
+
+
+插件安装完了之后，输入 `pyenv` 会发现多了一些东西
+
+>  没安装的时候
+
+```bash
+pyenv 2.3.17
+Usage: pyenv <command> [<args>]
+
+Some useful pyenv commands are:
+   commands    List all available pyenv commands
+   exec        Run an executable with the selected Python version
+   global      Set or show the global Python version(s)
+   help        Display help for a command
+   hooks       List hook scripts for a given pyenv command
+   init        Configure the shell environment for pyenv
+   install     Install a Python version using python-build
+   latest      Print the latest installed or known version with the given prefix
+   local       Set or show the local application-specific Python version(s)
+   prefix      Display prefixes for Python versions
+   rehash      Rehash pyenv shims (run this after installing executables)
+   root        Display the root directory where versions and shims are kept
+   shell       Set or show the shell-specific Python version
+   shims       List existing pyenv shims
+   uninstall   Uninstall Python versions
+   --version   Display the version of pyenv
+   version     Show the current Python version(s) and its origin
+   version-file   Detect the file that sets the current pyenv version
+   version-name   Show the current Python version
+   version-origin   Explain how the current Python version is set
+   versions    List all Python versions available to pyenv
+   whence      List all Python versions that contain the given executable
+   which       Display the full path to an executable
+```
+
+> 安装完了之后
+
+```bash
+pyenv 2.3.17
+Usage: pyenv <command> [<args>]
+
+Some useful pyenv commands are:
+   activate    Activate virtual environment
+   commands    List all available pyenv commands
+   deactivate   Deactivate virtual environment
+   exec        Run an executable with the selected Python version
+   global      Set or show the global Python version(s)
+   help        Display help for a command
+   hooks       List hook scripts for a given pyenv command
+   init        Configure the shell environment for pyenv
+   install     Install a Python version using python-build
+   latest      Print the latest installed or known version with the given prefix
+   local       Set or show the local application-specific Python version(s)
+   prefix      Display prefixes for Python versions
+   rehash      Rehash pyenv shims (run this after installing executables)
+   root        Display the root directory where versions and shims are kept
+   shell       Set or show the shell-specific Python version
+   shims       List existing pyenv shims
+   uninstall   Uninstall Python versions
+   --version   Display the version of pyenv
+   version     Show the current Python version(s) and its origin
+   version-file   Detect the file that sets the current pyenv version
+   version-name   Show the current Python version
+   version-origin   Explain how the current Python version is set
+   versions    List all Python versions available to pyenv
+   virtualenv   Create a Python virtualenv using the pyenv-virtualenv plugin
+   virtualenv-delete   Uninstall a specific Python virtualenv
+   virtualenv-init   Configure the shell environment for pyenv-virtualenv
+   virtualenv-prefix   Display real_prefix for a Python virtualenv version
+   virtualenvs   List all Python virtualenvs found in `$PYENV_ROOT/versions/*'.
+   whence      List all Python versions that contain the given executable
+   which       Display the full path to an executable
+```
+
+这里怎么使用也很简单的啦，后面轻度教学，核心使用直接看官方git下面~
 
 ## 2. 命令
 
