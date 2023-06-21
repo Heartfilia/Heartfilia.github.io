@@ -31,14 +31,16 @@ toc: true
 1. 这里默认是获取国内新闻
 2. `lite-tools news weibo` 这样子可以获取此时此刻的微博热榜榜单
 3. `lite-tools news china/world`后面跟`china`或者`world`可以获取此时此刻中国或者世界上的最新的新闻
+3. `lite-tools news paper` 这个和直接输入`lite-tools news`效果一样，只不过这个数据源是**澎湃新闻**，默认是**环球网**
 ## lite-tools today
 
 1. 默认获取今天的黄历，也可以获取今年的节假日，并看经过情况
 2. `lite-tools today history`获取历史上的今天的信息
 3. `lite-tools today oil`获取今天的油价
 ## lite-tools weather
-默认根据当前请求IP获取当地的天气，当然有可能请求失败，然后会默认返回北京的天气
+默认根据当前请求`IP`获取当地的天气，当然有可能请求失败，然后会默认返回北京的天气
 可以手动指定 **市区县 **然后获取对应地点的天气，后面不用写市区县，如下
+
 > lite-tools weather 天河     获取天河区的天气，如果全国有同名的区就不知道是哪个地方了
 > lite-tools weather 广州     这样子就可以获取广州市的 
 
@@ -247,7 +249,8 @@ time_range((2022,11), (2022,12,6), unit='ms')   # (1667232000000, 1670256000000)
 获取user-agent 真实版本号
 
 ```python
-get_ua()                # 随机获取一个
+get_ua()                # 随机获取一个 基本都是chrome的
+get_ua('pc')            # 可以从ie edge firfox chrome 里面随机取 太随机了
 get_ua('mobile')        # 随机获取一个手机ua
 get_ua('chrome', 'ie')  # 随机从chrome/ie里面获取一个ua
 ```
@@ -257,6 +260,8 @@ get_ua('chrome', 'ie')  # 随机从chrome/ie里面获取一个ua
 ## MySql / MySqlConfig / SqlString
 
 描述复杂 这是给我自己使用方便的 如果你们要用的话 最好用 `MySqlConfig` 配置了传入MySql创建一个属于自己的
+
+可以设置返回值的类型 在配置文件里面 有一个 `cursor`参数 默认`tuple`,可以设置为`dict` ，这里是**字符串**哦.
 
 下面所有的`where` 都可以写字典和字符串 字典只有等值, 字符串就是你想写啥规则就是啥规则
 
@@ -275,6 +280,44 @@ for a, b in mysql.select("SELECT a, b FROM xxxx WHERE ..."):
 # 统计
 count = mysql.count()  # 不写统计全部 可以写规则
 e = mysql.exists({"a": 66})  # 判断a=66是否存在 
+```
+
+```python
+# 假如返回字典格式的
+mysql = MySql(MySqlConfig(database="test", host="xxx", user="aaaaa", password="xxxx", cursor='dict', port=6666)) 
+# 这里其实可以不写 表名 ，只实例化一次 后续可以在每个操作位置单独指定表名
+
+# --------------------
+# 注意：实例化位置和下面方法的位置 至少有一个地方写表名 两个地方都写 优先采取方法位置的表名来进行操作
+# -------------------
+
+# 如 增
+mysql.insert({"a": 123}, ignore=True, table_name="这里可以单独指定表名")  # 所以程序里可以只实例化一次 插入同一个库的不同表
+
+# 批量插入  批量插入支持以下两个形式 字段都要对应 长度也要对应
+items1 = {
+	"_id": ["0015", "0016", "0017", "0018"],
+	"api": ["5", "6", "7", "8"],
+	"platform": ["a", "b", "c", "d"],
+	"status_code": [1, 1, 6, 9]
+}
+items2 = [
+	{"_id": "1111", "api": "11", "platform": "aaa", "status_code": 5}, 
+	{"_id": "2222", "api": "22", "platform": "bbb", "status_code": 7},
+	{"_id": "3333", "api": "33", "platform": "ccc", "status_code": 7},
+	{"_id": "4444", "api": "44", "platform": "ddd", "status_code": 8},
+]
+mysql.insert_batch(itemsX)  # 直接操作 如果碰到主键重复 这一堆会插入异常 会提示错误
+mysql.insert_batch(itemsX, duplicate="ignore")   # 去重模式选择 ignore 那么重复的主键将会跳过 不会修改原值
+mysql.insert_batch(items, duplicate="update", update_field=["status_code"], table_name="表名")
+# 插入模式采用更新，如果有主键重复的数据 会更新 update_field 里面的字段的数据
+
+
+# 批量更新 这个 目前 暂时 只支持 上面 items1 的格式 更新域和条件长度的一致
+mysql.update_batch({"a": [1, 2, 3], "b": ["x", "y", "z"]}, {"c": ["aa", "bb", "cc"]}, table_name="同理这里不写就得全局写 二选一")
+# 上面的意思是 把 "c" 值等于"aa"的内容的 "a" 更新为 1, "b" 更新为 "x" 
+# 上面的意思是 把 "c" 值等于"bb"的内容的 "a" 更新为 2, "b" 更新为 "y" 
+# 上面的意思是 把 "c" 值等于"cc"的内容的 "a" 更新为 3, "b" 更新为 "z" 
 ```
 
 
@@ -302,6 +345,14 @@ def when_x_other(x):
 ## CleanString
 
 可能不好用 就是清理字符串的字符的
+
+
+
+## clean_html
+采用了米乐大佬的 `usepy` 的包实现的
+```python
+clean_html(html文本, white_tags=["p"])
+```
 
 
 
@@ -358,7 +409,7 @@ if __name__ == "__main__":
 Buffer.reset()  # 重置统计的数据
 Buffer.size()   # 获取当前队列里面剩余任务
 Buffer.count()  # 获取跑了多少个任务
-Buffer.sow(666)  # 放一个新的数据进队列
+Buffer.sow(666)  # 放一个新的数据进队列 << 一般不建议用这个 可能会造成队列阻塞
 ```
 
 
@@ -388,4 +439,53 @@ log_file.dump("这里是一条日志")
 
 {% alertbox primary "TODO" %}
 
-主要是js里面 进制转换 比如36进制啥的 我没有弄 先放着
+主要是js里面 进制转换 比如36进制啥的 大部分代码由 `小小白` 提供
+```python
+# 两种引用方式
+from lite_tools import atob, btoa, to_string_36, xor, unsigned_right_shift, left_shift, dec_to_bin
+
+# 或者
+from lite_tools.tools.js import atob, btoa, to_string_36, xor, unsigned_right_shift, left_shift, dec_to_bin
+
+# 是一样的 就是方法区分功能 和不管区分与否的 差别
+```
+
+### atob/ btoa  base64功能
+### to_string_36 
+```python
+# js>>> (123456789).toString(36)
+to_string_36(5615)   # 将数字转换为 36 进制
+```
+
+### xor
+
+```python
+# js>>> 656616 ^ 516565
+# 数字都是我随便写的 这个和python的区别在于精度不同 python 的 ^ 数字小的时候没问题 数字大就不对了
+xor(565646, 98486)
+```
+
+### unsigned_right_shift
+
+```python
+# js>>> 555 >>> 1
+# 主要是实现js的上面操作  数字我乱写的
+unsigned_right_shift(555, 1)
+```
+
+### left_shift
+
+```python
+# 主要是解决和python的精度差别问题
+# js>>>   555 << 2
+left_shift(555, 2)
+```
+
+### dec_to_bin
+
+```python
+# 主要是解决 十进制 浮点数 转 二进制 的精度 问题
+# js>>> (56.541).toString(2)
+dec_to_bin(56.541)
+```
+
