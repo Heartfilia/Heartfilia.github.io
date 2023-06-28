@@ -283,8 +283,13 @@ mysql.delete({"a": 666})
 # 改
 mysql.update({"a": 888}, {"b": 111})
 # 查
-for a, b in mysql.select("SELECT a, b FROM xxxx WHERE ..."):
+for a, b in mysql.select("SELECT a, b FROM xxxx WHERE ..."):  # 可以选择的fetch模式有 one all many 设置many的话 可以设置buffer=1000  默认就是1000
     pass  # a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组
+
+# 大量的数据建议用这个
+for a, b in mysql.select_iter("SELECT a, b FROM xxxx WHERE ...", "这里写主键用来记录游标位置的"):
+    pass  # a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组
+
 # 统计
 count = mysql.count()  # 不写统计全部 可以写规则
 e = mysql.exists({"a": 66})  # 判断a=66是否存在 
