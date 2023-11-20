@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【goSwagger】goswagger+gin配置踩坑 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="go" />
+  
+  <meta name="description" content="搭建一个swagger页面 手把手教学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【goSwagger】goswagger+gin配置踩坑">
+<meta property="og:url" content="https://heartfilia.github.io/2023/02/10/goSwagger/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="搭建一个swagger页面 手把手教学">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2023-02-10T03:14:15.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/02/10/goSwagger/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【goSwagger】goswagger+gin配置踩坑</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-02-10T03:14:15.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-02-10</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~11.98K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">一、基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">1.1.</span> <span class="toc-text">1. 页面展示</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E6%88%98"><span class="toc-number">2.</span> <span class="toc-text">二、实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%80%E5%A7%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1. 开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85goswagger"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 安装goswagger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 目录介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-main-go"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">1) main.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-middlewares-cors-go"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">2) middlewares&#x2F;cors.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-router-router-go"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">3) router&#x2F;router.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-controller-controller-go"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">4) controller&#x2F;controller.go</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.3.</span> <span class="toc-text">1.3 类型参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MIME"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">MIME</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">参数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#param%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.3.4.</span> <span class="toc-text">param参数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E5%B1%9E%E6%80%A7"><span class="toc-number">2.1.3.5.</span> <span class="toc-text">限制属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.1.4.</span> <span class="toc-text">1.4 注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">2. 运行</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>搭建一个swagger页面 手把手教学</p>
+<span id="more"></span>
+
+<h1 id="一、基本介绍"><a href="#一、基本介绍" class="headerlink" title="一、基本介绍"></a>一、基本介绍</h1><h2 id="1-页面展示"><a href="#1-页面展示" class="headerlink" title="1. 页面展示"></a>1. 页面展示</h2><blockquote>
+<p>最终页面</p>
+</blockquote>
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230209164726860.png" alt="image-20230209164726860"></p>
+<p>我们将用上面的几个例子来展示一下几种普通请求的使用方式，然后再<strong>稍微</strong> 讲一下常用的一些参数，其它参数我代码里面不会展示，但是可以尝试配置一下，逻辑一样的。</p>
+<blockquote>
+<p>代码层级</p>
+</blockquote>
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230209165144727.png" alt="image-20230209165144727"></p>
+<h1 id="二、实战"><a href="#二、实战" class="headerlink" title="二、实战"></a>二、实战</h1><h2 id="1-开始"><a href="#1-开始" class="headerlink" title="1. 开始"></a>1. 开始</h2><p><a target="_blank" rel="noopener" href="https://swagger.io/docs/specification/about/"><strong>官方文档地址</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/swaggo/swag/blob/master/README_zh-CN.md"><strong>快速查询中文文档</strong></a> : github的，可以查查</p>
+<h3 id="1-1-安装goswagger"><a href="#1-1-安装goswagger" class="headerlink" title="1.1 安装goswagger"></a>1.1 安装goswagger</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们先安装swag  这个地方有个坑</span></span><br><span class="line">go get -u github.com/swaggo/swag/cmd/swag</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果上面安装了但是<code>swag.exe</code> 不在 <code>GOPATH/bin</code> 里面那么就需要执行下面操作</p>
+</blockquote>
+<p>安装完了之后，如果<code>swag</code> 这个命令还不可以使用，这时候我们需要去到<code>GOPATH/pkg/mod/github.com/swaggo/swag@版本号</code> 这个位置执行一下<code>go install</code> 然后我们重启一下<code>cmd</code> 尝试一下是否可以返回版本号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swag -v</span><br><span class="line"><span class="comment"># 正常会直接返回一行版本信息</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后我们继续安装其它包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/swaggo/gin-swagger</span><br><span class="line">go get -u github.com/swaggo/gin-swagger/swaggerFiles</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-目录介绍"><a href="#1-2-目录介绍" class="headerlink" title="1.2 目录介绍"></a>1.2 目录介绍</h3><p>这里项目名称我是随意写的，我这里是<code>webbase</code> 然后这个东西在<code>GOPATH/src/LearnTest</code> 下面，所以后面很多包的引用目录位置是从<code>LearnTest/webbase/xxxxx</code> 这样子的</p>
+<h4 id="1-main-go"><a href="#1-main-go" class="headerlink" title="1) main.go"></a>1) main.go</h4><p><strong>这里只负责启动路由</strong>，下面我写了很多注释在文件开头，这里我会和图片一起对照讲解。</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td><strong>必需的。</strong>应用程序的标题。</td>
+</tr>
+<tr>
+<td>version</td>
+<td><strong>必需的。</strong>提供应用程序API的版本</td>
+</tr>
+<tr>
+<td>description</td>
+<td>应用程序的简短描述。</td>
+</tr>
+<tr>
+<td>termsOfService</td>
+<td>API的服务条款。</td>
+</tr>
+<tr>
+<td>contact.name</td>
+<td>公开的API的联系信息。</td>
+</tr>
+<tr>
+<td>contact.url</td>
+<td>指向联系信息的URL。必须采用网址格式。</td>
+</tr>
+<tr>
+<td>contact.email</td>
+<td>联系人&#x2F;组织的电子邮件地址。必须采用电子邮件地址的格式。</td>
+</tr>
+<tr>
+<td>license.name</td>
+<td><strong>必需的。</strong>用于API的许可证名称。</td>
+</tr>
+<tr>
+<td>license.url</td>
+<td>用于该API的许可证的URL。必须采用网址格式。</td>
+</tr>
+<tr>
+<td>host</td>
+<td>提供API的主机（名称或IP）。</td>
+</tr>
+<tr>
+<td>BasePath</td>
+<td>提供API的基本路径。</td>
+</tr>
+</tbody></table>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @title 我的测试网站</span></span><br><span class="line"><span class="comment">// @version 1.0</span></span><br><span class="line"><span class="comment">// @description 这是我的api测试网站</span></span><br><span class="line"><span class="comment">// @termsOfService http://swagger.io/terms/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @contact.name Heartfilia</span></span><br><span class="line"><span class="comment">// @contact.url https://heartfilia.github.io</span></span><br><span class="line"><span class="comment">// @contact.email xxxxxx@qq.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @license.name Apache 2.0</span></span><br><span class="line"><span class="comment">// @license.url http://www.apache.org/licenses/LICENSE-2.0.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @host 192.168.1.115:8888</span></span><br><span class="line"><span class="comment">// @BasePath</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;LearnTest/webbase/router&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	router.Routers()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230209172213249.png" alt="image-20230209172213249"></p>
+<p>这里有些东西不是必须写的 我这里写了四个板块(用换行符分割的)。这里面只要呈现了超链接样子的东西都可以不写的。核心是最后那个<code>host</code></p>
+<ol>
+<li><p>如果你是放在有<code>nginx </code>服务的地方的话这里写<code>127.0.0.1:xxxx</code> <strong>完全没有问题</strong>，那么你将碰不到任何错误</p>
+</li>
+<li><p>如果是<strong>单机测试</strong>，你写<code>127.0.0.1:xxxx</code> 也<strong>没有任何问题</strong>，访问也不会出错</p>
+</li>
+<li><p>如果你写了<code>127.0.0.1:xxxx</code> 然后要给<strong>内网</strong>小伙伴玩，那么你会遇到如下问题，他用内网IP访问你的服务，swagger页面可以打开，但是api服务访问会出现<code>CORS</code>问题。</p>
+</li>
+<li><p>如果你写了<code>内网ip:xxxx</code> 然后给内网小伙伴玩，那么一般是不会遇到任何问题的。但是，此时你自己用<code>127.0.0.1:xxxx</code> 去访问，你自己又会碰到<code>CORS</code>错误。这时候我们可以利用添加一个<code>CORS</code> 中间件来处理这个问题，下一个板块我就会写到，因为里面没啥东西讲的，先写前面。</p>
+<ul>
+<li>添加中间件后，我们测试访问<code>GET</code> 请求没问题，<code>POST json</code>数据依旧会出现<code>CORS</code> 问题，我们打开浏览器抓包一下请求看看</li>
+</ul>
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230209173904660.png" alt="image-20230209173904660"></p>
+<ul>
+<li>这时候我们就只好也走<code>内网ip</code> 然后接下来都<code>ok</code></li>
+</ul>
+</li>
+<li><p>所以推荐<code>host</code> 参数设置如下</p>
+<ul>
+<li>这个位置如果是<code>nginx</code>服务，就写<code>127.0.0.1</code>即可。</li>
+<li>如果是内网，那么大家都用内网ip访问。</li>
+<li>如果是公网，那么就公网访问，也不会有问题。</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-middlewares-cors-go"><a href="#2-middlewares-cors-go" class="headerlink" title="2) middlewares&#x2F;cors.go"></a>2) middlewares&#x2F;cors.go</h4><p>这里是我同源策略处理问题的时候，这里可以解决部分问题。毕竟这个地方可以在<code>nginx</code> 那里面替代处理</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> middlewares</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Cors</span><span class="params">()</span></span> gin.HandlerFunc &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		method := context.Request.Method</span><br><span class="line">		origin := context.Request.Header.Get(<span class="string">&quot;Origin&quot;</span>) <span class="comment">//请求头部</span></span><br><span class="line">		<span class="keyword">if</span> origin != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="comment">//接收客户端发送的origin （重要！）</span></span><br><span class="line">			context.Writer.Header().Set(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>)</span><br><span class="line"></span><br><span class="line">			<span class="comment">//服务器支持的所有跨域请求的方法</span></span><br><span class="line">			context.Header(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;POST, GET, OPTIONS, PUT, DELETE,UPDATE&quot;</span>)</span><br><span class="line">			<span class="comment">//允许跨域设置可以返回其他子段，可以自定义字段</span></span><br><span class="line">			context.Header(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;Authorization, Content-Length, X-CSRF-Token, Token,session&quot;</span>)</span><br><span class="line">			<span class="comment">// 允许浏览器（客户端）可以解析的头部 （重要）</span></span><br><span class="line">			context.Header(<span class="string">&quot;Access-Control-Expose-Headers&quot;</span>, <span class="string">&quot;Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers&quot;</span>)</span><br><span class="line">			<span class="comment">//设置缓存时间</span></span><br><span class="line">			<span class="comment">//c.Header(&quot;Access-Control-Max-Age&quot;, &quot;172800&quot;)</span></span><br><span class="line">			<span class="comment">//允许客户端传递校验信息比如 cookie (重要)</span></span><br><span class="line">			context.Header(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="string">&quot;true&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//允许类型校验</span></span><br><span class="line">		<span class="keyword">if</span> method == <span class="string">&quot;OPTIONS&quot;</span> &#123;</span><br><span class="line">			context.AbortWithStatus(<span class="number">200</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			context.Next()</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个使用的地方是在<code>router.go</code>里面</p>
+<h4 id="3-router-router-go"><a href="#3-router-router-go" class="headerlink" title="3) router&#x2F;router.go"></a>3) router&#x2F;router.go</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> router</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;LearnTest/webbase/controller&quot;</span></span><br><span class="line">	_ <span class="string">&quot;LearnTest/webbase/docs&quot;</span>       <span class="comment">// 这个很重要 一定要导入计算好的这个目录，这个是swag init得到的</span></span><br><span class="line">	<span class="string">&quot;LearnTest/webbase/middlewares&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">	swaggerFiles <span class="string">&quot;github.com/swaggo/files&quot;</span>   <span class="comment">// 这个也要导入</span></span><br><span class="line">	ginSwagger <span class="string">&quot;github.com/swaggo/gin-swagger&quot;</span>   <span class="comment">// 这个别忘记了也要</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Routers</span><span class="params">()</span></span> &#123;</span><br><span class="line">	router := gin.Default()</span><br><span class="line">	router.Use(middlewares.Cors())  <span class="comment">// 处理CROS问题的中间件，一般来说不用写，这里可以由nginx去解决</span></span><br><span class="line">	<span class="comment">// 这里是浏览器打开swagger的路由,这个地方 docs 可以是任意你想要的单词，这里也可以是你任意安排的路由</span></span><br><span class="line">	router.GET(<span class="string">&quot;/docs/*any&quot;</span>, ginSwagger.WrapHandler(swaggerFiles.Handler))</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 下面是我的测试代码，展示了 4 种请求数据的方式，后面我会对每种数据方式的swagger模板进行设置</span></span><br><span class="line">	test := router.Group(<span class="string">&quot;/test&quot;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		test.GET(<span class="string">&quot;/get_query&quot;</span>, controller.TestGetQuery)</span><br><span class="line">		test.GET(<span class="string">&quot;/get_param/:name&quot;</span>, controller.TestGetParam)</span><br><span class="line">		test.POST(<span class="string">&quot;/post_json&quot;</span>, controller.TestPostJson)</span><br><span class="line">		test.POST(<span class="string">&quot;/post_data&quot;</span>, controller.TestPostData)</span><br><span class="line">		test.POST(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">			context.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;code&quot;</span>: <span class="string">&quot;0&quot;</span>, <span class="string">&quot;msg&quot;</span>: <span class="string">&quot;默认路由返回&quot;</span>&#125;)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	router.Run(<span class="string">&quot;:8888&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-controller-controller-go"><a href="#4-controller-controller-go" class="headerlink" title="4) controller&#x2F;controller.go"></a>4) controller&#x2F;controller.go</h4><p>这里先展示<strong>最上面</strong>每个函数都可能会用到的东西</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> controller</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;encoding/json&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个不是必要的，可以不弄这个，但是后面设置Success 和 Failure 的时候就需要弄其它模板</span></span><br><span class="line"><span class="keyword">type</span> Response <span class="keyword">struct</span> &#123;</span><br><span class="line">	Msg  <span class="type">string</span> <span class="string">`json:&quot;msg&quot;`</span></span><br><span class="line">	From <span class="type">string</span> <span class="string">`json:&quot;from&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个不是必要的，可以不弄这个，但是后面设置Success 和 Failure 的时候就需要弄其它模板</span></span><br><span class="line"><span class="keyword">type</span> ResponseError <span class="keyword">struct</span> &#123;</span><br><span class="line">	Code <span class="type">uint32</span> <span class="string">`json:&quot;code&quot;`</span></span><br><span class="line">	Msg  <span class="type">string</span> <span class="string">`json:&quot;msg&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>下面代码都是接着上面写的 我们先对每一个板块单独写下来，然后汇总说一下</p>
+</blockquote>
+<ol>
+<li><p>GET-query</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Summary 这里是get测试query取值</span></span><br><span class="line"><span class="comment">// @Description 这是description111</span></span><br><span class="line"><span class="comment">// @Tags 测试</span></span><br><span class="line"><span class="comment">// @produce json</span></span><br><span class="line"><span class="comment">// @Router /test/get_query [get]</span></span><br><span class="line"><span class="comment">// @Param name query string false &quot;这里是get参数之一&quot; default(swagger默认值) minlength(3) maxlength(100)</span></span><br><span class="line"><span class="comment">// @Success 200 &#123;object&#125; Response &quot;成功&quot;</span></span><br><span class="line"><span class="comment">// @Failure 400 &#123;integer&#125; integer &quot;失败&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestGetQuery</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	name := context.Query(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> name == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		name = <span class="string">&quot;不传我就给这个默认值&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	context.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;msg&quot;</span>: name, <span class="string">&quot;from&quot;</span>: <span class="string">&quot;get_query&quot;</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>GET-param</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Summary 这里是get测试param取值</span></span><br><span class="line"><span class="comment">// @Description 这是description222</span></span><br><span class="line"><span class="comment">// @Tags 测试</span></span><br><span class="line"><span class="comment">// @produce json</span></span><br><span class="line"><span class="comment">// @Router /test/get_param/&#123;name&#125; [get]</span></span><br><span class="line"><span class="comment">// @Param name path string true &quot;这里是get参数之一&quot;</span></span><br><span class="line"><span class="comment">// @Success 200 &#123;object&#125; Response &quot;成功&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestGetParam</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	name := context.Param(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">	context.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;msg&quot;</span>: name, <span class="string">&quot;from&quot;</span>: <span class="string">&quot;get_param&quot;</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>POST-json</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Summary 这里是post测试json取值</span></span><br><span class="line"><span class="comment">// @Description 这是description333</span></span><br><span class="line"><span class="comment">// @Tags 测试</span></span><br><span class="line"><span class="comment">// @produce json</span></span><br><span class="line"><span class="comment">// @Router /test/post_json [post]</span></span><br><span class="line"><span class="comment">// @Accept json</span></span><br><span class="line"><span class="comment">// @Param name body string true &quot;测试&quot;</span></span><br><span class="line"><span class="comment">// @Success 200 &#123;object&#125; Response &quot;成功&quot;</span></span><br><span class="line"><span class="comment">// @Failure 400 &#123;object&#125; ResponseError &quot;失败&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPostJson</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	b, err := context.GetRawData()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		context.JSON(http.StatusBadRequest, gin.H&#123;<span class="string">&quot;msg&quot;</span>: <span class="string">&quot;传入数据有问题&quot;</span>, <span class="string">&quot;from&quot;</span>: <span class="string">&quot;post_json&quot;</span>&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> result <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">	err = json.Unmarshal(b, &amp;result)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		context.JSON(http.StatusBadRequest, gin.H&#123;<span class="string">&quot;msg&quot;</span>: <span class="string">&quot;传入的json有问题&quot;</span>, <span class="string">&quot;from&quot;</span>: <span class="string">&quot;post_json&quot;</span>&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	context.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;msg&quot;</span>: result, <span class="string">&quot;from&quot;</span>: <span class="string">&quot;post_json&quot;</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>POST-data</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Summary 这里是post测试data取值</span></span><br><span class="line"><span class="comment">// @Description 这是description444</span></span><br><span class="line"><span class="comment">// @Tags 测试</span></span><br><span class="line"><span class="comment">// @produce json</span></span><br><span class="line"><span class="comment">// @Router /test/post_data [post]</span></span><br><span class="line"><span class="comment">// @Param name formData string true &quot;这里是post参数之一&quot;</span></span><br><span class="line"><span class="comment">// @Success 200 &#123;object&#125; Response &quot;成功&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPostData</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">	username := context.PostForm(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">	context.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;code&quot;</span>: fmt.Sprintf(<span class="string">&quot;这里是post传过来的值: %v&quot;</span>, username)&#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>通用模块位置， 下面出现的 <code>MIME</code> <code>参数类型</code> <code>数据类型</code> <code>param参数类型</code> 都在[二–&gt; 1.3]里面详解</p>
+</blockquote>
+<p><strong>下面的很多参数用不到可以不写，可以看到我上面也不是全部都写的，对大小写不敏感</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Summary      这个出现在参数的description位置 说这个参数做啥的</span></span><br><span class="line"><span class="comment">// @Description  这个出现在URL后面，说明这个URL做啥的</span></span><br><span class="line"><span class="comment">// @Tags         这个是对这个URL分组的，可以把多个统一名称tag放到一个组里面</span></span><br><span class="line"><span class="comment">// @Produce      这个是值这个api产生什么类型的数据 选值从MIME类型里面选择  ---&gt; 见 二-&gt;1-&gt;1.3 类型参数-&gt;MIME</span></span><br><span class="line"><span class="comment">// @Accept       请求体接收的数据格式，值也是MIME类型</span></span><br><span class="line"><span class="comment">// @Router       这个就是定义这个API的url的和请求方式 后面url和请求方式用空格分开，这里我要单独说</span></span><br><span class="line"><span class="comment">// @Success      成功的时候的响应模板，这里不会对结果有影响，只是展示成功响应的情况，不写就不展示</span></span><br><span class="line"><span class="comment">// @Failure      同成功。 --&gt;这两个都是空格分隔，参数是: 响应码 &#123;参数类型&#125; 数据类型 备注  --&gt; 见 二-&gt;1-&gt;1.3 类型参数-&gt;参数类型/数据类型</span></span><br><span class="line"><span class="comment">// @Security     每个API操作的安全性。</span></span><br><span class="line"><span class="comment">// @Header       请求头字段 格式是: 响应码 &#123;参数类型&#125; 数据类型 备注</span></span><br><span class="line"><span class="comment">// @Param        这个位置下面细说 统一格式: 参数名称 param参数类型 数据类型 是否必须 备注 限制属性   --&gt; 见 二-&gt;1-&gt;1.3 类型参数-&gt;param参数类型/限制属性</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>单独说的参数</p>
+</blockquote>
+<p><code>Router</code> : 这个其它参数都没有啥问题，就是取值类型为param的时候，这里我们不能按照<code>gin</code> url里面<code>xxx/:a/:b</code> 这样子写，这里我们需要写成<code>xxx/&#123;a&#125;/&#123;b&#125;</code></p>
+<p><code>Param</code> : 这个地方只有几个地方需要变就是param参数类型，统一的格式就是 <code>// @Param 参数名称 param参数类型 数据类型 是否必须 备注 限制属性 </code>    这里的详细讲解见 <code>1.3 下面的 param参数类型</code>  和<code>限制属性</code>.</p>
+<p><code>Success / Failure </code>:  这里 格式是空格分隔 我们需要写如下几个参数，只会展示成功失败返回数据的基本模板，不会有具体值，这里也不会影响程序结果，只是<strong>模板</strong>， 所以可以定义多个成功和失败展示不同状态码的成功和失败的返回值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Success 状态码 &#123;参数类型&#125; 返回数据 备注</span></span><br><span class="line"><span class="comment">// @Failure 状态码 &#123;参数类型&#125; 返回数据 备注</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230210093727615.png" alt="image-20230210093727615"></p>
+<p><code>Security</code> : 这个可以不写，写了就是做一些api校验，用的很少，如果要用可以查文档</p>
+<p><strong>通用API信息</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @securityDefinitions.basic BasicAuth</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @securitydefinitions.oauth2.application OAuth2Application</span></span><br><span class="line"><span class="comment">// @tokenUrl https://example.com/oauth/token</span></span><br><span class="line"><span class="comment">// @scope.write Grants write access</span></span><br><span class="line"><span class="comment">// @scope.admin Grants read and write access to administrative information</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>每个API操作</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Security ApiKeyAuth</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用AND条件</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Security ApiKeyAuth</span></span><br><span class="line"><span class="comment">// @Security OAuth2Application[write, admin]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里摘抄自 中文文档: <a target="_blank" rel="noopener" href="https://github.com/swaggo/swag/blob/master/README_zh-CN.md">https://github.com/swaggo/swag/blob/master/README_zh-CN.md</a></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="1-3-类型参数"><a href="#1-3-类型参数" class="headerlink" title="1.3 类型参数"></a>1.3 类型参数</h3><h4 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>json</td>
+<td>application&#x2F;json</td>
+</tr>
+<tr>
+<td>x-www-form-urlencoded</td>
+<td>application&#x2F;x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td>xml</td>
+<td>text&#x2F;xml</td>
+</tr>
+<tr>
+<td>plain</td>
+<td>text&#x2F;plain</td>
+</tr>
+<tr>
+<td>html</td>
+<td>text&#x2F;html</td>
+</tr>
+<tr>
+<td>mpfd</td>
+<td>multipart&#x2F;form-data</td>
+</tr>
+<tr>
+<td>json-api</td>
+<td>application&#x2F;vnd.api+json</td>
+</tr>
+<tr>
+<td>json-stream</td>
+<td>application&#x2F;x-json-stream</td>
+</tr>
+<tr>
+<td>octet-stream</td>
+<td>application&#x2F;octet-stream</td>
+</tr>
+<tr>
+<td>png</td>
+<td>image&#x2F;png</td>
+</tr>
+<tr>
+<td>jpeg</td>
+<td>image&#x2F;jpeg</td>
+</tr>
+<tr>
+<td>gif</td>
+<td>image&#x2F;gif</td>
+</tr>
+</tbody></table>
+<h4 id="参数类型"><a href="#参数类型" class="headerlink" title="参数类型"></a>参数类型</h4><blockquote>
+<p> 参数类型 Param Type</p>
+</blockquote>
+<ul>
+<li>object (struct 类型的东西写这个)</li>
+<li>string (string 类型写这个)</li>
+<li>integer (int, uinit, uint32, uint64 都写这个)</li>
+<li>number (float32 类型写这个称呼)</li>
+<li>boolean (bool)</li>
+<li>array</li>
+</ul>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><blockquote>
+<p>数据类型Data Type</p>
+</blockquote>
+<ul>
+<li>string (string)</li>
+<li>integer (int, uint, uint32, uint64)</li>
+<li>number (float32)</li>
+<li>boolean (bool)</li>
+<li>user defined struct     &#x2F;&#x2F; 这里就比如我上面定义的成功失败的结构体</li>
+</ul>
+<h4 id="param参数类型"><a href="#param参数类型" class="headerlink" title="param参数类型"></a>param参数类型</h4><ul>
+<li><p><strong>query</strong> :  这个类型是取 <code>url?</code> 后面的数据的值，有几个参数就<strong>写几行</strong> 如下示例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Param name query string true &quot;用户名&quot;</span></span><br><span class="line"><span class="comment">// @Param age query integer false &quot;年龄&quot; default(18)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>path</strong> : 这个类型是取restful格式的url的值 如路由那边写 <code>url/user/:name/:age</code> ,不过这里的Router得写成 <code>url/user/&#123;name&#125;/&#123;age&#125;</code> 下面才可以正常取值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Param name path string true &quot;用户名&quot;</span></span><br><span class="line"><span class="comment">// @Param age path integer true &quot;年龄&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>header</strong> : 这个是需要附加header里面参数的,这里注意<strong>不能是中文</strong>，最好是英文数字英文符号</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Param token header string true &quot;header需要的值&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>body</strong> : 这个是设置Json的数据,这里不和其它参数一样，这里<strong>最好只设置一个</strong>，设置多了虽然页面也会展示，但是api访问只会取最后一个框，他这个位置的第一个位置参数名无实际作用，配套的得在前面加一行传入参数限制才好。如下，name 无实际作用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Accept json</span></span><br><span class="line"><span class="comment">// @Param name body string true &quot;测试&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/goswagger/image-20230210102518367.png" alt="image-20230210102518367"></p>
+</li>
+<li><p><strong>formDate</strong> : 取form-data的值的，有几个写几行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Param name formData string true &quot;这里是post参数之一&quot;</span></span><br><span class="line"><span class="comment">// @Param age formData integer true &quot;这里是post参数之二&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="限制属性"><a href="#限制属性" class="headerlink" title="限制属性"></a>限制属性</h4><blockquote>
+<p>这里可以多个一起往后面写 也<strong>可以不写</strong>表示不限制，下面【】里面的是示例 没有示例的不咋常用</p>
+</blockquote>
+<ul>
+<li>defualt * 参数默认值    【default(666) default(这就是默认值)】</li>
+<li>maximum number 最大值  【maximum(199.99)】</li>
+<li>mininum number 最小值  【mininum(6.66)】</li>
+<li>maxLength integer 最大长度  【maxLength(1000)】</li>
+<li>minLength integer 最小长度   【minLength(1)】</li>
+<li>enums [*] 枚举类型  【enums(0, 1)】</li>
+<li>format string</li>
+<li>collectionFormat string query 数组分割模式</li>
+</ul>
+<h3 id="1-4-注意事项"><a href="#1-4-注意事项" class="headerlink" title="1.4 注意事项"></a>1.4 注意事项</h3><ol>
+<li><p>多字段定义时候不能跨字段，如两个相同的类型定义</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Accept  json</span></span><br><span class="line"><span class="comment">// @Produce json</span></span><br><span class="line"><span class="comment">// @param id query string false &quot;用户id&quot; default(&quot;&quot;) minlength(3) maxlength(100)</span></span><br><span class="line"><span class="comment">// @Produce json 这里将报错</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>修改定义后需要重新执行，生成命令并重启服务</p>
+</li>
+<li><p>路由配置的时候，需要引入文档</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_ <span class="string">&quot;LearnTest/webbase/docs&quot;</span>   <span class="comment">// 如这一个引入</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>备注那些字 一定有<strong>双引号</strong>包裹，不能裸奔</p>
+</li>
+</ol>
+<h2 id="2-运行"><a href="#2-运行" class="headerlink" title="2. 运行"></a>2. 运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swag init       <span class="comment"># 先计算出模板，没有问题我们测试运行</span></span><br><span class="line">go run main.go  <span class="comment"># 测试运行</span></span><br></pre></td></tr></table></figure>
+
+<p>访问页面测试，没有问题就行。 API单独访问是肯定没有问题的，主要是在swagger页面可能会出现一些问题。</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2023/02/10/goSwagger/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2023/02/10/goSwagger/";
+            const title         = "「【goSwagger】goswagger+gin配置踩坑」";
+            const excerpt       = `搭建一个swagger页面 手把手教学`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/go/" rel="tag">go</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【泛型】go语言泛型编程" href="/2023/02/07/goGenericbase/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【反射】go-reflect基本理解" href="/2023/02/14/goReflect/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-text">1. 页面展示</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E6%88%98"><span class="toc-text">二、实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%80%E5%A7%8B"><span class="toc-text">1. 开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85goswagger"><span class="toc-text">1.1 安装goswagger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">1.2 目录介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-main-go"><span class="toc-text">1) main.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-middlewares-cors-go"><span class="toc-text">2) middlewares&#x2F;cors.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-router-router-go"><span class="toc-text">3) router&#x2F;router.go</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-controller-controller-go"><span class="toc-text">4) controller&#x2F;controller.go</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="toc-text">1.3 类型参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MIME"><span class="toc-text">MIME</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">参数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#param%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">param参数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E5%B1%9E%E6%80%A7"><span class="toc-text">限制属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">1.4 注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C"><span class="toc-text">2. 运行</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

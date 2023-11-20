@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【wsl】在windows的linux子系统问题整体 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="wsl" />
+  
+  <meta name="description" content="持续更新~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【wsl】在windows的linux子系统问题整体">
+<meta property="og:url" content="https://heartfilia.github.io/2023/03/02/wslsolve/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="持续更新~">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2023-03-02T03:20:03.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.815Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="wsl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/03/02/wslsolve/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【wsl】在windows的linux子系统问题整体</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-03-02T03:20:03.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-03-02</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.49K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707815"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E6%97%B6"><span class="toc-number">1.</span> <span class="toc-text">一、安装时</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85wsl"><span class="toc-number">1.1.</span> <span class="toc-text">1. 无法安装wsl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B2%A1%E6%9C%89centos"><span class="toc-number">1.2.</span> <span class="toc-text">2. 没有centos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEwsl%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.1.</span> <span class="toc-text">设置wsl版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bwsl%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.</span> <span class="toc-text">查看wsl信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-number">2.</span> <span class="toc-text">二、运行时</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%A0%E7%BD%91%E7%BB%9C"><span class="toc-number">2.1.</span> <span class="toc-text">1. 无网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">2. 设置代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AB%AF%E5%8F%A3%E8%AE%BF%E9%97%AE"><span class="toc-number">2.3.</span> <span class="toc-text">3. 端口访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A0systemctl"><span class="toc-number">2.4.</span> <span class="toc-text">4. 无systemctl</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>持续更新~</p>
+<span id="more"></span>
+
+<h1 id="一、安装时"><a href="#一、安装时" class="headerlink" title="一、安装时"></a>一、安装时</h1><h2 id="1-无法安装wsl"><a href="#1-无法安装wsl" class="headerlink" title="1. 无法安装wsl"></a>1. 无法安装wsl</h2><ol>
+<li><p>可能需要开启下面的东西</p>
+<p>   这里的两个选项可以先勾上，如果测试不行我们再打开 <code>Hyper-V</code>, 我这个电脑安装的时候提示需要开启<code>Hypter-V</code> 然后我打开了就可以实现安装了，就没有勾选下面这两个服务测试。</p>
+<p>   <img src="https://static.litetools.top/blogs/wsl/image-20230302102904835.png" alt="image-20230302102904835"></p>
+</li>
+<li><p>可能需要开启 <code>hyper-v</code></p>
+<p>   <img src="https://static.litetools.top/blogs/wsl/image-20230302101251753.png" alt="image-20230302101251753"></p>
+</li>
+</ol>
+<h2 id="2-没有centos"><a href="#2-没有centos" class="headerlink" title="2. 没有centos"></a>2. 没有centos</h2><p>在微软应用商店是没有centos的wsl镜像的，这时候我们可以去  <a target="_blank" rel="noopener" href="https://github.com/mishamosher/CentOS-WSL/releases">下载地址</a> 这里下载centos的镜像</p>
+<p>当然新版本的镜像哪些我们可能需要切换到<code>wsl2</code>  </p>
+<h3 id="设置wsl版本"><a href="#设置wsl版本" class="headerlink" title="设置wsl版本"></a>设置wsl版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --set-default-version 2    <span class="comment"># 使你安装的任何新发行版均初始化为 WSL 2 发行版</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看wsl信息"><a href="#查看wsl信息" class="headerlink" title="查看wsl信息"></a>查看wsl信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>下载完毕后，放在你要放的地方，然后解压出来，用<strong>管理员权限</strong>打开 <code>CentOS*.exe</code> 这个安装上系统就好了，安装完成了后会退出一下，然后在安装目录或者cmd输入<code>wsl</code>进入linux系统。当然更加方便的就是使用<code>WindowsTerminal</code> 一键直达~</p>
+<h1 id="二、运行时"><a href="#二、运行时" class="headerlink" title="二、运行时"></a>二、运行时</h1><h2 id="1-无网络"><a href="#1-无网络" class="headerlink" title="1. 无网络"></a>1. 无网络</h2><p>我们刚进入linux系统的时候，可以更新一下yum 或者 apt 源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以我安装的centos为例</span></span><br><span class="line">yum -y update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 很多时候会发现可能没有网络之类的 所以我们需要换源</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有个问题，网上找到的教程里面都是去更换 <code>/etc/yum.repos.d/</code> 里面的信息，然后 <code>yum makecache</code> 之类的，但是你会发现部分版本并没有那个文件(可能不在，如果在按照网络上的操作即可)</p>
+<blockquote>
+<p>手动修改三个文件： 注意我这里是Centos8  如果其他版本自己网上查询</p>
+</blockquote>
+<p>国内源我这里提供两个任选其一即可</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清华云</span></span><br><span class="line"><span class="attr">baseurl</span>=<span class="string">https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/virt/$basearch/advanced-virtualization/</span></span><br><span class="line"><span class="comment"># 阿里云</span></span><br><span class="line"><span class="attr">baseurl</span>=<span class="string">https://mirrors.aliyun.com/centos-vault//$contentdir/$releasever/AppStream/$basearch/os/</span></span><br><span class="line"><span class="comment"># 官方的其它源 我测试下来就这个好用</span></span><br><span class="line"><span class="attr">baseurl</span>=<span class="string">http://vault.centos.org/$contentdir/$releasever/extras/$basearch/os/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**注释掉 ** <code>mirrorlist=</code>    <strong>替换</strong> <code>baseurl=</code></p>
+<ol>
+<li>CentOS-Linux-AppStream.repo</li>
+<li>CentOS-Linux-BaseOS.repo</li>
+<li>CentOS-Linux-Extras.repo</li>
+</ol>
+<p><img src="https://static.litetools.top/blogs/wsl/image-20230302103830368.png" alt="image-20230302103830368"></p>
+<p>下面是示例，三个文件是一样的，所以我展示一个</p>
+<p><img src="https://static.litetools.top/blogs/wsl/image-20230302103850038.png" alt="image-20230302103850038"></p>
+<p>都弄完了试试下面，如果卡住不行的话，那么就得操作其它方法了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum clean all     <span class="comment"># 清除系统所有的yum缓存</span></span><br><span class="line">yum repolist</span><br><span class="line">yum grouplist</span><br><span class="line">yum makecache     <span class="comment"># 生成yum缓存</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果其它源卡住了，换成官方的那个 重新试试</span></span><br></pre></td></tr></table></figure>
+
+<p>如果上面设置了<strong>还不起作用</strong>，那么就用下面这个万能的方法：</p>
+<h2 id="2-设置代理"><a href="#2-设置代理" class="headerlink" title="2. 设置代理"></a>2. 设置代理</h2><p>首先你的windows 得有代理：</p>
+<p>我这个主机开启的是 <code>sock5</code> 的代理，开启的局域网端口是<code>19876</code></p>
+<p>操作这个之前 我们得去windows的防火墙位置设置 入站规则: 控制面板 –&gt; 系统和安全 –&gt; Windows Defender 防火墙 –&gt; 高级设置 –&gt; 入站规则 –&gt; (右边)新建规则 –&gt; (选择)端口 –&gt; 特定本地端口: (输入) 你要开启的端口，可以多开几个后面http服务啥的用 我开了如下<code>80,6666,8888,8080,8000,9999,19876</code> </p>
+<p><img src="https://static.litetools.top/blogs/wsl/image-20230302104847308.png" alt="image-20230302104847308"></p>
+<p>编辑 <code>~/.bashrc</code> 因为我没有安装<code>zsh</code> 所以就改这个文件 或者 <code>/etc/profile</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动获取ip 因为wsl每次启动都会分配不同的ip 所以要自动获取</span></span><br><span class="line"><span class="built_in">export</span> hostip=$(<span class="built_in">cat</span> /etc/resolv.conf |grep -oP <span class="string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取一个快捷操作的别名需要网络的时候开启不用的时候一键关闭</span></span><br><span class="line"><span class="comment"># 我的代理是socks5协议的 如果你的是http协议 把socks5改成http即可</span></span><br><span class="line"><span class="built_in">alias</span> setproxy=<span class="string">&#x27;export ALL_PROXY=&quot;socks5://$&#123;hostip&#125;:19876&quot;;&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> unsetproxy=<span class="string">&#x27;unset ALL_PROXY&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>写完了后记得操作保存一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们输入以下命令开启代理</span></span><br><span class="line">setproxy</span><br><span class="line"><span class="comment"># 然后测试一下google</span></span><br><span class="line">curl http://www.google.com</span><br><span class="line"><span class="comment"># 如果直接返回内容证明代理配置ok</span></span><br><span class="line"><span class="comment"># 输入如下命令关闭代理</span></span><br><span class="line">unsetproxy</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果都没有问题的话，那么在安装源啥的国内网络不行的情况下，我们可以直接开启代理下载更新。</p>
+<h2 id="3-端口访问"><a href="#3-端口访问" class="headerlink" title="3. 端口访问"></a>3. 端口访问</h2><p>我们有些时候需要部署一些服务在linux里面，然后外面想测试，自己电脑是肯定可以访问到的<code>127.0.0.1</code> 或者<code>linux的内网ip</code> 都可以，但是我要给局域网里面的其他人访问，那么就需要操作一下了</p>
+<p>首先保证我们的服务的端口是在windows防火墙那里配置通过了的，就是上面设置代理那里，因为我默认开启了一堆端口，所以我后面的服务可以通过这些端口访问，当然如果你要部署一个nginx在linux里面转发，那就只需要开启一个对外端口即可</p>
+<ol>
+<li>开启windows防火墙端口</li>
+<li>在windows用管理员权限打开终端</li>
+<li>创建和删除映射<ul>
+<li>创建映射: <code>netsh interface portproxy add v4tov4 listenport=win监听端口 listenaddress=0.0.0.0 connectport=wsl的端口 connectaddress=wsl内网ip</code>  </li>
+<li>删除映射: <code>netsh interface portproxy delete v4tov4 listenport=映射的端口 listenaddress=0.0.0.0</code></li>
+</ul>
+</li>
+<li>查看端口映射配置<ul>
+<li><code>netsh interface portproxy show all</code></li>
+</ul>
+</li>
+</ol>
+<p><img src="https://static.litetools.top/blogs/wsl/image-20230302105912912.png" alt="image-20230302105912912"></p>
+<p>这样子内网就可以愉快的访问你的服务器对应端口了。</p>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<p>因为每次重启电脑，linux的内网ip会改变，所以上面的操作需要随时删除和创建</p>
+<p>注意防火墙端口得开</p>
+<h2 id="4-无systemctl"><a href="#4-无systemctl" class="headerlink" title="4. 无systemctl"></a>4. 无systemctl</h2><p>网上的解决办法基本都是安装下面的东西</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dnf install -y mock perl openssh-server <span class="comment"># 安装依赖</span></span><br><span class="line"></span><br><span class="line">dnf install -y epel-release wget    <span class="comment"># 如果有wget了就不用操作这里了</span></span><br><span class="line"></span><br><span class="line">wget https://github.com/arkane-systems/genie/releases/download/v1.44/genie-1.44-1.fc34.x86_64.rpm    <span class="comment"># 会下载一个文件到你电脑上 可以预先找个位置 或者指定输出位置执行</span></span><br><span class="line"></span><br><span class="line">dnf install -y genie-1.44-1.fc34.x86_64.rpm</span><br><span class="line"></span><br><span class="line">genie -s    <span class="comment"># 这一步会巨久 好了之后可以测试一下</span></span><br><span class="line"></span><br><span class="line">systemctl list-unit-files   <span class="comment"># 测试 无报错即成功</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这个只是一个服务来的，上面执行了后，重启又不行了，所以我们可以开启自启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc <span class="comment"># 添加自启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加下面的内容</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;`ps -eo pid,lstart,cmd | grep systemd | grep -v -e grep -e systemd- | sort -n -k2 | awk &#x27;NR==1 &#123; print <span class="variable">$1</span> &#125;&#x27;`&quot;</span> != <span class="string">&quot;1&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  genie -s</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>测试 启动docker ok！</p>
+<p><img src="https://static.litetools.top/blogs/wsl/image-20230302111151549.png" alt="image-20230302111151549"></p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2023/03/02/wslsolve/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2023/03/02/wslsolve/";
+            const title         = "「【wsl】在windows的linux子系统问题整体」";
+            const excerpt       = `持续更新~`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/wsl/" rel="tag">wsl</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.815Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【yaml】go里面两种yaml文件读取比较" href="/2023/02/22/goyamlRead/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【pyenv】python版本管理神器" href="/2023/03/31/pyenv/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E6%97%B6"><span class="toc-text">一、安装时</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85wsl"><span class="toc-text">1. 无法安装wsl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B2%A1%E6%9C%89centos"><span class="toc-text">2. 没有centos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEwsl%E7%89%88%E6%9C%AC"><span class="toc-text">设置wsl版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bwsl%E4%BF%A1%E6%81%AF"><span class="toc-text">查看wsl信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-text">二、运行时</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%A0%E7%BD%91%E7%BB%9C"><span class="toc-text">1. 无网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-text">2. 设置代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AB%AF%E5%8F%A3%E8%AE%BF%E9%97%AE"><span class="toc-text">3. 端口访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A0systemctl"><span class="toc-text">4. 无systemctl</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

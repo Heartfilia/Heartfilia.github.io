@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【pandas】结合xlsxwriter变得轻松一点 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="pandas, python" />
+  
+  <meta name="description" content="我这个地方是不讲数据处理的，只管内容的样式设置。核心使用pandas 辅助引擎采用 xlsxwriter，不会讲的很细，只会讲几个常用操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【pandas】结合xlsxwriter变得轻松一点">
+<meta property="og:url" content="https://heartfilia.github.io/2023/02/15/pandasSetstyle/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="我这个地方是不讲数据处理的，只管内容的样式设置。核心使用pandas 辅助引擎采用 xlsxwriter，不会讲的很细，只会讲几个常用操作。">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2023-02-15T09:30:25.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/02/15/pandasSetstyle/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【pandas】结合xlsxwriter变得轻松一点</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-02-15T09:30:25.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-02-15</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~8.66K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><p>我这个地方是不讲数据处理的，只管内容的样式设置。核心使用pandas 辅助引擎采用 xlsxwriter，不会讲的很细，只会讲几个常用操作。</p>
+<span id="more"></span>
+
+<p><a id="top"></a></p>
+<blockquote>
+<p>关于<code>xlsxwriter</code>的更多操作可以点击 <a target="_blank" rel="noopener" href="https://xlsxwriter.readthedocs.io/worksheet.html">这里官方链接</a></p>
+</blockquote>
+<h1 id="一、基础操作"><a href="#一、基础操作" class="headerlink" title="一、基础操作"></a>一、基础操作</h1><h2 id="1-无格式设置"><a href="#1-无格式设置" class="headerlink" title="1. 无格式设置"></a>1. 无格式设置</h2><p>按照常规数据来说，基本没有什么格式需求，所以我们可以直接采取最基础的操作：如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">base_dict = &#123;</span><br><span class="line">    <span class="string">&quot;a&quot;</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="string">&quot;b&quot;</span>: [<span class="string">&quot;一&quot;</span>, <span class="string">&quot;二&quot;</span>, <span class="string">&quot;三&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">df = pd.DataFrame(base_dict)</span><br><span class="line">df.to_excel(<span class="string">&quot;基础样式.xlsx&quot;</span>, freeze_panes=(<span class="number">1</span>, <span class="number">0</span>), index=<span class="literal">False</span>)  <span class="comment">#  我这里设置了冻结首行 关闭了内容序号标记</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215110221616.png" alt="image-20230215110221616"></p>
+<h2 id="2-取消超链接"><a href="#2-取消超链接" class="headerlink" title="2. 取消超链接"></a>2. 取消超链接</h2><p>但是这样子应付基本的数据没有问题，如果内容是链接，问题就有了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">base_dict = &#123;</span><br><span class="line">    <span class="string">&quot;a&quot;</span>: [<span class="string">&quot;http://www.baidu.com&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span>],</span><br><span class="line">    <span class="string">&quot;b&quot;</span>: [<span class="string">&quot;http://www.google.com&quot;</span>, <span class="string">&quot;http://www.google.com&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215110351452.png" alt="image-20230215110351452"></p>
+<p>可以看到内容都是超链接格式，内容少问题不大，但是内容多了，那么一个xlsx文件就会巨大，而且生成也慢，而且又不好看。这时候我们就需要引入我们今天的主角了 ： <code>xlsxwriter</code></p>
+<p>这个是一个包来的，可以独立使用，也可以引入pandas引擎作为pandas的插件。</p>
+<p>首先得保证我们有这个包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xlsxwriter</span><br></pre></td></tr></table></figure>
+
+<p>然后我们导出内容的时候就不要直接<code>df.to_excel</code>了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们导出一个df的话 直接</span></span><br><span class="line">df = pd.DataFrame(base_dict)</span><br><span class="line"><span class="comment"># 下面我们用 with 创建一个上下文管理器 writer出来 这里引擎有很多选择，我们这篇文章主要是xlsxwriter 所以后面都将用这个模板 </span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&quot;基础样式.xlsx&quot;</span>, engine=<span class="string">&quot;xlsxwriter&quot;</span>, engine_kwargs=&#123;<span class="string">&quot;options&quot;</span>: &#123;<span class="string">&quot;strings_to_urls&quot;</span>: <span class="literal">False</span>&#125;&#125;) <span class="keyword">as</span> writer:</span><br><span class="line">    df.to_excel(writer, index=<span class="literal">False</span>, freeze_panes=(<span class="number">1</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215111142907.png" alt="执行了上面操作之后"></p>
+<h3 id="2-1引擎参数"><a href="#2-1引擎参数" class="headerlink" title="2.1引擎参数"></a>2.1引擎参数</h3><p>上面我们看到我在后面 <code>engine_kwargs=&#123;&quot;options&quot;: &#123;&#125;&#125;</code> 设置了东西，那么这东西我们怎么能知道设置哪些呢？</p>
+<p>我们可以跟进 <code>xlsxwriter</code> 的源码里面，我们进去就可以看到有个<code>class Workbook(xmlwriter.XMLwriter):</code> 的类，下面有个  <code>options = &#123;&#125;</code> 的操作，然后我们开启查找进行标记，可以看到有一堆参数我们进行修改的。</p>
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215111723844.png" alt="image-20230215111723844"></p>
+<p>我们刚才使用的 <code>strings_to_urls</code> 就是这里的一个参数，所以同理其他的也能这样子设置。</p>
+<h1 id="二、样式操作"><a href="#二、样式操作" class="headerlink" title="二、样式操作"></a>二、样式操作</h1><p>这里才是我这里今天要讲的核心部分。</p>
+<p>这里主要的样式操作啥的，其实还是有很多样式<strong>没有写到</strong>，我这里就<strong>不多写</strong>，额只弄常见的一些操作。</p>
+<p>下面有两种表格样式 一是基础样式: <code>add_format</code> 还有一个插入表图: <code>add_chart</code>。这两个都是会返回一个样式对象。</p>
+<p><strong>然后</strong>我们通过</p>
+<ul>
+<li><p><code>write_row/write (这个我们这里不常用，因为数据我们弄得一般是有了的)</code></p>
+</li>
+<li><p><code>merge_range (这里是表格合并的时候可以添加的操作)</code></p>
+</li>
+<li><p><code>set_column  (设置列的时候添加样式)</code> </p>
+</li>
+<li><p><code>set_row (设置行的时候添加样式)</code> </p>
+</li>
+<li><p><code>conditional_format (根据条件添加样式)</code></p>
+</li>
+</ul>
+<p>等等操作的时候添加那个样式对象的。</p>
+<p>我们先逐步假设场景，然后来解决。</p>
+<h2 id="1-add-format"><a href="#1-add-format" class="headerlink" title="1. add_format"></a>1. add_format</h2><p>用于在工作表中创建一个新的格式对象来格式化单元格。</p>
+<p>这个是可以<strong>单独</strong>添加样式的<strong>主要</strong>操作方式,大概可以设置的参数如下: </p>
+<blockquote>
+<p>如果出现 <code>是否</code> 两个字，表明设置值为 <code>True/False</code></p>
+</blockquote>
+<ul>
+<li><code>align</code> : 水平对齐方式<ul>
+<li><code>left/center/right </code></li>
+<li><code>不常用的:fill/justify/centre_across/distributed/justify_distributed</code></li>
+</ul>
+</li>
+<li><code>valign</code>: 垂直对齐方式<ul>
+<li><code>top/vcenter/bottom</code></li>
+<li><code>不常用的:vjustify/vdistributed</code></li>
+</ul>
+</li>
+<li><code>border</code>:  边框<ul>
+<li><code>0无边框  1外边框 ...</code></li>
+</ul>
+</li>
+<li><code>bold</code>:  <strong>是否</strong>字体加粗</li>
+<li><code>italic</code>: <strong>是否</strong>字体倾斜</li>
+<li><code>font_name</code>: 字体</li>
+<li><code>font_size</code>: 字体大小</li>
+<li><code>font_color</code>: 字体颜色(这里用 #000000 这种格式的最好)</li>
+<li><code>text_wrap</code>: <strong>是否</strong>自动换行</li>
+</ul>
+<p>我们平时操作数据的时候，基本都是利用pandas 然后创建 <code>df = pd.DataFrame</code> ，pandas处理数据能力是非常牛逼，无其它包能敌的。但是美化这一点来说，可以说，基本没有美化。网上之前查询过很多设置pandas样式的操作，就改各种<code>css</code> 结果都不咋地，反正pands自带的一些美化是<strong>有，但不多</strong>。但是，我们可以利用<code>openpyxl</code> 或者 <code>xlsxwriter</code> 之类的对美化操作很方便的包来实现。但是两边的数据操作的类是不一样的，所以需要<strong>进行转化</strong>：</p>
+<p>我们这里不讲<code>openpyxl</code>,这个工具也很强，但是我还是喜欢用<code>xlsxwriter</code>这里面。</p>
+<p>最基础的demo如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">base_dict = &#123;</span><br><span class="line">    <span class="string">&quot;姓名&quot;</span>: [<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;李四&quot;</span>, <span class="string">&quot;王五&quot;</span>],</span><br><span class="line">    <span class="string">&quot;周一&quot;</span>: [<span class="string">&quot;09:00\n18:00&quot;</span>, <span class="string">&quot;09:00\n18:00&quot;</span>, <span class="string">&quot;09:00\n18:00&quot;</span>],</span><br><span class="line">    <span class="string">&quot;周二&quot;</span>: [<span class="string">&quot;10:00\n19:00&quot;</span>, <span class="string">&quot;10:00\n19:00&quot;</span>, <span class="string">&quot;10:00\n19:00&quot;</span>],</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 我们创建df的时候这里 也可以 是二维数组，然后 我们通过header添加标题</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(base_dict)</span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&quot;进阶样式.xlsx&quot;</span>, engine=<span class="string">&quot;xlsxwriter&quot;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df.to_excel(writer, index=<span class="literal">False</span>, freeze_panes=(<span class="number">1</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215113820170.png" alt="image-20230215113820170"></p>
+<p>可以看到我们的内容，表格内的换行是没有了，那么我们这里就需要先利用<code>xlsxwriter</code>来对pandas的<code>df</code> 数据进行美化。</p>
+<h3 id="1-1-获取workbook和worksheet"><a href="#1-1-获取workbook和worksheet" class="headerlink" title="1.1 获取workbook和worksheet"></a>1.1 获取workbook和worksheet</h3><blockquote>
+<p>声明: 下面是缩写描述</p>
+</blockquote>
+<p><code>workbook</code> : 是 <code>xlsxwriter</code>的文件对象</p>
+<p><code>worksheet</code> : 是利用<code>workbook</code> 来获取<code>sheet</code>的对象</p>
+<p>在<code>pandas</code>里面我们利用了<code>xlsxwriter</code>引擎后，可以通过创建出来的<code>writer</code>对象获取到我们想要的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&quot;进阶样式.xlsx&quot;</span>, engine=<span class="string">&quot;xlsxwriter&quot;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df.to_excel(writer, index=<span class="literal">False</span>, freeze_panes=(<span class="number">1</span>, <span class="number">0</span>))  <span class="comment"># 这里就是我们基础的数据 无样式</span></span><br><span class="line">    workbook = writer.book    <span class="comment"># 这样就是一个workbook对象</span></span><br><span class="line">    worksheet = writer.sheets[<span class="string">&quot;Sheet1&quot;</span>]  </span><br><span class="line">    <span class="comment"># 因为 writer.sheets 返回的是一个字典，这个地方我们要取值到需要操作的sheet， 我们这里只有一个df 默认这个df的sheet_name是Sheet1 所以这里需要写Sheet1，当然可以对需要操作的df设置想要设置的名称，然后这里也需要对应修改</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-内容换行"><a href="#1-2-内容换行" class="headerlink" title="1.2 内容换行"></a>1.2 内容换行</h3><p>这里是接着上面内容写的，后面的展示内容均会这样子操作，因为我们设置样式是需要这两个对象的，然后我们只需要对这两个对象操作就好了。</p>
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215115558078.png" alt="image-20230215115558078"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wrap_format = workbook.add_format(&#123;<span class="string">&#x27;text_wrap&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;align&#x27;</span>: <span class="string">&#x27;center&#x27;</span>, <span class="string">&#x27;valign&#x27;</span>: <span class="string">&#x27;top&#x27;</span>&#125;)</span><br><span class="line">worksheet.set_row(<span class="number">1</span>, <span class="number">30</span>, wrap_format)   <span class="comment"># 设置索引1号行的样式</span></span><br><span class="line">worksheet.set_row(<span class="number">2</span>, <span class="number">30</span>, wrap_format)   <span class="comment"># 设置索引2号行的样式</span></span><br><span class="line">worksheet.set_row(<span class="number">3</span>, <span class="number">30</span>, wrap_format)   <span class="comment"># 设置索引3号行的样式</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里是设置了行的属性，<strong>如果要</strong>设置列，更加简单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">worksheet.set_column(<span class="string">&quot;A:A&quot;</span>, <span class="number">30</span>, wrap_format)   <span class="comment"># 只修改A列的样式</span></span><br><span class="line">worksheet.set_column(<span class="string">&quot;B:E&quot;</span>, <span class="number">30</span>, wrap_format)   <span class="comment"># 修改B-E列的样式</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>后面设置样式的时候，我均只写 <code>workbook</code> 和 <code>worksheet</code> 后面的内容！因为这里的<code>api</code>和普通的<code>xlsx</code> 包无差异。</p>
+<p>我们设置了样式之后看看结果：</p>
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215120145450.png" alt="image-20230215120145450"></p>
+<p>我们上面设置了 <code>1, 2, 3</code> 行的内容样式 这个数据其实是对应了 我们注释了的 索引(<code>index=False</code> 这个设置隐藏了)的 <code>1,2,3</code> 。这里标题那一栏是<code>0</code> 我们没有设置而已。</p>
+<p>可以看到内容已经设置了自动换行，然后我们还设置了一些对齐样式， 其实主要就是讲解这个<code>add_format</code>的一些附加属性操作。</p>
+<h3 id="1-3-单元格合并"><a href="#1-3-单元格合并" class="headerlink" title="1.3 单元格合并"></a>1.3 单元格合并</h3><p>这里我们就不讲获取相同内容值的操作了，我们主要讲一下参数。我们就按照上面那个表，我们想合并周一一样的内容和周二一样的内容，我这里举例子我就不把周一周二一起合并了，周一合并一块，周二合并一块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">merge_format = workbook.add_format(&#123;<span class="string">&#x27;text_wrap&#x27;</span>: <span class="literal">True</span>, <span class="string">&quot;bold&quot;</span>: <span class="literal">True</span>, <span class="string">&#x27;align&#x27;</span>: <span class="string">&#x27;center&#x27;</span>&#125;)</span><br><span class="line">worksheet.merge_range(<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="string">&quot;xxxx\n换行后内容&quot;</span>, merge_format)   <span class="comment"># (开始行,开始列,结束行,结束列,合并后值,合并内容样式)  行列均0开始</span></span><br><span class="line">worksheet.merge_range(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="string">&quot;yyyy\n换行后内容&quot;</span>, merge_format)   <span class="comment"># (开始行,开始列,结束行,结束列,合并后值,合并内容样式)  行列均0开始</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215154121126.png" alt="image-20230215154121126"></p>
+<p>主要是这个<code>merge_range</code> 有五个参数，其中第五个位置样式可以不写。</p>
+<h2 id="2-add-chart"><a href="#2-add-chart" class="headerlink" title="2. add_chart"></a>2. add_chart</h2><p>在这里我们先准备一些测试用的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">base_data = [</span><br><span class="line">    [<span class="string">&quot;张三&quot;</span>, <span class="number">10</span>, <span class="number">13</span>],</span><br><span class="line">    [<span class="string">&quot;李四&quot;</span>, <span class="number">20</span>, <span class="number">35</span>],</span><br><span class="line">    [<span class="string">&quot;王五&quot;</span>, <span class="number">30</span>, <span class="number">21</span>],</span><br><span class="line">    [<span class="string">&quot;赵六&quot;</span>, <span class="number">11</span>, <span class="number">15</span>],</span><br><span class="line">    [<span class="string">&quot;钱七&quot;</span>, <span class="number">25</span>, <span class="number">20</span>],</span><br><span class="line">]</span><br><span class="line"><span class="comment"># 用这种数组格式一条表示一行数据</span></span><br><span class="line"><span class="comment"># headers 我这里模板没有用字典,所以我需要设置header来命名，如果不弄的话就会默认的标题0 1 2 .....</span></span><br><span class="line">headers = [<span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;上次&quot;</span>, <span class="string">&quot;这次&quot;</span>]</span><br><span class="line">df = pd.DataFrame(base_data)</span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&quot;表格示例.xlsx&quot;</span>, engine=<span class="string">&quot;xlsxwriter&quot;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df.to_excel(writer, index=<span class="literal">False</span>, sheet_name=<span class="string">&quot;表格测试&quot;</span>, header=headers, freeze_panes=(<span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">    workbook = writer.book</span><br><span class="line">    worksheet = writer.sheets[<span class="string">&quot;表格测试&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>和上面一样 我后面操作均不缩进，均单独书写。</p>
+<h3 id="2-1-表格样式"><a href="#2-1-表格样式" class="headerlink" title="2.1 表格样式"></a>2.1 表格样式</h3><table>
+<thead>
+<tr>
+<th align="center">type可选参数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">area</td>
+<td align="center">面积样式图表</td>
+</tr>
+<tr>
+<td align="center">bar</td>
+<td align="center">条形样式图表</td>
+</tr>
+<tr>
+<td align="center">column</td>
+<td align="center">柱形样式图表</td>
+</tr>
+<tr>
+<td align="center">line</td>
+<td align="center">线性样式图表</td>
+</tr>
+<tr>
+<td align="center">pie</td>
+<td align="center">饼状样式图表</td>
+</tr>
+<tr>
+<td align="center">scatter</td>
+<td align="center">散点样式图表</td>
+</tr>
+<tr>
+<td align="center">stock</td>
+<td align="center">股票样式图表</td>
+</tr>
+<tr>
+<td align="center">radar</td>
+<td align="center">雷达样式图表</td>
+</tr>
+</tbody></table>
+<p>我们用柱形样式图表做一个demo~</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">chart_column = workbook.add_chart(&#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;column&quot;</span>&#125;)   <span class="comment"># 创建一个图表对象</span></span><br><span class="line"><span class="comment">#定义图像数据系列函数</span></span><br><span class="line"><span class="comment"># 下面这个每操作一次就相当于添加一组记录到表</span></span><br><span class="line">chart_column.add_series(&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;=表格测试!$B$1&quot;</span>,         <span class="comment"># 引用业务名称为 图例项 就是标注在旁边的标记</span></span><br><span class="line">    <span class="string">&quot;categories&quot;</span>: <span class="string">&quot;=表格测试!$A$2:$A$6&quot;</span>,   <span class="comment"># 这个是将什么作为 x 轴 A2到A6</span></span><br><span class="line">    <span class="string">&quot;values&quot;</span>: <span class="string">&quot;=表格测试!$B$2:$B$6&quot;</span>,       <span class="comment"># 这里是添加第 一 组数据</span></span><br><span class="line">    <span class="string">&quot;data_labels&quot;</span>: &#123;<span class="string">&quot;value&quot;</span>: <span class="literal">True</span>&#125;,       <span class="comment"># 显示数字,默认不显示</span></span><br><span class="line">    <span class="string">&quot;line&quot;</span>: &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;black&quot;</span>&#125;,           <span class="comment"># 线条定义为 黑色</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment"># 同理再添加第二条，如果数据量很多的话，可以单独写一个方法，然后循环操作</span></span><br><span class="line">chart_column.add_series(&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;=表格测试!$C$1&quot;</span>,         <span class="comment"># 引用业务名称为 图例项 就是标注在旁边的标记</span></span><br><span class="line">    <span class="string">&quot;categories&quot;</span>: <span class="string">&quot;=表格测试!$A$2:$A$6&quot;</span>,   <span class="comment"># 这个是将什么作为 x 轴 A2到A6</span></span><br><span class="line">    <span class="string">&quot;values&quot;</span>: <span class="string">&quot;=表格测试!$C$2:$C$6&quot;</span>,       <span class="comment"># 这里是添加第 二 组数据</span></span><br><span class="line">    <span class="string">&quot;data_labels&quot;</span>: &#123;<span class="string">&quot;value&quot;</span>: <span class="literal">True</span>&#125;,       <span class="comment"># 显示数字,默认不显示</span></span><br><span class="line">    <span class="string">&quot;line&quot;</span>: &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;black&quot;</span>&#125;,           <span class="comment"># 线条定义为 黑色</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">chart_column.set_title(&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;展示的标题&quot;</span>&#125;)</span><br><span class="line">chart_column.set_x_axis(&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;x 轴的描述&quot;</span>&#125;)</span><br><span class="line">chart_column.set_y_axis(&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;y 轴的描述&quot;</span>&#125;)</span><br><span class="line">chart_column.set_table()   <span class="comment"># 设置x轴为数据表格式 不写这个的话就不展示</span></span><br><span class="line">chart_column.set_style(<span class="number">2</span>)  <span class="comment"># 设置直方图的类型，不设置就是默认类型</span></span><br><span class="line"><span class="comment"># 把直方图放到E2 表格位置，这里还可以设置一个&#123;&#x27;x_offset&#x27;: 10, &#x27;y_offset&#x27;: 5&#125; 表示起点位置偏移量</span></span><br><span class="line">worksheet.insert_chart(<span class="string">&quot;E2&quot;</span>, chart_column)  </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215164159701.png" alt="image-20230215164159701"></p>
+<h2 id="3-下拉选择框"><a href="#3-下拉选择框" class="headerlink" title="3.下拉选择框"></a>3.下拉选择框</h2><p>这里是通过 <code>worksheet.data_validation</code> 来实现的一些下拉框的选择操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">base_dict = &#123;</span><br><span class="line">    <span class="string">&quot;姓名&quot;</span>: [<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;李四&quot;</span>],</span><br><span class="line">&#125;</span><br><span class="line">levels = [<span class="string">&quot;炼气&quot;</span>, <span class="string">&quot;筑基&quot;</span>, <span class="string">&quot;金丹&quot;</span>, <span class="string">&quot;元婴&quot;</span>, <span class="string">&quot;化神&quot;</span>, <span class="string">&quot;炼虚&quot;</span>, <span class="string">&quot;合体&quot;</span>, <span class="string">&quot;大乘&quot;</span>, <span class="string">&quot;渡劫&quot;</span>, <span class="string">&quot;小天劫&quot;</span>, <span class="string">&quot;大天劫&quot;</span>, <span class="string">&quot;仙劫&quot;</span>]</span><br><span class="line">df = pd.DataFrame(base_dict)</span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&quot;下拉框测试.xlsx&quot;</span>, engine=<span class="string">&#x27;xlsxwriter&#x27;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df.to_excel(writer, index=<span class="literal">False</span>)</span><br><span class="line">    workbook = writer.book</span><br><span class="line">    worksheet = writer.sheets[<span class="string">&quot;Sheet1&quot;</span>]</span><br><span class="line"></span><br><span class="line">    worksheet.write(<span class="string">&quot;B1&quot;</span>, <span class="string">&quot;等级&quot;</span>)</span><br><span class="line">    <span class="comment"># 可以利用 openpyxl.utils 工具包中提供的一个提供由数字转为 excel 中列号字母的方法: get_column_letter   传入数字得到字母</span></span><br><span class="line">    <span class="comment"># 注释的这里是引用已有数据的模板 当然我们可以像B3那样子主动插入</span></span><br><span class="line">    <span class="comment"># worksheet.write_row(&quot;D2&quot;, levels)   # 从D2位置开始写入多个数据</span></span><br><span class="line">    <span class="comment"># worksheet.data_validation(&#x27;B2&#x27;, &#123;&#x27;validate&#x27;: &#x27;list&#x27;, &#x27;source&#x27;: &quot;=$D$2:$O$2&quot;&#125;)  # 这里O 是我手动算的 其实有数字转excel上面序号的方法</span></span><br><span class="line">    worksheet.data_validation(<span class="string">&#x27;B3&#x27;</span>, &#123;<span class="string">&#x27;validate&#x27;</span>: <span class="string">&#x27;list&#x27;</span>, <span class="string">&#x27;source&#x27;</span>: levels&#125;)  <span class="comment"># 这里直接引用数据</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到其实操作很简单 就只是一个方法而已。</p>
+<p><img src="https://static.litetools.top/blogs/pandasxlsxwriter/image-20230215171714443.png" alt="image-20230215171714443"></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>暂时写这么一点点，其他的可以去查看最开始的链接。<strong>点击<a href="#top">这里</a>回到顶部</strong></p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2023/02/15/pandasSetstyle/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2023/02/15/pandasSetstyle/";
+            const title         = "「【pandas】结合xlsxwriter变得轻松一点」";
+            const excerpt       = `我这个地方是不讲数据处理的，只管内容的样式设置。核心使用pandas 辅助引擎采用 xlsxwriter，不会讲的很细，只会讲几个常用操作。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/pandas/" rel="tag">pandas</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【反射】go-reflect基本理解" href="/2023/02/14/goReflect/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【gRPC】师傅领进门，修仙靠个人" href="/2023/02/17/gogrpc/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

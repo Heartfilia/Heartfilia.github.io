@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【gRPC】师傅领进门，修仙靠个人 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="TLS, go, grpc" />
+  
+  <meta name="description" content="gRPC入门实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【gRPC】师傅领进门，修仙靠个人">
+<meta property="og:url" content="https://heartfilia.github.io/2023/02/17/gogrpc/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="gRPC入门实战">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2023-02-17T09:21:35.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="grpc">
+<meta property="article:tag" content="TLS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/02/17/gogrpc/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【gRPC】师傅领进门，修仙靠个人</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-02-17T09:21:35.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-02-17</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~13.40K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">一、基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">1. 应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E5%A7%8B%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、开始应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-protobuf"><span class="toc-number">2.1.</span> <span class="toc-text">1. protobuf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-proto%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 proto文件介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%89%E8%A3%85protobuf"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 安装protobuf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%AE%89%E8%A3%85gprc"><span class="toc-number">2.1.3.</span> <span class="toc-text">1.3 安装gprc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.4.</span> <span class="toc-text">1.4 代码生成工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%86%99%E4%B8%80%E4%B8%8B"><span class="toc-number">2.1.5.</span> <span class="toc-text">1.5 写一下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BC%96%E5%86%99"><span class="toc-number">2.2.</span> <span class="toc-text">2. 服务端编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 编写代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BC%96%E5%86%99"><span class="toc-number">2.3.</span> <span class="toc-text">3. 客户端编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1 编写代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E5%85%A8%E4%BC%A0%E8%BE%93-SSL-TLS"><span class="toc-number">2.4.</span> <span class="toc-text">4. 安全传输[SSL&#x2F;TLS]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-SSL-TLS%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1 SSL&#x2F;TLS认证方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2 生成证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">2.4.3.</span> <span class="toc-text">4.3 修改配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%A7%81%E9%92%A5"><span class="toc-number">2.4.4.</span> <span class="toc-text">4.4 生成证书私钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E4%BB%A3%E7%A0%81%E4%BF%AE%E6%94%B9"><span class="toc-number">2.4.5.</span> <span class="toc-text">4.5 代码修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%89%E5%85%A8%E4%BC%A0%E8%BE%93-Token"><span class="toc-number">2.5.</span> <span class="toc-text">5. 安全传输[Token]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">2.5.1.</span> <span class="toc-text">5.1 客户端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">2.5.2.</span> <span class="toc-text">5.2 服务端代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>gRPC入门实战</p>
+<span id="more"></span>
+
+<h1 id="一、基本介绍"><a href="#一、基本介绍" class="headerlink" title="一、基本介绍"></a>一、基本介绍</h1><h2 id="1-应用场景"><a href="#1-应用场景" class="headerlink" title="1. 应用场景"></a>1. 应用场景</h2><p>我们先来简单的看一下</p>
+<blockquote>
+<p>微服务</p>
+</blockquote>
+<p><strong>单体架构</strong>：</p>
+<ol>
+<li>一旦某个服务宕机，会引起整个应用不可用，隔离性差。</li>
+<li>只能整体应用进行伸缩，浪费资源，可伸缩性差。</li>
+<li>代码耦合在一起，可维护性差。</li>
+</ol>
+<p><strong>微服务架构</strong>:</p>
+<p>解决了单体架构的弊端，但是引入了新的问题：</p>
+<ol>
+<li>代码冗余</li>
+<li>服务和服务之前存在调用关系。</li>
+<li>服务拆分后，服务和服务之间发生的是进程和进程之前的调用，服务器和服务器之间的调用。</li>
+<li>那么就需要发起网络调用，可能第一时间想起来的都是<code>http</code> 协议调用，大多微服务架构中，http虽然便捷方便，但是性能较低，这时候需要引入RPC，通过自定义协议发起TCP调用，加快传输效率。</li>
+</ol>
+<h2 id="2-过程"><a href="#2-过程" class="headerlink" title="2.过程"></a>2.过程</h2><p>实际rpc是<strong>客户端</strong>与<strong>服务端</strong>沟通的过程</p>
+<ol>
+<li>客户端发送数据（以字节流的方式）</li>
+<li>服务端接收并解析。根据<strong>约定</strong>知道要执行什么，然后把结果返回给客户。</li>
+</ol>
+<p><strong>RPC</strong>:</p>
+<ol>
+<li>实际就是将上面过程封装一下，使其操作更加优化。</li>
+<li>使用一些大家都认可的协议，使其规范化。</li>
+<li>做成一些框架，直接或间接产生利益。</li>
+</ol>
+<p><strong>gRPC</strong>是一个高性能的、开源的通用RPC框架。</p>
+<p><img src="https://grpc.io/img/landing-2.svg" alt="Concept Diagram"></p>
+<h1 id="二、开始应用"><a href="#二、开始应用" class="headerlink" title="二、开始应用"></a>二、开始应用</h1><h2 id="1-protobuf"><a href="#1-protobuf" class="headerlink" title="1. protobuf"></a>1. protobuf</h2><p>我们学习 gRPC需要使用<code>Protocol Buffss</code> 传输数据，这是谷歌搞得一套的数据结构序列化机制。</p>
+<p><code>序列化</code>: 将数据结构或对象转换成二进制串的过程。</p>
+<p><code>反序列化</code>: 将在序列化过程中所产生的二进制串转换成数据结构或者对象的过程。</p>
+<blockquote>
+<p> protobuf的优势:</p>
+</blockquote>
+<ol>
+<li>序列化后体积相比JSON和XML都小，适合网络传输</li>
+<li>支持跨平台多语言</li>
+<li>消息格式升级和兼容新不错</li>
+<li>序列化和反序列化速度很快</li>
+</ol>
+<h3 id="1-1-proto文件介绍"><a href="#1-1-proto文件介绍" class="headerlink" title="1.1 proto文件介绍"></a>1.1 proto文件介绍</h3><blockquote>
+<p>message</p>
+</blockquote>
+<p>protobuf 中定义一个消息类型式是通过关键字 message字段指定的。 消息就是需要传输的数据格式的定义</p>
+<p><code>message</code> 关键字相当于 Cpp&#x2F;Java&#x2F;Python里面的class, go里面的struct</p>
+<p>在消息中承载的数据分别对应于每一个字段，其中每个字段都有一个名字和一种类型，一个proto文件中可以定义多个消息类型。</p>
+<blockquote>
+<p>字段规则</p>
+</blockquote>
+<p><code>required</code> : protobuf2 中消息体必填字段，不设置会导致编码异常，不过在protobuf3 里面被删除。</p>
+<p><code>optional</code> : 消息体重可选字段，protobuf3 里面没有required，optional等说明关键字，都默认optional。</p>
+<p><code>repeated</code> : 消息体中可重复字段，重复的值的顺序会被保留在go中重复的会被定义为<strong>切片</strong>。</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message </span><span class="title class_">Hello</span> &#123;</span><br><span class="line">	<span class="type">string</span> requestName = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int64</span> age = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">repeated</span> <span class="type">string</span> name = <span class="number">3</span>;     <span class="comment">// Name []string </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>消息号</p>
+</blockquote>
+<p>在消息体的的定义中，<strong>每个字段都必须要有一个唯一的标识号</strong>，标识号是[1, 2^29 -1]范围内的<strong>一个整数</strong>。</p>
+<blockquote>
+<p>嵌套消息</p>
+</blockquote>
+<p>可以在其它消息类型中定义，使用消息类型，在下面的例子中，person消息就定在PersonInfo消息内:</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message </span><span class="title class_">PersonInfo</span> &#123;</span><br><span class="line">	<span class="keyword">message </span><span class="title class_">Person</span> &#123;</span><br><span class="line">		<span class="type">string</span> name = <span class="number">1</span>;</span><br><span class="line">		<span class="type">int32</span> height = <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">repeated</span> <span class="type">int32</span> weight = <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">repeated</span> Person info = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要在它的父消息类型的外部重用这个消息类型，可以按照如下方式操作:</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message </span><span class="title class_">PersonMessage</span> &#123;</span><br><span class="line">	PersonInfo.Person info = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>服务定义</p>
+</blockquote>
+<p>如果想要将消息类型用在PRC系统中，可以在 <code>.proto文件中顶一个rpc服务接口</code>，protocol buffer编译器将会根据所选择的不同语言生成服务接口代码及存根。</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">service </span><span class="title class_">SearchService</span> &#123;</span><br><span class="line">	<span class="comment">// rpc 服务函数名(参数) returns （返回参数)</span></span><br><span class="line">	<span class="function"><span class="keyword">rpc</span> Search(SearchRequest) <span class="keyword">returns</span> (SearchResponse)	</span></span><br><span class="line"><span class="function">	// 可以写多个</span></span><br><span class="line"><span class="function">	<span class="keyword">rpc</span> Search2(SearchRequest) <span class="keyword">returns</span> (SearchResponse)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>上诉代表表示，定义了一个RPC服务，该方法接收SearchRequest返回SearchResponse。</p>
+<h3 id="1-2-安装protobuf"><a href="#1-2-安装protobuf" class="headerlink" title="1.2 安装protobuf"></a>1.2 安装protobuf</h3><p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf">官方地址</a>: 点击找到<code>Releases</code> 下载想要的版本，下载下来是一个压缩包，把里面东西解压出来然后放到环境变量里面.</p>
+<p>配置好了后重新打开终端输入 <code>protoc</code> 看一下是否正常即可。</p>
+<h3 id="1-3-安装gprc"><a href="#1-3-安装gprc" class="headerlink" title="1.3 安装gprc"></a>1.3 安装gprc</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get google.golang.org/grpc</span><br></pre></td></tr></table></figure>
+
+<p>这里执行如果报如下错误，那么就是需要在项目目录下执行</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230216175740512.png" alt="image-20230216175740512"></p>
+<p>然后我们在学习的目录下执行下面操作：</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230216175818640.png" alt="image-20230216175818640"></p>
+<p>就可以正常执行了~</p>
+<h3 id="1-4-代码生成工具"><a href="#1-4-代码生成工具" class="headerlink" title="1.4 代码生成工具"></a>1.4 代码生成工具</h3><p>上面我们安装了<code>protocol</code>的编译器，还有安装了核心库。我们在golang里面还需要执行以下俩操作:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go install google.golang.org/protobuf/cmd/protoc-gen-go@latest  <span class="comment"># 注意这里我们是从google.golang.org下载的 不是github.com/golang/ 这个位置下载的，这俩是不一样的。github的是旧版本，golang域名下的是新版本，API会有些不一样，所以我们也要用最新的版本</span></span><br><span class="line">go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest</span><br></pre></td></tr></table></figure>
+
+<p>其实: 上面两个文件在安装<code>grpc</code>的时候已经下载了，只不过还没有安装，所以我们这里需要执行的是<code>install</code> 命令而不是<code>get</code> 。执行了之后这些东西都会在<code>GOPATH/bin</code>目录下面可以检查一下。</p>
+<h3 id="1-5-写一下"><a href="#1-5-写一下" class="headerlink" title="1.5 写一下"></a>1.5 写一下</h3><p>先直接看语法demo，这个东西并不是具体的数据，而是一个<strong>约束</strong>。</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里是在说明我们使用的是 proto3语法</span></span><br><span class="line">syntax = <span class="string">&quot;proto3&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这部分的内容是关于最后生成的go文件是在哪个目录哪个包中, . 代表当前目录生成, service代表了生成的go文件的包名是service,这个名字随便写无所谓的</span></span><br><span class="line"><span class="keyword">option</span> go_package = <span class="string">&quot;.;service&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个服务，在这个服务中需要一个方法，这个方法可以接受客户端的参数，再返回服务端的响应</span></span><br><span class="line"><span class="comment">// 其实很容易可以看出，我们定义了一个service， 称为SayHello, 这个服务中有一个rpc方法，名为 SayHello</span></span><br><span class="line"><span class="comment">// 这个方法会发送一个HelloRequest 然后返回一个HelloResponse</span></span><br><span class="line"><span class="keyword">service </span><span class="title class_">SayHello</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">rpc</span> SayHello(HelloRequest) <span class="keyword">returns</span> (HelloResponse) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// message 关键字 可以理解为golang中的结构体</span></span><br><span class="line"><span class="comment">// 这里比较特别的是变量后面的 “赋值”。 这里并不是赋值，二十定义这个变量在这个message中的位置</span></span><br><span class="line"><span class="keyword">message </span><span class="title class_">HelloRequest</span> &#123;</span><br><span class="line">  <span class="type">string</span> requestName = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">// int64 age = 2;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">message </span><span class="title class_">HelloResponse</span> &#123;</span><br><span class="line">  <span class="type">string</span> responseMsg = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们现在在目录下创建几个文件夹和文件，目录结构如下：</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230216182621439.png" alt="image-20230216182621439"></p>
+<p>然后我们上面贴出的<code>proto</code>代码就是我们在<code>hello-server</code>里面写的内容。</p>
+<p>接下来我们去往<code>hello-server/proto</code>目录下执行下面两条命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protoc --go_out=. hello.proto        <span class="comment"># 生成我们go相关文件 后面 . 就是当前位置 的 hello.proto文件</span></span><br><span class="line">protoc --go-grpc_out=. hello.proto   <span class="comment"># 生成我们的grpc相关文件</span></span><br></pre></td></tr></table></figure>
+
+<p>然后会给我们生成两个go代码在当前目录;</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230216183841572.png" alt="image-20230216183841572"></p>
+<p>我们可以直接在生成的代码里面找到对应的方法然后实现我们要做的事情。</p>
+<p>上面我们弄得东西是放在<code>hello-server</code>里面的，我们可以整体拷贝这个<code>proto</code>目录到<code>hello-client</code> ，代码是一样的，主要是里面的一些小东西调整，因为我们约束一致。</p>
+<h2 id="2-服务端编写"><a href="#2-服务端编写" class="headerlink" title="2. 服务端编写"></a>2. 服务端编写</h2><ul>
+<li>创建gPRC Server对象，理解为Server端的抽象对象</li>
+<li>将server （其包含的需要被调用的服务端接口）注册到gRPC Server 的内部注册中心<ul>
+<li>这样可以在接收到请求时，通过内部的服务发现，发现该服务端接口并转接进行逻辑处理</li>
+</ul>
+</li>
+<li>创建Listen，监听TCP端口</li>
+<li>gRPC Server 开始 lis.Accept 直到Stop</li>
+</ul>
+<h3 id="2-1-编写代码"><a href="#2-1-编写代码" class="headerlink" title="2.1 编写代码"></a>2.1 编写代码</h3><p>我们先从server那边 <code>grpc.pb.go</code> 文件里面留意两个东西，然后我们需要重新实现的</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217101356768.png" alt="image-20230217101356768"></p>
+<p>然后我们在main里面开启端口进行监听</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 开启端口</span></span><br><span class="line">	listen, _ := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:9090&quot;</span>)</span><br><span class="line">	<span class="comment">// 创建grpc服务</span></span><br><span class="line">	grpcServer := grpc.NewServer()</span><br><span class="line">	<span class="comment">// 在grpc服务端中注册我们自己编写的服务，这里在grpc那个pb.go 文件里都给我们写好了直接使用</span></span><br><span class="line">	pb.RegisterSayHelloServer(grpcServer, &amp;server&#123;&#125;)</span><br><span class="line">	<span class="comment">// 启动服务</span></span><br><span class="line">	err := grpcServer.Serve(listen)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;创建服务失败...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217101924224.png" alt="image-20230217101924224"></p>
+<h2 id="3-客户端编写"><a href="#3-客户端编写" class="headerlink" title="3. 客户端编写"></a>3. 客户端编写</h2><ul>
+<li>创建与给定目标（服务端)的连接交互</li>
+<li>创建server的客户端对象</li>
+<li>发送PRC请求，等待同步响应，得到回调后返回响应结果</li>
+<li>输出响应结果</li>
+</ul>
+<h3 id="3-1-编写代码"><a href="#3-1-编写代码" class="headerlink" title="3.1 编写代码"></a>3.1 编写代码</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	pb <span class="string">&quot;gRPC/hello-server/proto&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc/credentials/insecure&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 我们先普通链接测试一下，仅用了安全传输，没有加密和验证</span></span><br><span class="line">	conn, err := grpc.Dial(<span class="string">&quot;127.0.0.1:9090&quot;</span>, grpc.WithTransportCredentials(insecure.NewCredentials()))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">&quot;did not connect: %v&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close() <span class="comment">// 需要关闭</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 和服务端创建链接</span></span><br><span class="line">	client := pb.NewSayHelloClient(conn)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 执行rpc调用（服务端来实现并返回结果</span></span><br><span class="line">	resp, _ := client.SayHello(context.Background(), &amp;pb.HelloRequest&#123;RequestName: <span class="string">&quot;===heartfilia&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">	fmt.Println(resp.GetResponseMsg())</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217104208103.png" alt="image-20230217104208103"></p>
+<p>可以看到我们服务端运行一次 客户端调用一次</p>
+<h2 id="4-安全传输-SSL-TLS"><a href="#4-安全传输-SSL-TLS" class="headerlink" title="4. 安全传输[SSL&#x2F;TLS]"></a>4. 安全传输[SSL&#x2F;TLS]</h2><p>gPRC是一个典型的C&#x2F;S 模型，需要开发客户端和服务端，客户端与服务端需要达成协议，使用某一个确认的传输协议来传输数据，gRPC通常默认是使用protobuf来作为传输协议，当然也是可以使用其它自定义的协议的。</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217105118232.png" alt="image-20230217105118232"></p>
+<p><strong>gRPC认证</strong>: 不是用户身份认证，而是指多个Server和多个client之间，如何识别对方是谁，并且可以安全的进行数据传入。下面是几种方案。</p>
+<ul>
+<li><strong>SSL&#x2F;TLS 认证方式(采用http2协议)</strong></li>
+<li><strong>基于Token的认证方式（基于安全链接)</strong></li>
+<li>不采用任何措施的链接，这是不安全的链接(默认采用http1)</li>
+<li>自定义的身份认证</li>
+</ul>
+<p>客户端和服务端之间调用，我们可以通过加入证书的方式，实现调用的安全性.</p>
+<p>TLS（Transport Layer Security 安全传输层）， TLS 是建立在传输层TCP协议之上的协议，服务于应用层，它的前身是SSL(Secure Socket Layer, 安全套接字层)，它实现了将应用层的报文进行加密后再交由TCP进行传输的功能。</p>
+<p>TLS协议主要解决如下三个网络安全问题:</p>
+<ol>
+<li>保密(message privacy), 保密通过加密encryption实现，所有信息都加密传输，第三方无法嗅探;</li>
+<li>完整性(message integrity), 通过MAC校验机制，一旦被篡改，通信双方会立刻发现;</li>
+<li>认证(mutual authentication)，双方认证，双方都可以配备证书，防止身份被冒充;</li>
+</ol>
+<blockquote>
+<p>生产环境可以购买证书或者一些平台发放的免费证书</p>
+</blockquote>
+<p>key: 服务器上的私钥文件，用于对发送给客户端数据的加密，以及对从客户端接收到数据的解密</p>
+<p>csr: 证书签名请求文件，用于提交给证书颁发机构(CA) 对证书签名</p>
+<p>crt: 由帧数颁发机构(CA) 签名后的证书，或者是开发者自签名的证书，包含证书持有人的信息，持有人的公钥，以及签署者的签名等信息。</p>
+<p>pem: 基于Base64编码的证书格式，扩展名包括PEM、CRT、CER。</p>
+<p>我们可以参考这里查看更多: <a target="_blank" rel="noopener" href="https://www.kuangstudy.com/bbs/1604044550878703617">聊聊HTTPS和SSL&#x2F;TLS协议</a></p>
+<h3 id="4-1-SSL-TLS认证方式"><a href="#4-1-SSL-TLS认证方式" class="headerlink" title="4.1 SSL&#x2F;TLS认证方式"></a>4.1 SSL&#x2F;TLS认证方式</h3><p>我们需要通过<code>openssl</code> 生成证书和私钥</p>
+<ol>
+<li><p>下载工具</p>
+<ul>
+<li>如果有C语言工具可以通过官网下载下来自己编译(比较复杂): <a target="_blank" rel="noopener" href="https://www.openssl.org/source/">官网链接</a></li>
+<li>也可以通过别人编译好的工具包来用: <a target="_blank" rel="noopener" href="http://slproweb.com/products/Win32OpenSSL.html">便捷工具</a></li>
+</ul>
+</li>
+<li><p>推荐便捷工具，一直下一步（我安装在了我自己喜欢放的目录）</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217114829177.png" alt="image-20230217114829177"></p>
+</li>
+<li><p>需要把安装好的目录里面<code>/bin</code>配置到环境变量</p>
+</li>
+<li><p>装好了后新打开一个终端输入 <code>openssl</code> 测试一下，没有报错就是ok了</p>
+</li>
+</ol>
+<h3 id="4-2-生成证书"><a href="#4-2-生成证书" class="headerlink" title="4.2 生成证书"></a>4.2 生成证书</h3><blockquote>
+<p>这里生成的东西是给后面我们生成另外一套东西用的，这里的不引入代码</p>
+</blockquote>
+<p>下面内容不用死记硬背，没意义，每次copy即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 生成私钥         名字.key   名字随意</span></span><br><span class="line">openssl genrsa -out server.key 2048</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 生成证书，一直回车就好了，可以不填</span></span><br><span class="line">openssl req -new -x509 -key server.key -out server.crt -days 36500</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下面内容是敲了上面的后每个让你填写或者修改的操作</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">国家名称</span></span><br><span class="line">Country Name （2 letter code) [AU]:CN</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">省名称</span></span><br><span class="line">State or Provice Name (full name) [Some-state]:GuangDong</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">城市名称</span></span><br><span class="line">Locality Name (eg, city) []:Guangzhou</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">公司组织名称</span></span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Personal</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">部门名称</span></span><br><span class="line">Organizational Unit Name (eg, section) []:go</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">服务器or网站名称</span></span><br><span class="line">Common Name (eg. server FQDN or YOUR name) []:Heartfilia</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">邮件</span></span><br><span class="line">Email Address []:xxxxx@qq.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3.生成 csr   也可以一直回车下去</span></span><br><span class="line">openssl req -new -key server.key -out server.csr</span><br></pre></td></tr></table></figure>
+
+<p>我们在项目中创建一个额外的目录<code>key</code>, 然后在这个目录下执行上面的操作</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217140828169.png" alt="image-20230217140828169"></p>
+<p>我们执行完了上面的<code>1</code> 后, <code>key</code> 目录下面会多一个 <code>server.key</code> 文件。</p>
+<p>我们执行完了上面的<code>2</code> 后, <code>key</code> 目录下面会多一个 <code>server.crt</code> 文件。</p>
+<p>我们执行完了上面的<code>3</code> 后, <code>key</code> 目录下面会多一个 <code>server.csr</code> 文件。</p>
+<h3 id="4-3-修改配置"><a href="#4-3-修改配置" class="headerlink" title="4.3 修改配置"></a>4.3 修改配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更改openssl.cnf  (linux 是openssl.cfg)   在安装的openssl/bin 目录下</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 复制一份已经安装好的 openssl.cnf 到项目所在目录</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 找到[ CA_default ] 打开 copy_extensions = copy 把前面的 <span class="comment"># 去掉</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. 找到[ req ] 打开 req_extensions = v3_req  <span class="comment"># The extensions to add to a certificate request</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4. 找到[ v3_req ], 添加 subjectAltName = @alt_names</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5. 添加新的标签 [ alt_names ], 和标签字段</span></span><br><span class="line">DNS.1 = *.yourdomain.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个下面可以写多个比如 以后访问必须要通过这个才可以访问代码 如果DNS.1 = *  那么就是所有都能访问不安全</span></span><br><span class="line">DNS.2 = *.yourdomain2.com</span><br><span class="line">DNS.3 = *.yourdomain3.com</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><img src="https://static.litetools.top/blogs/grpc/image-20230217142727643.png" alt="image-20230217142727643"></li>
+<li><img src="https://static.litetools.top/blogs/grpc/image-20230217142747346.png" alt="image-20230217142747346"></li>
+<li><img src="https://static.litetools.top/blogs/grpc/image-20230217142832578.png" alt="image-20230217142832578"></li>
+<li><img src="https://static.litetools.top/blogs/grpc/image-20230217142959904.png" alt="image-20230217142959904"></li>
+<li><img src="https://static.litetools.top/blogs/grpc/image-20230217143125007.png" alt="image-20230217143125007"></li>
+</ol>
+<h3 id="4-4-生成证书私钥"><a href="#4-4-生成证书私钥" class="headerlink" title="4.4 生成证书私钥"></a>4.4 生成证书私钥</h3><blockquote>
+<p>这里生成的东西才是我们代码里面用的</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 生成证书私钥 test.key</span></span><br><span class="line">openssl genpkey -algorithm RSA -out test.key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 通过私钥test.key 生成证书请求文件 test.csr （注意cfg和cnf 下面是官方默认写的openssl.cnf 我们要改成 cfg)</span></span><br><span class="line">openssl req -new -nodes -key test.key -out test.csr -days 3650 -subj &quot;/C=cn/OU=myorg/O=mycomp/CN=myname&quot; -config ./openssl.cnf -extensions v3_req</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">test.csr 是上面生成的证书请求文件。 ca.crt/server.key 是CA证书文件和key，用来对test.csr进行签名认证。这两个文件在第一部分生成</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. 生成SAN证书 pem  同理下面的 cnf 如果在windows也需要修改成 cfg</span></span><br><span class="line">openssl x509 -req -days 365 -in test.csr -out test.pem -CA server.crt -CAkey server.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req</span><br></pre></td></tr></table></figure>
+
+<p>我们经过上面1.2.3 操作后生成了一堆文件</p>
+<p><img src="https://static.litetools.top/blogs/grpc/image-20230217150053951.png" alt="image-20230217150053951"></p>
+<h3 id="4-5-代码修改"><a href="#4-5-代码修改" class="headerlink" title="4.5 代码修改"></a>4.5 代码修改</h3><ol>
+<li><p>server 端: 只需要增加两行代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;创建rcp服务中...&quot;</span>)</span><br><span class="line">	<span class="comment">//===================</span></span><br><span class="line">	<span class="comment">// TLS认证</span></span><br><span class="line">	<span class="comment">//===================</span></span><br><span class="line">	<span class="comment">// 下面两个文件的路径最好用绝对路径不要用相对的</span></span><br><span class="line">	<span class="comment">// 自签名证书文件和私钥文件</span></span><br><span class="line">	cred, _ := credentials.NewServerTLSFromFile(</span><br><span class="line">		<span class="string">&quot;C:\\code\\mine\\GoCode\\src\\gRPC\\key\\test.pem&quot;</span>,</span><br><span class="line">		<span class="string">&quot;C:\\code\\mine\\GoCode\\src\\gRPC\\key\\test.key&quot;</span>)</span><br><span class="line">	<span class="comment">// 开启端口</span></span><br><span class="line">	listen, _ := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:9090&quot;</span>)</span><br><span class="line">	<span class="comment">// 创建grpc服务</span></span><br><span class="line">	grpcServer := grpc.NewServer(grpc.Creds(cred))</span><br><span class="line">	<span class="comment">// 在grpc服务端中注册我们自己编写的服务，这里在grpc那个pb.go 文件里都给我们写好了直接使用</span></span><br><span class="line">	pb.RegisterSayHelloServer(grpcServer, &amp;server&#123;&#125;)</span><br><span class="line">	<span class="comment">// 启动服务</span></span><br><span class="line">	err := grpcServer.Serve(listen)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;创建服务失败...&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>服务端: 这里也是我们只需要修改两行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	cred, _ := credentials.NewClientTLSFromFile(</span><br><span class="line">		<span class="string">&quot;C:\\code\\mine\\GoCode\\src\\gRPC\\key\\test.pem&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*.yourdomain.com&quot;</span>) <span class="comment">// 真实环境客户端这里要自动获取 不写死 这里必须得是我们之前配置文件里面dns.* = 域名 这里面的东西才可以校验通过</span></span><br><span class="line">	<span class="comment">// 我们先普通链接测试一下，仅用了安全传输，没有加密和验证</span></span><br><span class="line">	<span class="comment">//conn, err := grpc.Dial(&quot;127.0.0.1:9090&quot;, grpc.WithTransportCredentials(insecure.NewCredentials()))</span></span><br><span class="line">	<span class="comment">// 这里是我们就要用安全的链接了</span></span><br><span class="line">	conn, err := grpc.Dial(<span class="string">&quot;127.0.0.1:9090&quot;</span>, grpc.WithTransportCredentials(cred))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">&quot;did not connect: %v&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close() <span class="comment">// 需要关闭</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 和服务端创建链接</span></span><br><span class="line">	client := pb.NewSayHelloClient(conn)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 执行rpc调用（服务端来实现并返回结果</span></span><br><span class="line">	resp, _ := client.SayHello(context.Background(), &amp;pb.HelloRequest&#123;RequestName: <span class="string">&quot;===heartfilia&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">	fmt.Println(resp.GetResponseMsg())</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="5-安全传输-Token"><a href="#5-安全传输-Token" class="headerlink" title="5. 安全传输[Token]"></a>5. 安全传输[Token]</h2><p>这里十分简单，gRPC给我们提供了一个接口，这个接口有两个方法，接口位于 credentials 包里面，这个接口需要由<strong>客户端</strong>来实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PerRPCCredentials <span class="keyword">interface</span> &#123;</span><br><span class="line">    GetRequestMetadata(ctx context.Context, uri ...<span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">error</span>)</span><br><span class="line">    RequireTransportSecurity() <span class="type">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面接口里面两个方法分别作用是:</p>
+<ol>
+<li>第一个方法–获取元数据信息，也就是客户端提供的key,value对， context用于控制超时和取消，uri是请求入口处的uri</li>
+<li>第二个方法–是否需要基于TLS认证进行安全传输，如果返回值是true,则必须加上TLS验证，返回值是false则不用。【结合操作的话这里改成true其他的和TLS那里设置流程一样的】</li>
+</ol>
+<h3 id="5-1-客户端代码"><a href="#5-1-客户端代码" class="headerlink" title="5.1 客户端代码"></a>5.1 客户端代码</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	pb <span class="string">&quot;gRPC/hello-server/proto&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc/credentials/insecure&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ClientTokenAuth <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ClientTokenAuth)</span></span> GetRequestMetadata(ctx context.Context, uri ...<span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="comment">// 这里可以做实现操作 我们这是demo 直接返回</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">		<span class="string">&quot;appId&quot;</span>:  <span class="string">&quot;Heartfilia&quot;</span>,</span><br><span class="line">		<span class="string">&quot;appKey&quot;</span>: <span class="string">&quot;666&quot;</span>,</span><br><span class="line">	&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ClientTokenAuth)</span></span> RequireTransportSecurity() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span> <span class="comment">// 我们这里不通过SSL/TLS 所以这里直接返回false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 我们现在不通过TLS 我们验证token 所以这样子弄</span></span><br><span class="line">	<span class="keyword">var</span> opts []grpc.DialOption</span><br><span class="line">	opts = <span class="built_in">append</span>(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))</span><br><span class="line">	opts = <span class="built_in">append</span>(opts, grpc.WithPerRPCCredentials(<span class="built_in">new</span>(ClientTokenAuth))) <span class="comment">// 这里是需要弄我们自己实现的方法</span></span><br><span class="line">	conn, err := grpc.Dial(<span class="string">&quot;127.0.0.1:9090&quot;</span>, opts...)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">&quot;did not connect: %v&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close() <span class="comment">// 需要关闭</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 和服务端创建链接</span></span><br><span class="line">	client := pb.NewSayHelloClient(conn)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 执行rpc调用（服务端来实现并返回结果</span></span><br><span class="line">	resp, _ := client.SayHello(context.Background(), &amp;pb.HelloRequest&#123;RequestName: <span class="string">&quot;===heartfilia&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">	fmt.Println(resp.GetResponseMsg())</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-服务端代码"><a href="#5-2-服务端代码" class="headerlink" title="5.2 服务端代码"></a>5.2 服务端代码</h3><p>因为我们用的是token校验，所以我们这里校验都在方法里校验</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;errors&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	pb <span class="string">&quot;gRPC/hello-server/proto&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc/credentials/insecure&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc/metadata&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;net&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> server <span class="keyword">struct</span> &#123;</span><br><span class="line">	pb.UnimplementedSayHelloServer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 业务逻辑在这里处理判断也在这里</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="comment">// 获取元数据的信息</span></span><br><span class="line">	md, ok := metadata.FromIncomingContext(ctx)</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;未传输token&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> appId <span class="type">string</span></span><br><span class="line">	<span class="keyword">var</span> appKey <span class="type">string</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> v, ok := md[<span class="string">&quot;appid&quot;</span>]; ok &#123;</span><br><span class="line">		appId = v[<span class="number">0</span>]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> v, ok := md[<span class="string">&quot;appkey&quot;</span>]; ok &#123;</span><br><span class="line">		appKey = v[<span class="number">0</span>]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 这里一般是查库啥的 我们这里写死</span></span><br><span class="line">	<span class="keyword">if</span> appId != <span class="string">&quot;Heartfilia&quot;</span> || appKey != <span class="string">&quot;666&quot;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;token 不正确&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	log.Println(<span class="string">&quot;当客户端访问这里将会被调用...&quot;</span>)</span><br><span class="line">	<span class="keyword">return</span> &amp;pb.HelloResponse&#123;ResponseMsg: <span class="string">&quot;hello&quot;</span> + req.RequestName&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;创建rcp服务中...&quot;</span>)</span><br><span class="line">	<span class="comment">// 开启端口</span></span><br><span class="line">	listen, _ := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:9090&quot;</span>)</span><br><span class="line">	<span class="comment">// 我们这里是去掉安全认证的</span></span><br><span class="line">	grpcServer := grpc.NewServer(grpc.Creds(insecure.NewCredentials()))</span><br><span class="line">	<span class="comment">// 在grpc服务端中注册我们自己编写的服务，这里在grpc那个pb.go 文件里都给我们写好了直接使用</span></span><br><span class="line">	pb.RegisterSayHelloServer(grpcServer, &amp;server&#123;&#125;)</span><br><span class="line">	<span class="comment">// 启动服务</span></span><br><span class="line">	err := grpcServer.Serve(listen)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;创建服务失败...&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以研究一下 <code>go-zero</code> ，上面的操作可以很轻松的帮我们实现上面的操作。有兴趣可以自己研究一下。</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2023/02/17/gogrpc/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2023/02/17/gogrpc/";
+            const title         = "「【gRPC】师傅领进门，修仙靠个人」";
+            const excerpt       = `gRPC入门实战`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/TLS/" rel="tag">TLS</a>, <a class="tag-none-link" href="/tags/go/" rel="tag">go</a>, <a class="tag-none-link" href="/tags/grpc/" rel="tag">grpc</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【pandas】结合xlsxwriter变得轻松一点" href="/2023/02/15/pandasSetstyle/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【yaml】go里面两种yaml文件读取比较" href="/2023/02/22/goyamlRead/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">1. 应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%87%E7%A8%8B"><span class="toc-text">2.过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E5%A7%8B%E5%BA%94%E7%94%A8"><span class="toc-text">二、开始应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-protobuf"><span class="toc-text">1. protobuf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-proto%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-text">1.1 proto文件介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%89%E8%A3%85protobuf"><span class="toc-text">1.2 安装protobuf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%AE%89%E8%A3%85gprc"><span class="toc-text">1.3 安装gprc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="toc-text">1.4 代码生成工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%86%99%E4%B8%80%E4%B8%8B"><span class="toc-text">1.5 写一下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BC%96%E5%86%99"><span class="toc-text">2. 服务端编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-text">2.1 编写代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BC%96%E5%86%99"><span class="toc-text">3. 客户端编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-text">3.1 编写代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E5%85%A8%E4%BC%A0%E8%BE%93-SSL-TLS"><span class="toc-text">4. 安全传输[SSL&#x2F;TLS]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-SSL-TLS%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-text">4.1 SSL&#x2F;TLS认证方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="toc-text">4.2 生成证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">4.3 修改配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%A7%81%E9%92%A5"><span class="toc-text">4.4 生成证书私钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E4%BB%A3%E7%A0%81%E4%BF%AE%E6%94%B9"><span class="toc-text">4.5 代码修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%89%E5%85%A8%E4%BC%A0%E8%BE%93-Token"><span class="toc-text">5. 安全传输[Token]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-text">5.1 客户端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-text">5.2 服务端代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

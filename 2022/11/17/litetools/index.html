@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【lite-tools】一个python包的使用目录 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="python" />
+  
+  <meta name="description" content="这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【lite-tools】一个python包的使用目录">
+<meta property="og:url" content="https://heartfilia.github.io/2022/11/17/litetools/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2022-11-17T10:31:35.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2022/11/17/litetools/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【lite-tools】一个python包的使用目录</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-11-17T10:31:35.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-11-17</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~12.69K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%89%88%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">命令行版块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-fish"><span class="toc-number">2.1.</span> <span class="toc-text">🧮 lite-tools fish</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-say"><span class="toc-number">2.2.</span> <span class="toc-text">🧮 lite-tools say</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-acg"><span class="toc-number">2.3.</span> <span class="toc-text">🧮 lite-tools acg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-news"><span class="toc-number">2.4.</span> <span class="toc-text">🧮 lite-tools news</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-today"><span class="toc-number">2.5.</span> <span class="toc-text">🧮 lite-tools today</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-dict"><span class="toc-number">2.6.</span> <span class="toc-text">🧮 lite-tools dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-weather"><span class="toc-number">2.7.</span> <span class="toc-text">🧮 lite-tools weather</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-trans"><span class="toc-number">2.8.</span> <span class="toc-text">🧮 lite-tools trans</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%87%8C%E9%9D%A2%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">代码里面使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-lan-get-wan"><span class="toc-number">3.1.</span> <span class="toc-text">📋 get_lan &#x2F; get_wan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-b64d-get-b64e"><span class="toc-number">3.2.</span> <span class="toc-text">📋 get_b64d &#x2F; get_b64e</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-try-get-try-key-FlattenJson-WrapJson"><span class="toc-number">3.3.</span> <span class="toc-text">📋 try_get &#x2F; try_key &#x2F; FlattenJson &#x2F; WrapJson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-try-get"><span class="toc-number">3.3.1.</span> <span class="toc-text">📋 try_get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-try-key"><span class="toc-number">3.3.2.</span> <span class="toc-text">📋 try_key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-FlattenJson"><span class="toc-number">3.3.3.</span> <span class="toc-text">📋 FlattenJson</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-JsJson"><span class="toc-number">3.3.4.</span> <span class="toc-text">📋 JsJson</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-WrapJson"><span class="toc-number">3.3.5.</span> <span class="toc-text">📋 WrapJson</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-md5-get-sha-get-sha3"><span class="toc-number">3.4.</span> <span class="toc-text">📋 get_md5 &#x2F; get_sha &#x2F; get_sha3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-time-time-count-time-range"><span class="toc-number">3.5.</span> <span class="toc-text">📋 get_time &#x2F; time_count &#x2F; time_range</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-get-time"><span class="toc-number">3.5.1.</span> <span class="toc-text">📋 get_time</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-time-count"><span class="toc-number">3.5.2.</span> <span class="toc-text">📋 time_count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-time-range"><span class="toc-number">3.5.3.</span> <span class="toc-text">📋 time_range</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-try-catch"><span class="toc-number">3.6.</span> <span class="toc-text">📋 try_catch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-ua"><span class="toc-number">3.7.</span> <span class="toc-text">📋 get_ua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-MySql-MySqlConfig-SqlString"><span class="toc-number">3.8.</span> <span class="toc-text">📋 MySql &#x2F; MySqlConfig &#x2F; SqlString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-match-case"><span class="toc-number">3.9.</span> <span class="toc-text">📋 match_case</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-CleanString"><span class="toc-number">3.10.</span> <span class="toc-text">📋 CleanString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-clean-html"><span class="toc-number">3.11.</span> <span class="toc-text">📋 clean_html</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-color-string"><span class="toc-number">3.12.</span> <span class="toc-text">📋 color_string</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-x-timeout"><span class="toc-number">3.13.</span> <span class="toc-text">📋 x_timeout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-Singleton"><span class="toc-number">3.14.</span> <span class="toc-text">📋 Singleton</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-Buffer"><span class="toc-number">3.15.</span> <span class="toc-text">📋 Buffer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8Bcount-lines"><span class="toc-number">3.16.</span> <span class="toc-text">📋count_lines</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8BLiteLogFile"><span class="toc-number">3.17.</span> <span class="toc-text">📋LiteLogFile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E7%9B%B8%E5%85%B3%E7%9A%84"><span class="toc-number">3.18.</span> <span class="toc-text">js相关的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Batob-btoa-base64%E5%8A%9F%E8%83%BD"><span class="toc-number">3.18.1.</span> <span class="toc-text">📋atob&#x2F; btoa  base64功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-2"><span class="toc-number">3.18.2.</span> <span class="toc-text">📋to_string_2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-16"><span class="toc-number">3.18.3.</span> <span class="toc-text">📋to_string_16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-36"><span class="toc-number">3.18.4.</span> <span class="toc-text">📋to_string_36</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bxor"><span class="toc-number">3.18.5.</span> <span class="toc-text">📋xor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bunsigned-right-shift"><span class="toc-number">3.18.6.</span> <span class="toc-text">📋unsigned_right_shift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bleft-shift"><span class="toc-number">3.18.7.</span> <span class="toc-text">📋left_shift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-dec-to-bin"><span class="toc-number">3.18.8.</span> <span class="toc-text">📋 dec_to_bin</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>这里一般来说国内国外镜像都可以，不过我这个更新太随意了，有些时候国内镜像更新会慢几小时<br><code>pip install lite-tools</code> 如果有其他需求可以<code>pip install lite-tools[all]</code>不过这个<code>all</code>版本我没有搞完，没时间，哈哈哈</p>
+<h1 id="命令行版块"><a href="#命令行版块" class="headerlink" title="命令行版块"></a>命令行版块</h1><p>这里我们可以直接 <code>lite-tools -h</code>获取一些详细的操作</p>
+<blockquote>
+<p>如果遇到pip安装了之后 lite-tools还是命令行不可使用，那是你python的scripts目录不在环境变量里面,需要手动添加一下,因为不添加你的<code>scrapy``feapder</code>这些工具也不可以命令行使用，具体操作自己百度即可。</p>
+</blockquote>
+<p><img src="https://static.litetools.top/blogs/lite_tools/1.png" alt="命令行帮助"></p>
+<h2 id="🧮-lite-tools-fish"><a href="#🧮-lite-tools-fish" class="headerlink" title="🧮 lite-tools fish"></a>🧮 lite-tools fish</h2><p>这是一个人生日历，没有搞农历节日那些东西，所以这里是标准的<strong>上五休二</strong>制度</p>
+<h2 id="🧮-lite-tools-say"><a href="#🧮-lite-tools-say" class="headerlink" title="🧮 lite-tools say"></a>🧮 lite-tools say</h2><p>这里基于 <a target="_blank" rel="noopener" href="http://hi.pcmoe.net/roar.html">熊与论道兽音</a> 版块修改算法改成python版本后实现的，并做了智能识别，大概操作如下<br><img src="https://static.litetools.top/blogs/lite_tools/2.png" alt="兽语"></p>
+<p>新增了 morse –》 可以通过<code> lite-tools say -h</code>  查看使用方法</p>
+<h2 id="🧮-lite-tools-acg"><a href="#🧮-lite-tools-acg" class="headerlink" title="🧮 lite-tools acg"></a>🧮 lite-tools acg</h2><p>这里我没有弄好，主要是这里需要一个自动校准数据这里我没有弄，后面再弄，不复杂，想提前体验可以终端输入自己试一下</p>
+<h2 id="🧮-lite-tools-news"><a href="#🧮-lite-tools-news" class="headerlink" title="🧮 lite-tools news"></a>🧮 lite-tools news</h2><ol>
+<li>这里默认是获取国内新闻</li>
+<li><code>lite-tools news weibo</code> 这样子可以获取此时此刻的微博热榜榜单</li>
+<li><code>lite-tools news china/world</code>后面跟<code>china</code>或者<code>world</code>可以获取此时此刻中国或者世界上的最新的新闻</li>
+<li><code>lite-tools news paper</code> 这个和直接输入<code>lite-tools news</code>效果一样，只不过这个数据源是<strong>澎湃新闻</strong>，默认是<strong>环球网</strong></li>
+</ol>
+<h2 id="🧮-lite-tools-today"><a href="#🧮-lite-tools-today" class="headerlink" title="🧮 lite-tools today"></a>🧮 lite-tools today</h2><ol>
+<li>默认获取今天的黄历，也可以获取今年的节假日，并看经过情况</li>
+<li><code>lite-tools today history</code>获取历史上的今天的信息</li>
+<li><code>lite-tools today oil</code>获取今天的油价</li>
+</ol>
+<h2 id="🧮-lite-tools-dict"><a href="#🧮-lite-tools-dict" class="headerlink" title="🧮 lite-tools dict"></a>🧮 lite-tools dict</h2><p>全程通过输入对应的数字可以查找汉字的拼音，因为拼音你会打就会查，但是不会打的就可以尝试我这个看看。</p>
+<h2 id="🧮-lite-tools-weather"><a href="#🧮-lite-tools-weather" class="headerlink" title="🧮 lite-tools weather"></a>🧮 lite-tools weather</h2><p>默认根据当前请求<code>IP</code>获取当地的天气，当然有可能请求失败，然后会默认返回北京的天气<br>可以手动指定 **市区县 **然后获取对应地点的天气，后面不用写市区县，如下</p>
+<blockquote>
+<p>lite-tools weather 天河     获取天河区的天气，如果全国有同名的区就不知道是哪个地方了<br>lite-tools weather 广州     这样子就可以获取广州市的 </p>
+</blockquote>
+<h2 id="🧮-lite-tools-trans"><a href="#🧮-lite-tools-trans" class="headerlink" title="🧮 lite-tools trans"></a>🧮 lite-tools trans</h2><p>这里需要安装额外的包 <code>pip install lite-tools[all]</code>才可以实现以下功能。<br><strong>这里是比较复杂的，这里面很多功能我没有实现，目前我只搞了一个图片转pdf。</strong><br>**具体的操作可以看 **<code>**lite-tools trans -h**</code><br><img src="https://static.litetools.top/blogs/lite_tools/4.png" alt="转换操作"><br>这里<code>-i</code>或者<code>--input</code>后面必须要跟输入路径，这后面可以跟文件夹，也可以跟单个图片<br><code>-o</code>或者<code>--output</code>后面是输入文件的位置，这里可以定义输出文件的名称，不写默认同输入文件的名字<br>示例:<br><img src="https://static.litetools.top/blogs/lite_tools/11.png" alt="示例代码"><br>上面<code>-i</code>后面跟了这个文件夹路径  后面<code>-o</code>后面自定义了输出的文件名称 这里的<code>-o</code>要是不写后面输出的文件就是 和文件夹同名的一个<code>pdf</code></p>
+<blockquote>
+<p>这里有个问题，这里是一个图片一页纸 我没有做密度排版，那样子要做很多计算，太麻烦了，反正平时大多数图片都是一页一页的</p>
+</blockquote>
+<h1 id="代码里面使用"><a href="#代码里面使用" class="headerlink" title="代码里面使用"></a>代码里面使用</h1><h2 id="📋-get-lan-get-wan"><a href="#📋-get-lan-get-wan" class="headerlink" title="📋 get_lan &#x2F; get_wan"></a>📋 get_lan &#x2F; get_wan</h2><p>因为python自带的socket获取内网地址没有那么好用，我自己通过正则写了一个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_lan()   <span class="comment"># 获取内网ip 国内服务器问题不大 英文版本我没有兼容</span></span><br><span class="line">get_wan()   <span class="comment"># 获取外网ip 依赖网络</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-get-b64d-get-b64e"><a href="#📋-get-b64d-get-b64e" class="headerlink" title="📋 get_b64d &#x2F; get_b64e"></a>📋 get_b64d &#x2F; get_b64e</h2><p>就是base64加解密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_b64d(string)    <span class="comment"># 解密base64字符串 可以选择解密模式 </span></span><br><span class="line">get_b64e(string)    <span class="comment"># 加密字符串成base64 可以选择加密模式</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-try-get-try-key-FlattenJson-WrapJson"><a href="#📋-try-get-try-key-FlattenJson-WrapJson" class="headerlink" title="📋 try_get &#x2F; try_key &#x2F; FlattenJson &#x2F; WrapJson"></a>📋 try_get &#x2F; try_key &#x2F; FlattenJson &#x2F; WrapJson</h2><h3 id="📋-try-get"><a href="#📋-try-get" class="headerlink" title="📋 try_get"></a>📋 try_get</h3><p>用<code>jspath</code> 的方法提取<code>json串</code>或者<code>字典</code> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;a&quot;</span>: &#123;<span class="string">&quot;b&quot;</span>: [<span class="number">0</span>, &#123;<span class="string">&quot;c_123&quot;</span>:[<span class="number">0</span>, <span class="number">1</span>, [<span class="number">3</span>, <span class="number">4</span>, [&#123;<span class="string">&quot;a&quot;</span>: <span class="number">666</span>&#125;]]]&#125;]&#125;&#125;</span><br><span class="line"><span class="built_in">print</span>(try_get(a, <span class="string">&quot;a.b[1].c_123[2][2][0].a&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># try_get(源可以是json字符串可以是字典, 匹配规则, 没有匹配上的时候默认返回的值, expected_type=(int, str))  还有其它参数可以直接看源代码里面的注释</span></span><br><span class="line"><span class="comment"># 可以读取文件,可以读取json字符串,可以把字典转换成json字符串,可以通过`|` 写多个规则</span></span><br></pre></td></tr></table></figure>
+
+<div class="alert alert-warning"><div class="icon"><i class="fa fa-warning"></i></div><div class="text"><p>注意事项</p>
+</div></div>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>正常使用的话就不用看了</span></div>
+    <div class="xContent"><div class="inner">
+        <ol>
+<li><p>数组在前的时候不能不加<code>.</code> 作为分割</p>
+<ul>
+<li>如<code>a.b[1][2].c</code> ，<strong>不能</strong> 写成<code>a.b[1][2]c</code></li>
+</ul>
+</li>
+<li><p>有几个字符如果是键里面的元素的话，需要加上转义符号</p>
+<ul>
+<li><p>符号有 <code>.</code> 、 <code>[ </code>、  <code>]</code>、  <code>|</code>  这四个是键的话要转义</p>
+</li>
+<li><p>如<code>{&quot;a|b&quot;: [0, {&quot;c.d[]&quot;: 666}]}</code> 解析需要写 <code>a\|b[1].c\.d\[\]</code></p>
+</li>
+</ul>
+</li>
+<li><p>如果要提取的键是<strong>整型</strong>或者<strong>浮点型</strong>就不要用我这个方法了</p>
+</li>
+</ol>
+<ul>
+<li>如 <code>{6: {3.14: 666}</code> 这种我的方法解析不了，主要是我懒得处理这些逻辑 还要判断写在字符串里面的内容是啥类型</li>
+</ul>
+ 
+    </div></div>
+    </div>
+
+
+
+<h3 id="📋-try-key"><a href="#📋-try-key" class="headerlink" title="📋 try_key"></a>📋 try_key</h3><p>这个结果是列表，因为可以匹配出来多个结果，通过<strong>一个键</strong> 来匹配多个值，或者<strong>一个确定的值</strong> 匹配它的键</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;a&quot;</span>: &#123;<span class="string">&quot;b&quot;</span>: <span class="number">123</span>&#125;, <span class="string">&quot;c&quot;</span>: &#123;<span class="string">&quot;b&quot;</span>: <span class="number">666</span>&#125;&#125;</span><br><span class="line"><span class="built_in">print</span>(try_key(a, <span class="string">&#x27;b&#x27;</span>))  <span class="comment"># 这里是匹配 键 为 `b` 的值 [123, 666]</span></span><br><span class="line"><span class="built_in">print</span>(try_key(a, <span class="number">666</span>, mode=<span class="string">&#x27;value&#x27;</span>))  <span class="comment"># 通过值666来找键  &quot;b&quot;  </span></span><br><span class="line"><span class="comment"># 同样这里可以设置期望要的类型 但是只适合键取值</span></span><br><span class="line">options = &#123;<span class="string">&quot;filter&quot;</span>: &#123;<span class="string">&quot;equal&quot;</span>: &#123;<span class="string">&quot;key1&quot;</span>: <span class="string">&quot;value1&quot;</span>, <span class="string">&quot;key2&quot;</span>: <span class="string">&quot;value2&quot;</span>&#125;, <span class="string">&quot;unequal&quot;</span>: &#123;<span class="string">&quot;key1&quot;</span>: <span class="string">&quot;value1&quot;</span>&#125;&#125;&#125;</span><br><span class="line"><span class="comment"># 上面参数的意思就是 设置过滤器 但是这个过滤器只适合匹配 兄弟元素关系 如 key1 和 key2 在同一个作用域这种     </span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="📋-FlattenJson"><a href="#📋-FlattenJson" class="headerlink" title="📋 FlattenJson"></a>📋 FlattenJson</h3><p>这里是扁平化json,就是把一个很大的<code>json</code> 可以变成一元的,然后也可以通过jspath的方法取值那些</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;a&quot;</span>: &#123;<span class="string">&quot;b&quot;</span>: [<span class="number">666</span>, [<span class="number">777</span>, <span class="number">888</span>]]&#125;, <span class="string">&quot;c&quot;</span>: <span class="number">123</span>&#125;</span><br><span class="line">app = FlattenJson(a)</span><br><span class="line">app.show()   <span class="comment"># 这个没有返回值,直接打印出来扁平化的内容 </span></span><br><span class="line"><span class="comment"># &#123;&#x27;a.b[0]&#x27;: 666, &#x27;a.b[1][0]&#x27;: 777, &#x27;a.b[1][1]&#x27;: 888, &#x27;c&#x27;: 123&#125;</span></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> app.get_all():  <span class="comment"># 迭代器</span></span><br><span class="line">    <span class="keyword">pass</span>   <span class="comment"># 可以拿到每个路径 和 值</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> app.path(value):</span><br><span class="line">    <span class="keyword">pass</span>   <span class="comment"># 可以拿到每个值的路径</span></span><br><span class="line"><span class="built_in">print</span>(app.get(key, default=<span class="literal">None</span>))  <span class="comment"># 通过路径获取对应的值 没有返回默认值</span></span><br><span class="line"><span class="built_in">print</span>(app.exists(key))  <span class="comment"># 判断路径是否存在</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="📋-JsJson"><a href="#📋-JsJson" class="headerlink" title="📋 JsJson"></a>📋 JsJson</h3><p>这个我没有搞完,反正大概意思就是从html啥的文本里提取json出来,目前这里没啥用</p>
+<h3 id="📋-WrapJson"><a href="#📋-WrapJson" class="headerlink" title="📋 WrapJson"></a>📋 WrapJson</h3><p>折叠json, 把一个很大的json或者字典按照想要的格式进行压缩</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;a&quot;</span>: <span class="string">&quot;666&quot;</span>, <span class="string">&quot;b&quot;</span>: &#123;<span class="string">&quot;c&quot;</span>: [<span class="number">123</span>], <span class="string">&quot;d&quot;</span>: <span class="number">777</span>&#125;, <span class="string">&quot;e&quot;</span>: <span class="number">3.14</span>&#125;</span><br><span class="line">app = WrapJson(&#123;<span class="string">&quot;a&quot;</span>: <span class="built_in">str</span>, <span class="string">&quot;b&quot;</span>: &#123;<span class="string">&quot;c&quot;</span>: <span class="built_in">list</span>&#125;, <span class="string">&quot;e&quot;</span>: ...&#125;)  <span class="comment"># 这里传入的是模板,就是想要获得的结果模板</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(app.get_all(a)) --&gt; &#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;666&#x27;</span>, <span class="string">&#x27;b&#x27;</span>: &#123;<span class="string">&#x27;c&#x27;</span>: [<span class="number">123</span>]&#125;, <span class="string">&#x27;e&#x27;</span>: <span class="number">3.14</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="alert alert-danger"><div class="icon"><i class="fa fa-exclamation"></i></div><div class="text"><p>使用注意事项</p>
+</div></div>
+
+<div class="xControl active">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>WrapJson的使用注意点</span></div>
+    <div class="xContent pre-open"><div class="inner">
+        <ol>
+<li><code>...</code> 只适用于 基本类型<code>str, int, float, bool</code> 的模糊匹配, 数组类型的<code>tuple, dict, list, set</code> 不适用</li>
+<li>如果是数组类型,必须指明,如上面<code>c</code> 的情况</li>
+<li>如果获取结果的值和模板匹配不上 将会返回空数组类型 <code>{} / []</code></li>
+</ol>
+ 
+    </div></div>
+    </div>
+
+
+
+<h2 id="📋-get-md5-get-sha-get-sha3"><a href="#📋-get-md5-get-sha-get-sha3" class="headerlink" title="📋 get_md5 &#x2F; get_sha &#x2F; get_sha3"></a>📋 get_md5 &#x2F; get_sha &#x2F; get_sha3</h2><p>这里没啥好说的 就是如命加密 都有可以指定类型的参数,直接看方法就知道转啥了</p>
+<h2 id="📋-get-time-time-count-time-range"><a href="#📋-get-time-time-count-time-range" class="headerlink" title="📋 get_time &#x2F; time_count &#x2F; time_range"></a>📋 get_time &#x2F; time_count &#x2F; time_range</h2><h3 id="📋-get-time"><a href="#📋-get-time" class="headerlink" title="📋 get_time"></a>📋 get_time</h3><p>时间转换, 方法都可以组合使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">get_time()   <span class="comment"># 默认获取当前时间时间戳  10位</span></span><br><span class="line">get_time(unit=<span class="string">&#x27;ms&#x27;</span>)  <span class="comment"># 获取13位的时间戳</span></span><br><span class="line">get_time(instance=<span class="built_in">float</span>)  <span class="comment"># 获取浮点类型的时间戳</span></span><br><span class="line">get_time(fmt=<span class="literal">True</span>)     <span class="comment"># 获取 YYYY-mm-dd HH:MM:SS 格式的时间</span></span><br><span class="line">get_time(fmt=<span class="string">&quot;%Y%m&quot;</span>)   <span class="comment"># 手动指定获取YYYYmm 格式的时间</span></span><br><span class="line">get_time(<span class="number">1656546540</span>, fmt=<span class="literal">True</span>)     <span class="comment"># 将指定时间戳转换为默认时间格式</span></span><br><span class="line">get_time(<span class="number">1656546540000</span>, fmt=<span class="string">&quot;%Y%m&quot;</span>)   <span class="comment"># 将指定时间戳转换为指定格式的时间格式 这里可以13位或者10位 兼容了的</span></span><br><span class="line">get_time(<span class="string">&quot;2022-10-11&quot;</span>)             <span class="comment"># 将时间格式转换为时间戳 默认匹配了 年月日/.///- 其它格式需要自己手动指定 </span></span><br><span class="line">get_time(<span class="string">&quot;2022/12/12 10:11&quot;</span>, fmt=<span class="string">&quot;%Y/%m/%d %H:%M&quot;</span>)    <span class="comment"># 没有内置的格式 需要手动指定格式 转换位时间戳 </span></span><br><span class="line">get_time(<span class="string">&quot;2022-10-11&quot;</span>, unit=<span class="string">&#x27;ms&#x27;</span>)   <span class="comment"># 转换出来的时间戳为13位</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="📋-time-count"><a href="#📋-time-count" class="headerlink" title="📋 time_count"></a>📋 time_count</h3><p>获取函数运行时间的装饰器</p>
+<h3 id="📋-time-range"><a href="#📋-time-range" class="headerlink" title="📋 time_range"></a>📋 time_range</h3><p>获取起止时间的时间戳范围</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (年,月,日,时,分,秒) 开始时间不可以比结束时间大 不写的位置默认为当前值最小值 如 (2022, 11) 只写了年月,那么日 时分秒是  1, 00:00:00</span></span><br><span class="line">time_range((<span class="number">2022</span>,<span class="number">11</span>), (<span class="number">2022</span>,<span class="number">12</span>,<span class="number">6</span>))              <span class="comment"># (1667232000, 1670256000)</span></span><br><span class="line">time_range((<span class="number">2022</span>,<span class="number">11</span>), (<span class="number">2022</span>,<span class="number">12</span>,<span class="number">6</span>), unit=<span class="string">&#x27;ms&#x27;</span>)   <span class="comment"># (1667232000000, 1670256000000)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-try-catch"><a href="#📋-try-catch" class="headerlink" title="📋 try_catch"></a>📋 try_catch</h2><p>捕获异常的装饰器, 支持<strong>同步</strong>和<strong>异步</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@try_catch     </span><span class="comment"># 不加参数默认正常捕获</span></span><br><span class="line"><span class="comment"># 下面是我随便写一些值来理解,都可以不写都有默认值</span></span><br><span class="line"><span class="meta">@try_catch(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="meta">    log=<span class="literal">False</span>,  <span class="comment"># 不打印日志                默认打印</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    retry=<span class="number">5</span>,    <span class="comment"># 如果异常了再重试 最多运行5次 默认1次</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    default=<span class="number">666</span>,  <span class="comment"># 捕获完了还是异常给的默认值 默认None</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    timeout=<span class="number">10</span>,   <span class="comment"># 异常了等10秒再重试或者10秒后再推出 默认不等待</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    err_callback=send_dingding,  <span class="comment"># 如果最后报错了触发这个函数 默认没有 如果有参数需要加下面那个</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    err_args=(<span class="params"><span class="string">&quot;xxx失败了&quot;</span>,</span>)       <span class="comment"># 这里只能是序列 列表 元组都行 但是得对应上面回调函数的参数</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    except_retry=(<span class="params">TimeoutException, ValueError</span>)  <span class="comment"># 如果是碰到了这两种异常 直接就不重试了 直接返回默认值</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    ignore_retry=KeyError,    <span class="comment"># 和上面参数一样可以单写,可以多写 但是这里是如果碰到了这种异常,直接跳过等待继续重试</span></span></span></span><br><span class="line"><span class="params"><span class="meta">    catch=<span class="literal">False</span>,              <span class="comment"># 默认就是False 这里是捕获异常的原因,一般不建议设置为True的时候不要和其它写一起</span></span></span></span><br><span class="line"><span class="params"><span class="meta"></span>)  </span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-get-ua"><a href="#📋-get-ua" class="headerlink" title="📋 get_ua"></a>📋 get_ua</h2><p>获取user-agent 真实版本号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">get_ua()                <span class="comment"># 随机获取一个 基本都是chrome的</span></span><br><span class="line">get_ua(<span class="string">&#x27;pc&#x27;</span>)            <span class="comment"># 可以从ie edge firfox chrome 里面随机取 太随机了</span></span><br><span class="line">get_ua(<span class="string">&#x27;mobile&#x27;</span>)        <span class="comment"># 随机获取一个手机ua</span></span><br><span class="line">get_ua(<span class="string">&#x27;chrome&#x27;</span>, <span class="string">&#x27;ie&#x27;</span>)  <span class="comment"># 随机从chrome/ie里面获取一个ua</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-MySql-MySqlConfig-SqlString"><a href="#📋-MySql-MySqlConfig-SqlString" class="headerlink" title="📋 MySql &#x2F; MySqlConfig &#x2F; SqlString"></a>📋 MySql &#x2F; MySqlConfig &#x2F; SqlString</h2><p>描述复杂 这是给我自己使用方便的 如果你们要用的话 最好用 <code>MySqlConfig</code> 配置了传入MySql创建一个属于自己的</p>
+<p>可以设置返回值的类型 在配置文件里面 有一个 <code>cursor</code>参数 默认<code>tuple</code>,可以设置为<code>dict</code> ，这里是<strong>字符串</strong>哦.</p>
+<p>下面所有的<code>where</code> 都可以写字典和字符串 字典只有等值, 字符串就是你想写啥规则就是啥规则</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql = MySql(MySqlConfig(database=<span class="string">&quot;test&quot;</span>, host=<span class="string">&quot;xxx&quot;</span>, user=<span class="string">&quot;aaaaa&quot;</span>, password=<span class="string">&quot;xxxx&quot;</span>, port=<span class="number">6666</span>), table_name=<span class="string">&quot;t1&quot;</span>)  </span><br><span class="line"><span class="comment"># 还有其它参数自己看接口</span></span><br><span class="line"><span class="comment"># 增</span></span><br><span class="line">mysql.insert(&#123;<span class="string">&quot;a&quot;</span>: <span class="number">123</span>&#125;)</span><br><span class="line"><span class="comment"># 删 </span></span><br><span class="line">mysql.delete(&#123;<span class="string">&quot;a&quot;</span>: <span class="number">666</span>&#125;)</span><br><span class="line"><span class="comment"># 改</span></span><br><span class="line">mysql.update(&#123;<span class="string">&quot;a&quot;</span>: <span class="number">888</span>&#125;, &#123;<span class="string">&quot;b&quot;</span>: <span class="number">111</span>&#125;)</span><br><span class="line"><span class="comment"># 查</span></span><br><span class="line"><span class="keyword">for</span> a, b <span class="keyword">in</span> mysql.select(<span class="string">&quot;SELECT a, b FROM xxxx WHERE ...&quot;</span>):  <span class="comment"># 可以选择的fetch模式有 one all many 设置many的话 可以设置buffer=1000  默认就是1000</span></span><br><span class="line">    <span class="keyword">pass</span>  <span class="comment"># a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 大量的数据建议用这个</span></span><br><span class="line"><span class="keyword">for</span> a, b <span class="keyword">in</span> mysql.select_iter(<span class="string">&quot;SELECT a, b FROM xxxx WHERE ...&quot;</span>, <span class="string">&quot;这里写主键用来记录游标位置的&quot;</span>):</span><br><span class="line">    <span class="keyword">pass</span>  <span class="comment"># a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计</span></span><br><span class="line">count = mysql.count()  <span class="comment"># 不写统计全部 可以写规则</span></span><br><span class="line">e = mysql.exists(&#123;<span class="string">&quot;a&quot;</span>: <span class="number">66</span>&#125;)  <span class="comment"># 判断a=66是否存在 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假如返回字典格式的</span></span><br><span class="line">mysql = MySql(MySqlConfig(database=<span class="string">&quot;test&quot;</span>, host=<span class="string">&quot;xxx&quot;</span>, user=<span class="string">&quot;aaaaa&quot;</span>, password=<span class="string">&quot;xxxx&quot;</span>, cursor=<span class="string">&#x27;dict&#x27;</span>, port=<span class="number">6666</span>)) </span><br><span class="line"><span class="comment"># 这里其实可以不写 表名 ，只实例化一次 后续可以在每个操作位置单独指定表名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --------------------</span></span><br><span class="line"><span class="comment"># 注意：实例化位置和下面方法的位置 至少有一个地方写表名 两个地方都写 优先采取方法位置的表名来进行操作</span></span><br><span class="line"><span class="comment"># -------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如 增</span></span><br><span class="line">mysql.insert(&#123;<span class="string">&quot;a&quot;</span>: <span class="number">123</span>&#125;, ignore=<span class="literal">True</span>, table_name=<span class="string">&quot;这里可以单独指定表名&quot;</span>)  <span class="comment"># 所以程序里可以只实例化一次 插入同一个库的不同表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量插入  批量插入支持以下两个形式 字段都要对应 长度也要对应</span></span><br><span class="line">items1 = &#123;</span><br><span class="line">	<span class="string">&quot;_id&quot;</span>: [<span class="string">&quot;0015&quot;</span>, <span class="string">&quot;0016&quot;</span>, <span class="string">&quot;0017&quot;</span>, <span class="string">&quot;0018&quot;</span>],</span><br><span class="line">	<span class="string">&quot;api&quot;</span>: [<span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>, <span class="string">&quot;7&quot;</span>, <span class="string">&quot;8&quot;</span>],</span><br><span class="line">	<span class="string">&quot;platform&quot;</span>: [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>],</span><br><span class="line">	<span class="string">&quot;status_code&quot;</span>: [<span class="number">1</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">9</span>]</span><br><span class="line">&#125;</span><br><span class="line">items2 = [</span><br><span class="line">	&#123;<span class="string">&quot;_id&quot;</span>: <span class="string">&quot;1111&quot;</span>, <span class="string">&quot;api&quot;</span>: <span class="string">&quot;11&quot;</span>, <span class="string">&quot;platform&quot;</span>: <span class="string">&quot;aaa&quot;</span>, <span class="string">&quot;status_code&quot;</span>: <span class="number">5</span>&#125;, </span><br><span class="line">	&#123;<span class="string">&quot;_id&quot;</span>: <span class="string">&quot;2222&quot;</span>, <span class="string">&quot;api&quot;</span>: <span class="string">&quot;22&quot;</span>, <span class="string">&quot;platform&quot;</span>: <span class="string">&quot;bbb&quot;</span>, <span class="string">&quot;status_code&quot;</span>: <span class="number">7</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;_id&quot;</span>: <span class="string">&quot;3333&quot;</span>, <span class="string">&quot;api&quot;</span>: <span class="string">&quot;33&quot;</span>, <span class="string">&quot;platform&quot;</span>: <span class="string">&quot;ccc&quot;</span>, <span class="string">&quot;status_code&quot;</span>: <span class="number">7</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;_id&quot;</span>: <span class="string">&quot;4444&quot;</span>, <span class="string">&quot;api&quot;</span>: <span class="string">&quot;44&quot;</span>, <span class="string">&quot;platform&quot;</span>: <span class="string">&quot;ddd&quot;</span>, <span class="string">&quot;status_code&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">]</span><br><span class="line">mysql.insert_batch(itemsX)  <span class="comment"># 直接操作 如果碰到主键重复 这一堆会插入异常 会提示错误</span></span><br><span class="line">mysql.insert_batch(itemsX, duplicate=<span class="string">&quot;ignore&quot;</span>)   <span class="comment"># 去重模式选择 ignore 那么重复的主键将会跳过 不会修改原值</span></span><br><span class="line">mysql.insert_batch(items, duplicate=<span class="string">&quot;update&quot;</span>, update_field=[<span class="string">&quot;status_code&quot;</span>], table_name=<span class="string">&quot;表名&quot;</span>)</span><br><span class="line"><span class="comment"># 插入模式采用更新，如果有主键重复的数据 会更新 update_field 里面的字段的数据</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量更新 这个 目前 暂时 只支持 上面 items1 的格式 更新域和条件长度的一致</span></span><br><span class="line">mysql.update_batch(&#123;<span class="string">&quot;a&quot;</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="string">&quot;b&quot;</span>: [<span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;z&quot;</span>]&#125;, &#123;<span class="string">&quot;c&quot;</span>: [<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;bb&quot;</span>, <span class="string">&quot;cc&quot;</span>]&#125;, table_name=<span class="string">&quot;同理这里不写就得全局写 二选一&quot;</span>)</span><br><span class="line"><span class="comment"># 上面的意思是 把 &quot;c&quot; 值等于&quot;aa&quot;的内容的 &quot;a&quot; 更新为 1, &quot;b&quot; 更新为 &quot;x&quot; </span></span><br><span class="line"><span class="comment"># 上面的意思是 把 &quot;c&quot; 值等于&quot;bb&quot;的内容的 &quot;a&quot; 更新为 2, &quot;b&quot; 更新为 &quot;y&quot; </span></span><br><span class="line"><span class="comment"># 上面的意思是 把 &quot;c&quot; 值等于&quot;cc&quot;的内容的 &quot;a&quot; 更新为 3, &quot;b&quot; 更新为 &quot;z&quot; </span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-match-case"><a href="#📋-match-case" class="headerlink" title="📋 match_case"></a>📋 match_case</h2><p>可以让你的if-else 更加好看</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@match_case</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;默认值&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@main.register(<span class="params"><span class="number">666</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">when_x_666</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;当x为666的时候走这里逻辑&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@main.register_all(<span class="params">[<span class="string">&quot;asd&quot;</span>, <span class="number">444</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">when_x_other</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;当x为 上面列表里面两种情况的时候走这里逻辑&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-CleanString"><a href="#📋-CleanString" class="headerlink" title="📋 CleanString"></a>📋 CleanString</h2><p>可能不好用 就是清理字符串的字符的</p>
+<h2 id="📋-clean-html"><a href="#📋-clean-html" class="headerlink" title="📋 clean_html"></a>📋 clean_html</h2><p>采用了米乐大佬的 <code>usepy</code> 的包实现的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clean_html(html文本, white_tags=[<span class="string">&quot;p&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-color-string"><a href="#📋-color-string" class="headerlink" title="📋 color_string"></a>📋 color_string</h2><p>返回一个有颜色的字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(color_string(<span class="string">&quot;你好&quot;</span>, <span class="string">&quot;红&quot;</span>))   <span class="comment"># 可以写 红,红色,red, R  其它颜色同理</span></span><br><span class="line"><span class="built_in">print</span>(color_string(<span class="string">&quot;哈哈&quot;</span>, &#123;<span class="string">&quot;b&quot;</span>: <span class="string">&quot;黑&quot;</span>, <span class="string">&quot;f&quot;</span>: <span class="string">&quot;y&quot;</span>, <span class="string">&quot;v&quot;</span>: <span class="string">&quot;bold&quot;</span>&#125;))  <span class="comment"># 对应backgroud front view</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-x-timeout"><a href="#📋-x-timeout" class="headerlink" title="📋 x_timeout"></a>📋 x_timeout</h2><div class="alert alert-primary"><div class="icon"><i class="fa fa-refresh"></i></div><div class="text"><p>TODO</p>
+</div></div>
+
+<p>需要兼容同步和异步,所以这里有问题,这个也是不可用的状态</p>
+<h2 id="📋-Singleton"><a href="#📋-Singleton" class="headerlink" title="📋 Singleton"></a>📋 Singleton</h2><p>单例模式装饰器</p>
+<h2 id="📋-Buffer"><a href="#📋-Buffer" class="headerlink" title="📋 Buffer"></a>📋 Buffer</h2><p>一个队列,配合V神的vthread使用有奇效, 如果一个地方设置<code>name</code> 对应的其它的都需要设置对应的name</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> vthread</span><br><span class="line"><span class="keyword">from</span> lite_tools <span class="keyword">import</span> Buffer</span><br><span class="line"></span><br><span class="line"><span class="meta">@vthread.pool(<span class="params"><span class="number">1</span>, gqueue=<span class="number">1</span></span>)  </span><span class="comment"># 任务线程</span></span><br><span class="line"><span class="meta">@Buffer.task                </span><span class="comment"># 声明这个任务 可以加名称</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task</span>():</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>                 <span class="comment"># 任务全部通过yield推送到队列</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@vthread.pool(<span class="params"><span class="number">10</span>, gqueue=<span class="number">2</span></span>)  </span><span class="comment"># 消耗线程</span></span><br><span class="line"><span class="meta">@Buffer.worker              </span><span class="comment"># 声明消耗任务的 名称需要和任务的名称对应 默认名称都是default 可以设置 @Buffer.worker(name=&quot;设置了名字其它的所有功能都需要创建这个名字才可以对应起来&quot;)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line">    <span class="comment"># 这里不需要写循环 这个worker会自动循环取队列</span></span><br><span class="line">    item = Buffer.seed()   <span class="comment"># 这里返回的内容是和上面的yield对应 如果yield a, b  那么这里建议  a, b = Buffer.seed() </span></span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    task()</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>): run()</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 此外还有好几个方法</span></span><br><span class="line">Buffer.reset()  <span class="comment"># 重置统计的数据</span></span><br><span class="line">Buffer.size()   <span class="comment"># 获取当前队列里面剩余任务</span></span><br><span class="line">Buffer.count()  <span class="comment"># 获取跑了多少个任务</span></span><br><span class="line">Buffer.sow(<span class="number">666</span>)  <span class="comment"># 放一个新的数据进队列 &lt;&lt; 一般不建议用这个 可能会造成队列阻塞</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋count-lines"><a href="#📋count-lines" class="headerlink" title="📋count_lines"></a>📋count_lines</h2><p>统计文件行数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(count_lines(<span class="string">&quot;文件路径&quot;</span>, encoding=<span class="string">&#x27;不写的话默认系统对应的格式&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋LiteLogFile"><a href="#📋LiteLogFile" class="headerlink" title="📋LiteLogFile"></a>📋LiteLogFile</h2><p>创建一个日志记录 采用循环记录 同一个位置只会存在10000条最多 超了从0开始记录 在用户目录下<code>.lite_tools/logs/xxx</code>下面可以找到记录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_file = LiteLogFile(<span class="string">&#x27;主目录&#x27;</span>, <span class="string">&#x27;日志名称&#x27;</span>)</span><br><span class="line">log_file.dump(<span class="string">&quot;这里是一条日志&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="js相关的"><a href="#js相关的" class="headerlink" title="js相关的"></a>js相关的</h2><div class="alert alert-primary"><div class="icon"><i class="fa fa-refresh"></i></div><div class="text"><p>TODO</p>
+</div></div>
+
+<p>主要是js里面 进制转换 比如36进制啥的 大部分代码由 <code>小小白</code> 提供</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两种引用方式</span></span><br><span class="line"><span class="keyword">from</span> lite_tools <span class="keyword">import</span> atob, btoa, to_string_36, xor, unsigned_right_shift, left_shift, dec_to_bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">from</span> lite_tools.tools.js <span class="keyword">import</span> atob, btoa, to_string_36, xor, unsigned_right_shift, left_shift, dec_to_bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是一样的 就是方法区分功能 和不管区分与否的 差别</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="📋atob-btoa-base64功能"><a href="#📋atob-btoa-base64功能" class="headerlink" title="📋atob&#x2F; btoa  base64功能"></a>📋atob&#x2F; btoa  base64功能</h3><h3 id="📋to-string-2"><a href="#📋to-string-2" class="headerlink" title="📋to_string_2"></a>📋to_string_2</h3><h3 id="📋to-string-16"><a href="#📋to-string-16" class="headerlink" title="📋to_string_16"></a>📋to_string_16</h3><h3 id="📋to-string-36"><a href="#📋to-string-36" class="headerlink" title="📋to_string_36"></a>📋to_string_36</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 但是这个还没有实现浮点数的转换操作</span></span><br><span class="line"><span class="comment"># js&gt;&gt;&gt; (123456789).toString(36)</span></span><br><span class="line">to_string_36(<span class="number">5615</span>)   <span class="comment"># 将数字转换为 36 进制</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="📋xor"><a href="#📋xor" class="headerlink" title="📋xor"></a>📋xor</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># js&gt;&gt;&gt; 656616 ^ 516565</span></span><br><span class="line"><span class="comment"># 数字都是我随便写的 这个和python的区别在于精度不同 python 的 ^ 数字小的时候没问题 数字大就不对了</span></span><br><span class="line">xor(<span class="number">565646</span>, <span class="number">98486</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="📋unsigned-right-shift"><a href="#📋unsigned-right-shift" class="headerlink" title="📋unsigned_right_shift"></a>📋unsigned_right_shift</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># js&gt;&gt;&gt; 555 &gt;&gt;&gt; 1</span></span><br><span class="line"><span class="comment"># 主要是实现js的上面操作  数字我乱写的</span></span><br><span class="line">unsigned_right_shift(<span class="number">555</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="📋left-shift"><a href="#📋left-shift" class="headerlink" title="📋left_shift"></a>📋left_shift</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主要是解决和python的精度差别问题</span></span><br><span class="line"><span class="comment"># js&gt;&gt;&gt;   555 &lt;&lt; 2</span></span><br><span class="line">left_shift(<span class="number">555</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="📋-dec-to-bin"><a href="#📋-dec-to-bin" class="headerlink" title="📋 dec_to_bin"></a>📋 dec_to_bin</h3><p>同上面的 &gt;&gt;&gt;  to_string_2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主要是解决 十进制 浮点数 转 二进制 的精度 问题</span></span><br><span class="line"><span class="comment"># js&gt;&gt;&gt; (56.541).toString(2)</span></span><br><span class="line">dec_to_bin(<span class="number">56.541</span>)</span><br></pre></td></tr></table></figure>
+
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2022/11/17/litetools/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2022/11/17/litetools/";
+            const title         = "「【lite-tools】一个python包的使用目录」";
+            const excerpt       = `这个包是我搞的 方便日常工作中一些重复代码或者需要绕弯的代码压缩版本`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【nps】记录一次内网穿透搭建隧道代理过程" href="/2022/11/17/nps/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【表格资源】资源链接分享" href="/2022/12/05/resoure-link/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%89%88%E5%9D%97"><span class="toc-text">命令行版块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-fish"><span class="toc-text">🧮 lite-tools fish</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-say"><span class="toc-text">🧮 lite-tools say</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-acg"><span class="toc-text">🧮 lite-tools acg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-news"><span class="toc-text">🧮 lite-tools news</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-today"><span class="toc-text">🧮 lite-tools today</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-dict"><span class="toc-text">🧮 lite-tools dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-weather"><span class="toc-text">🧮 lite-tools weather</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AE-lite-tools-trans"><span class="toc-text">🧮 lite-tools trans</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%87%8C%E9%9D%A2%E4%BD%BF%E7%94%A8"><span class="toc-text">代码里面使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-lan-get-wan"><span class="toc-text">📋 get_lan &#x2F; get_wan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-b64d-get-b64e"><span class="toc-text">📋 get_b64d &#x2F; get_b64e</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-try-get-try-key-FlattenJson-WrapJson"><span class="toc-text">📋 try_get &#x2F; try_key &#x2F; FlattenJson &#x2F; WrapJson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-try-get"><span class="toc-text">📋 try_get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-try-key"><span class="toc-text">📋 try_key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-FlattenJson"><span class="toc-text">📋 FlattenJson</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-JsJson"><span class="toc-text">📋 JsJson</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-WrapJson"><span class="toc-text">📋 WrapJson</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-md5-get-sha-get-sha3"><span class="toc-text">📋 get_md5 &#x2F; get_sha &#x2F; get_sha3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-time-time-count-time-range"><span class="toc-text">📋 get_time &#x2F; time_count &#x2F; time_range</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-get-time"><span class="toc-text">📋 get_time</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-time-count"><span class="toc-text">📋 time_count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-time-range"><span class="toc-text">📋 time_range</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-try-catch"><span class="toc-text">📋 try_catch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-get-ua"><span class="toc-text">📋 get_ua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-MySql-MySqlConfig-SqlString"><span class="toc-text">📋 MySql &#x2F; MySqlConfig &#x2F; SqlString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-match-case"><span class="toc-text">📋 match_case</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-CleanString"><span class="toc-text">📋 CleanString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-clean-html"><span class="toc-text">📋 clean_html</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-color-string"><span class="toc-text">📋 color_string</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-x-timeout"><span class="toc-text">📋 x_timeout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-Singleton"><span class="toc-text">📋 Singleton</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-Buffer"><span class="toc-text">📋 Buffer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8Bcount-lines"><span class="toc-text">📋count_lines</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8BLiteLogFile"><span class="toc-text">📋LiteLogFile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E7%9B%B8%E5%85%B3%E7%9A%84"><span class="toc-text">js相关的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Batob-btoa-base64%E5%8A%9F%E8%83%BD"><span class="toc-text">📋atob&#x2F; btoa  base64功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-2"><span class="toc-text">📋to_string_2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-16"><span class="toc-text">📋to_string_16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bto-string-36"><span class="toc-text">📋to_string_36</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bxor"><span class="toc-text">📋xor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bunsigned-right-shift"><span class="toc-text">📋unsigned_right_shift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8Bleft-shift"><span class="toc-text">📋left_shift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-dec-to-bin"><span class="toc-text">📋 dec_to_bin</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

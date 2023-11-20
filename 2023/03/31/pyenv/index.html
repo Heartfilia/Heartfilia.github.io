@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【pyenv】python版本管理神器 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="pyenv, python" />
+  
+  <meta name="description" content="距离上一次写文章已经很久过去了，主要是工作繁忙，我想写的东西比较花时间，但是今天【20230331】写这个是比较简短的，耗时很少，但是确实有用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【pyenv】python版本管理神器">
+<meta property="og:url" content="https://heartfilia.github.io/2023/03/31/pyenv/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="距离上一次写文章已经很久过去了，主要是工作繁忙，我想写的东西比较花时间，但是今天【20230331】写这个是比较简短的，耗时很少，但是确实有用。">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2023-03-31T09:19:00.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.815Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pyenv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/03/31/pyenv/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【pyenv】python版本管理神器</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-03-31T09:19:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-03-31</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~9.39K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707815"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、这是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">1. 说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">2. 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-mac"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 mac</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-linux"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-windows"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 windows</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8F%AF%E8%83%BD%E5%BC%82%E5%B8%B8"><span class="toc-number">2.</span> <span class="toc-text">二、可能异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BB%BA%E8%AE%AE%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">1. 建议安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-macos"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 macos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-linux"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 linux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-Debian"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">Ubuntu&#x2F;Debian</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fedora-Centos-RHEL"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">Fedora&#x2F;Centos&#x2F;RHEL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85python"><span class="toc-number">2.2.</span> <span class="toc-text">2. 安装python</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">三、教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">1. 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%91%BD%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text">2. 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E7%9B%B4%E6%8E%A5pyenv"><span class="toc-number">3.2.1.</span> <span class="toc-text">1.0 直接pyenv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-help"><span class="toc-number">3.2.2.</span> <span class="toc-text">1.1 help</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%BE%E7%BD%AE%E7%89%88%E6%9C%AC"><span class="toc-number">3.2.3.</span> <span class="toc-text">1.2 设置版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-version"><span class="toc-number">3.2.4.</span> <span class="toc-text">1.2 version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-versions"><span class="toc-number">3.2.5.</span> <span class="toc-text">1.3 versions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-install"><span class="toc-number">3.2.6.</span> <span class="toc-text">1.4 install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-uninstall"><span class="toc-number">3.2.7.</span> <span class="toc-text">1.5 uninstall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-rehash"><span class="toc-number">3.2.8.</span> <span class="toc-text">1.6 rehash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-shims"><span class="toc-number">3.2.9.</span> <span class="toc-text">1.7 shims</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-which"><span class="toc-number">3.2.10.</span> <span class="toc-text">1.8 which</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-virtualenv"><span class="toc-number">3.2.11.</span> <span class="toc-text">1.9 virtualenv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-%E6%9B%B4%E5%A4%9A"><span class="toc-number">3.2.12.</span> <span class="toc-text">1.10 更多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%96%B0pyenv"><span class="toc-number">3.3.</span> <span class="toc-text">3. 更新pyenv</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>距离上一次写文章已经很久过去了，主要是工作繁忙，我想写的东西比较花时间，但是今天【20230331】写这个是比较简短的，耗时很少，但是确实有用。</p>
+<span id="more"></span>
+
+<p>所以到这个时间点，我工具均用最新版进行讲解，其中有一些问题也可以说出来避免踩坑~</p>
+<h1 id="一、这是什么"><a href="#一、这是什么" class="headerlink" title="一、这是什么"></a>一、这是什么</h1><p>我们平时在开发东西的时候，都听说过虚拟环境，这样子可以让我们需要开发的东西所使用的包版本什么的是和我们日常使用的相互隔离，不会出现兼容问题。但是这个东西有个问题就是，大多情况下，我们都是同一个python，不能保证在其它版本python也能完美运行，所以就有了接下来我要说的这个神器—-<code>pyenv</code>。</p>
+<h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h2><p>我这里会有很多特殊情况，如果你的<strong>网络好</strong>，或者<strong>有梯子</strong>之类的工具，可以按照官方的教程，但是这里得注意一个点，<code>pyenv</code> 这个工具<strong>在windows 和 linux&#x2F;mac 需要安装的是不一样的东西</strong>。</p>
+<blockquote>
+<p>下面是我贴出来的官方的链接</p>
+</blockquote>
+<ol>
+<li><p><code>window</code>: <a target="_blank" rel="noopener" href="https://github.com/pyenv-win/pyenv-win">点这里</a></p>
+</li>
+<li><p><code>linux</code>:  <a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv#installation">点这里</a></p>
+</li>
+<li><p><code>macos</code>: 和<code>linux</code>一样的，官方也推荐使用<code>homebrew</code> </p>
+<p><a id="homebrew"></a></p>
+<ul>
+<li><code>homebrew</code>： mac 上面一个软件包管理神器，推荐使用，如果网络好可以参考<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn">这里</a>,不好也可以用国内源，这里给<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1935121">一篇不错的教程</a></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>【如果是mac通过homebrew安装 或者linux通过官方安装的 不用考虑兼容问题，测试完美运行，尤其你用的是windows需要注意后面问题】如果要用pyenv，电脑上最好别用官方的python了，我们都用这个了，就可以更方便管理了。主要是环境变量里面如果还有系统自带的python那么可能会有一些问题，后面会说。</p>
+</blockquote>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><p>我们上面已经给出了基于官方的链接的安装地址，可以看里面的操作，一键安装。但是对于我们国内的用户来说，可能就没有那么轻松了。</p>
+<h3 id="2-1-mac"><a href="#2-1-mac" class="headerlink" title="2.1 mac"></a>2.1 mac</h3><p>我们已经基于第一点说了那个homebrew，并且按照教程<strong>配置了国内源</strong>。所以这里安装就很轻松。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br><span class="line">brew install pyenv-virtualenv</span><br></pre></td></tr></table></figure>
+
+<p>如果安装的时候报错了,可以输入<code>brew version</code> 会提示你有两个命令，复制粘贴一下就好了。</p>
+<h3 id="2-2-linux"><a href="#2-2-linux" class="headerlink" title="2.2 linux"></a>2.2 linux</h3><p>这里我教两个方案，网上都是按照官方的，可能会没有网络连接不上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pyenv/pyenv.git ~/.pyenv</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>方案一：把<code>https://github.com/pyenv/pyenv.git</code> 转移到<code>gitee</code> ，然后替换成<code>gitee</code>你设置的仓库地址就好了，下面是一个我复制别人转移好的仓库的示例，比较新(20230326迁移的，我看了一下这个仓库是持续维护的，后面pyenv-virtualenv 也是这个用户维护的，可以直接用)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/cosynet/pyenv.git ~/.pyenv</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>方案二： 手动直接下载下来，手动把zip文件解压到 <code>~/.pyenv</code> 这个目录</p>
+</li>
+</ol>
+<p>文件放到了<code>~/.pyenv</code> 目录下后，我们需要编译一下，直接按照官方教程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.pyenv &amp;&amp; src/configure &amp;&amp; make -C src</span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要添加一下系统环境变量，下面两点根据你的终端类型选择。</p>
+<ol>
+<li><p>对于<code>bash</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面是基于 .bashrc 的一些操作</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(pyenv init -)&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>对于<code>zsh</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &#x27;command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &#x27;eval &quot;$(pyenv init -)&quot;&#x27; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>弄完了之后，需要重启一下<code>shell</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$SHELL</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-windows"><a href="#2-3-windows" class="headerlink" title="2.3 windows"></a>2.3 windows</h3><p>这个地方和<code>linux/macos</code>的包是不一样的，我们可以在官方下载，也可以通过我们已有的python的pip来安装，下面的home可以是你任意目录，不写的话默认是在你windows主用户目录下。当然也可以安装好了剪切到你想要放的目录，然后按照下面的添加环境变量就好了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyenv-win --target <span class="variable">$HOME</span>\.pyenv</span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要去系统设置一下环境变量，我这里就不教命令行了，如果想用命令行也可以，但是大概率还得去系统设置里面调整一下顺序。</p>
+<p>首先先在系统变量里面添加一个<code>pyenv</code>的root变量</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331112613562.png" alt="image-20230331112613562"></p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331112725148.png" alt="image-20230331112725148"></p>
+<p>我的是这个情况</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331112759833.png" alt="image-20230331112759833"></p>
+<p>然后就是配置下面两个东西，我这个地方是把这俩往前面移动了</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331112419436.png" alt="image-20230331112419436"></p>
+<p>然后我把我之前安装的python的环境变量给移除了，不移除也可以，但是为了避免可能出现的如下情况，下面是特殊情况的示例：</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331112948140.png" alt="image-20230331112948140"></p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331113139912.png" alt="image-20230331113139912"></p>
+<p>我系统是安装了<code>3.10.8</code>版本的普通python，然后切换了<code>pyenv</code>版本后替换不过去,因为我把python的环境变量顺序放在了pyenv的环境变量之前。我就想着我本来就要用pyenv管理python的，所以我就移除了之前的那个系统变量。</p>
+<p>现在我弄好了情况如下：</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331113323938.png" alt="image-20230331113323938"></p>
+<h1 id="二、可能异常"><a href="#二、可能异常" class="headerlink" title="二、可能异常"></a>二、可能异常</h1><h2 id="1-建议安装"><a href="#1-建议安装" class="headerlink" title="1. 建议安装"></a>1. 建议安装</h2><p>因为有些包有什么版本问题啥的，所以这里建议先安装这些东西再进行下面的操作。</p>
+<h3 id="1-1-macos"><a href="#1-1-macos" class="headerlink" title="1.1 macos"></a>1.1 macos</h3><p>需要安装<code>Xcode Command Line Tools</code>和<code>Homebrew</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+
+<p><code>Homebrew </code>在前面已经讲了，<a href="#homebrew">点击这里跳转</a></p>
+<h3 id="1-2-linux"><a href="#1-2-linux" class="headerlink" title="1.2 linux"></a>1.2 linux</h3><h4 id="Ubuntu-Debian"><a href="#Ubuntu-Debian" class="headerlink" title="Ubuntu&#x2F;Debian"></a>Ubuntu&#x2F;Debian</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \</span><br><span class="line">libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \</span><br><span class="line">xz-utils tk-dev</span><br></pre></td></tr></table></figure>
+
+<h4 id="Fedora-Centos-RHEL"><a href="#Fedora-Centos-RHEL" class="headerlink" title="Fedora&#x2F;Centos&#x2F;RHEL"></a>Fedora&#x2F;Centos&#x2F;RHEL</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装python"><a href="#2-安装python" class="headerlink" title="2. 安装python"></a>2. 安装python</h2><p><a id="install"></a></p>
+<p>这里一般都是网络的问题，要么替换国内源，要么就去下面下载离线镜像，python官网也可以下载，就看你了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 淘宝镜像  更新比较及时</span></span><br><span class="line">https://registry.npmmirror.com/binary.html?path=python/</span><br><span class="line"><span class="comment"># 华为镜像  很久不更新了</span></span><br><span class="line">https://mirrors.huaweicloud.com/python/</span><br><span class="line"><span class="comment"># 官方镜像  最即时但是可能很慢</span></span><br><span class="line">https://www.python.org/ftp/python/</span><br></pre></td></tr></table></figure>
+
+<p>官方的情况如下：</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331115036842.png" alt="image-20230331115036842"></p>
+<p>我们下载好了离线包之后，把包复制到<code>.pyenv</code>下面的目录</p>
+<ol>
+<li><p>windows –&gt; <code>你的目录\.pyenv\pyenv-win\install_cache</code> 这个目录下，把从你下载的python丢这里</p>
+</li>
+<li><p>mac&#x2F;linux –&gt; <code>你的目录\.pyenv\cache</code> (这个cache目录可能不存在，需要手动在这里创建一下)，然后可以直接在这个目录执行你想要下载的python版本，示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/python/3.11.2/Python-3.11.2.tar.xz</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331115950578.png" alt="image-20230331115950578"></p>
+<p>然后我们就可以去命令行执行安装这个指定版本的python了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.11.2</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装的过程会比较久</strong>~ 耐心等待</p>
+<p>对自己网络自信的可以输入下面指令查看可以安装的python版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv install -l</span><br><span class="line"><span class="comment"># 看中了哪个python后 就可以</span></span><br><span class="line">pyenv install 3.11.2   <span class="comment"># 优先读取 cache 目录里面的已经有的包，没有才会联网下载</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="三、教程"><a href="#三、教程" class="headerlink" title="三、教程"></a>三、教程</h1><h2 id="1-插件"><a href="#1-插件" class="headerlink" title="1. 插件"></a>1. 插件</h2><p>这是一个虚拟环境插件，不过这个只适用于 linux&#x2F;mac，windows这个属于另类，没有官方插件（主要是开发者大佬说兼容windows浪费时间，他又不用windows），但是可<strong>以用其它工具实现</strong>，道理一样的。</p>
+<ol>
+<li><p>mac用户通过 <code>homebrew</code>轻松安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv-virtualenv</span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(pyenv virtualenv-init -)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>linux 可以参考 <a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv-virtualenv">官方</a>，同理网络不好也可以用国内镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/cosynet/pyenv.git $(pyenv root)/plugins/pyenv-virtualenv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我这里是写入到bash的 可以根据你的终端类型更换  ~/.zshrc</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$SHELL</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后其他的按照官方弄，我这里不讲了</p>
+</li>
+</ol>
+<p>插件安装完了之后，输入 <code>pyenv</code> 会发现多了一些东西</p>
+<blockquote>
+<p> 没安装的时候</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pyenv 2.3.17</span><br><span class="line">Usage: pyenv &lt;<span class="built_in">command</span>&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">Some useful pyenv commands are:</span><br><span class="line">   commands    List all available pyenv commands</span><br><span class="line">   <span class="built_in">exec</span>        Run an executable with the selected Python version</span><br><span class="line">   global      Set or show the global Python version(s)</span><br><span class="line">   <span class="built_in">help</span>        Display <span class="built_in">help</span> <span class="keyword">for</span> a <span class="built_in">command</span></span><br><span class="line">   hooks       List hook scripts <span class="keyword">for</span> a given pyenv <span class="built_in">command</span></span><br><span class="line">   init        Configure the shell environment <span class="keyword">for</span> pyenv</span><br><span class="line">   install     Install a Python version using python-build</span><br><span class="line">   latest      Print the latest installed or known version with the given prefix</span><br><span class="line">   <span class="built_in">local</span>       Set or show the <span class="built_in">local</span> application-specific Python version(s)</span><br><span class="line">   prefix      Display prefixes <span class="keyword">for</span> Python versions</span><br><span class="line">   <span class="built_in">rehash</span>      Rehash pyenv shims (run this after installing executables)</span><br><span class="line">   root        Display the root directory <span class="built_in">where</span> versions and shims are kept</span><br><span class="line">   shell       Set or show the shell-specific Python version</span><br><span class="line">   shims       List existing pyenv shims</span><br><span class="line">   uninstall   Uninstall Python versions</span><br><span class="line">   --version   Display the version of pyenv</span><br><span class="line">   version     Show the current Python version(s) and its origin</span><br><span class="line">   version-file   Detect the file that sets the current pyenv version</span><br><span class="line">   version-name   Show the current Python version</span><br><span class="line">   version-origin   Explain how the current Python version is <span class="built_in">set</span></span><br><span class="line">   versions    List all Python versions available to pyenv</span><br><span class="line">   <span class="built_in">whence</span>      List all Python versions that contain the given executable</span><br><span class="line">   <span class="built_in">which</span>       Display the full path to an executable</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装完了之后</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">pyenv 2.3.17</span><br><span class="line">Usage: pyenv &lt;<span class="built_in">command</span>&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">Some useful pyenv commands are:</span><br><span class="line">   activate    Activate virtual environment</span><br><span class="line">   commands    List all available pyenv commands</span><br><span class="line">   deactivate   Deactivate virtual environment</span><br><span class="line">   <span class="built_in">exec</span>        Run an executable with the selected Python version</span><br><span class="line">   global      Set or show the global Python version(s)</span><br><span class="line">   <span class="built_in">help</span>        Display <span class="built_in">help</span> <span class="keyword">for</span> a <span class="built_in">command</span></span><br><span class="line">   hooks       List hook scripts <span class="keyword">for</span> a given pyenv <span class="built_in">command</span></span><br><span class="line">   init        Configure the shell environment <span class="keyword">for</span> pyenv</span><br><span class="line">   install     Install a Python version using python-build</span><br><span class="line">   latest      Print the latest installed or known version with the given prefix</span><br><span class="line">   <span class="built_in">local</span>       Set or show the <span class="built_in">local</span> application-specific Python version(s)</span><br><span class="line">   prefix      Display prefixes <span class="keyword">for</span> Python versions</span><br><span class="line">   <span class="built_in">rehash</span>      Rehash pyenv shims (run this after installing executables)</span><br><span class="line">   root        Display the root directory <span class="built_in">where</span> versions and shims are kept</span><br><span class="line">   shell       Set or show the shell-specific Python version</span><br><span class="line">   shims       List existing pyenv shims</span><br><span class="line">   uninstall   Uninstall Python versions</span><br><span class="line">   --version   Display the version of pyenv</span><br><span class="line">   version     Show the current Python version(s) and its origin</span><br><span class="line">   version-file   Detect the file that sets the current pyenv version</span><br><span class="line">   version-name   Show the current Python version</span><br><span class="line">   version-origin   Explain how the current Python version is <span class="built_in">set</span></span><br><span class="line">   versions    List all Python versions available to pyenv</span><br><span class="line">   virtualenv   Create a Python virtualenv using the pyenv-virtualenv plugin</span><br><span class="line">   virtualenv-delete   Uninstall a specific Python virtualenv</span><br><span class="line">   virtualenv-init   Configure the shell environment <span class="keyword">for</span> pyenv-virtualenv</span><br><span class="line">   virtualenv-prefix   Display real_prefix <span class="keyword">for</span> a Python virtualenv version</span><br><span class="line">   virtualenvs   List all Python virtualenvs found <span class="keyword">in</span> `<span class="variable">$PYENV_ROOT</span>/versions/*<span class="string">&#x27;.</span></span><br><span class="line"><span class="string">   whence      List all Python versions that contain the given executable</span></span><br><span class="line"><span class="string">   which       Display the full path to an executable</span></span><br></pre></td></tr></table></figure>
+
+<p>这里怎么使用也很简单的啦，后面轻度教学，核心使用直接看官方git下面~</p>
+<h2 id="2-命令"><a href="#2-命令" class="headerlink" title="2. 命令"></a>2. 命令</h2><p>主要列举了<strong>常用</strong>的一些，还有很多不常用的或者不同系统不兼容的就算了</p>
+<h3 id="1-0-直接pyenv"><a href="#1-0-直接pyenv" class="headerlink" title="1.0 直接pyenv"></a>1.0 <code>直接pyenv</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv            <span class="comment"># 这个会详细介绍每个做啥的</span></span><br><span class="line">或者</span><br><span class="line">pyenv commands   <span class="comment"># 这个只会列出来可以操作的指令</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-help"><a href="#1-1-help" class="headerlink" title="1.1 help"></a>1.1 <code>help</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv <span class="built_in">help</span> global</span><br></pre></td></tr></table></figure>
+
+<p>我把这个放在第一个，就是因为不懂得可以在这里输入看看教程</p>
+<h3 id="1-2-设置版本"><a href="#1-2-设置版本" class="headerlink" title="1.2 设置版本"></a>1.2 设置版本</h3><p>我这里主要是为了把三个放一起，因为这三个是效果类似的，但是有差别，</p>
+<p><code>global</code>: 就是把某个python设置为全局使用的，就是你在哪儿打开都是这个版本的，我目前是喜欢用<code>python3.10</code> 所以我就设置了这个</p>
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331115835952.png" alt="image-20230331115835952"></p>
+<p>本来上面会有一个<code>system</code> 的选项的，因为我不想用了，移除了就没有了</p>
+<p>直接把已经安装好的python版本操作如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv global 3.10.5</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>shell</code>: 这是给当前shell环境<strong>临时</strong>使用python版本，关掉了就恢复。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv shell 3.8.5</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331121133488.png" alt="image-20230331121133488"></p>
+<p><code>pyenv shell --unset</code> 可以立即取消。</p>
+<p><code>local</code>: 这里给当前目录设置python版本，包括子目录。你下次打开就会默认这个版本python。在指定目录输入后，你会发现你的目录里面多了一个文件。这个地方就会一直用这个版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pyenv <span class="built_in">local</span> 3.10.5</span><br><span class="line"><span class="comment"># 当然这个也可以 pyenv local 3.10.5 2.7.5  多个一起</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://static.litetools.top/blogs/pyenv/image-20230331121348374.png" alt="image-20230331121348374"></p>
+<p><code>pyenv local --unset</code> 取消本地的设置</p>
+<h3 id="1-2-version"><a href="#1-2-version" class="headerlink" title="1.2 version"></a>1.2 <code>version</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv version</span><br></pre></td></tr></table></figure>
+
+<p>查看当前正在使用的python版本。</p>
+<h3 id="1-3-versions"><a href="#1-3-versions" class="headerlink" title="1.3 versions"></a>1.3 <code>versions</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions</span><br></pre></td></tr></table></figure>
+
+<p>查看已经安装好了的python版本信息</p>
+<h3 id="1-4-install"><a href="#1-4-install" class="headerlink" title="1.4 install"></a>1.4 <code>install</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv install -l  或者  pyenv install --list  展示可以安装的版本</span><br><span class="line"></span><br><span class="line">pyenv install 3.8.5</span><br></pre></td></tr></table></figure>
+
+<p>如果网络不好，可以离线安装python，详细看前面，<a href="#install">点这里</a>跳转。</p>
+<h3 id="1-5-uninstall"><a href="#1-5-uninstall" class="headerlink" title="1.5 uninstall"></a>1.5 <code>uninstall</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall 3.8.5</span><br></pre></td></tr></table></figure>
+
+<p>卸载指定版本的python</p>
+<h3 id="1-6-rehash"><a href="#1-6-rehash" class="headerlink" title="1.6 rehash"></a>1.6 <code>rehash</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv <span class="built_in">rehash</span></span><br></pre></td></tr></table></figure>
+
+<p>按道理来说 安装了新版本后都应该执行以下，不过新版的好像移除了这个，但是<strong>如果命名行相关工具出问题了，请记得输入这个一般可以恢复</strong></p>
+<h3 id="1-7-shims"><a href="#1-7-shims" class="headerlink" title="1.7 shims"></a>1.7 <code>shims</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv shims</span><br></pre></td></tr></table></figure>
+
+<p>列出当前存在的shims（pyenv的工作原理就是在一个叫shims的目录下创建Python解释器的“假版本”，寻找Python应用时先从该目录查找）,这也是前面我们添加环境变量的时候需要添加一个这个的原因。</p>
+<h3 id="1-8-which"><a href="#1-8-which" class="headerlink" title="1.8 which"></a>1.8 <code>which</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv <span class="built_in">which</span> scrapy</span><br></pre></td></tr></table></figure>
+
+<p>列举出这个环境下可执行文件的绝对路径。</p>
+<h3 id="1-9-virtualenv"><a href="#1-9-virtualenv" class="headerlink" title="1.9 virtualenv"></a>1.9 <code>virtualenv</code></h3><p>这个是linux&#x2F;macos安装了插件有的操作，windows得用其它pip安装的包实现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 3.8.5 my_project  <span class="comment"># 通过3.8.5的python版本创建一个my_project的虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenvs                  <span class="comment"># 查看当前创建的虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenvs active my_project   <span class="comment"># 激活虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv deactivate                   <span class="comment"># 在虚拟环境中退出去</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-10-更多"><a href="#1-10-更多" class="headerlink" title="1.10 更多"></a>1.10 更多</h3><p>其实还有很多指令，但是不常用，也不兼容，不过linux&#x2F;macos是完全体，所以很多在windows上没有的。不过又不常用我就不写了。</p>
+<h2 id="3-更新pyenv"><a href="#3-更新pyenv" class="headerlink" title="3. 更新pyenv"></a>3. 更新pyenv</h2><p>因为我们的<code>pyenv </code>是通过<code>git clone</code>的，所以我们只需要进入 <code>.pyenv</code>的目录下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2023/03/31/pyenv/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2023/03/31/pyenv/";
+            const title         = "「【pyenv】python版本管理神器」";
+            const excerpt       = `距离上一次写文章已经很久过去了，主要是工作繁忙，我想写的东西比较花时间，但是今天【20230331】写这个是比较简短的，耗时很少，但是确实有用。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/pyenv/" rel="tag">pyenv</a>, <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.815Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【wsl】在windows的linux子系统问题整体" href="/2023/03/02/wslsolve/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【打包】简述几种源码打包工具" href="/2023/05/11/pythonpackages/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">一、这是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%B4%E6%98%8E"><span class="toc-text">1. 说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85"><span class="toc-text">2. 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-mac"><span class="toc-text">2.1 mac</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-linux"><span class="toc-text">2.2 linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-windows"><span class="toc-text">2.3 windows</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8F%AF%E8%83%BD%E5%BC%82%E5%B8%B8"><span class="toc-text">二、可能异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BB%BA%E8%AE%AE%E5%AE%89%E8%A3%85"><span class="toc-text">1. 建议安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-macos"><span class="toc-text">1.1 macos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-linux"><span class="toc-text">1.2 linux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-Debian"><span class="toc-text">Ubuntu&#x2F;Debian</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fedora-Centos-RHEL"><span class="toc-text">Fedora&#x2F;Centos&#x2F;RHEL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85python"><span class="toc-text">2. 安装python</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%99%E7%A8%8B"><span class="toc-text">三、教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%92%E4%BB%B6"><span class="toc-text">1. 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%91%BD%E4%BB%A4"><span class="toc-text">2. 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E7%9B%B4%E6%8E%A5pyenv"><span class="toc-text">1.0 直接pyenv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-help"><span class="toc-text">1.1 help</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%BE%E7%BD%AE%E7%89%88%E6%9C%AC"><span class="toc-text">1.2 设置版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-version"><span class="toc-text">1.2 version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-versions"><span class="toc-text">1.3 versions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-install"><span class="toc-text">1.4 install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-uninstall"><span class="toc-text">1.5 uninstall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-rehash"><span class="toc-text">1.6 rehash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-shims"><span class="toc-text">1.7 shims</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-which"><span class="toc-text">1.8 which</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-virtualenv"><span class="toc-text">1.9 virtualenv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-%E6%9B%B4%E5%A4%9A"><span class="toc-text">1.10 更多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%96%B0pyenv"><span class="toc-text">3. 更新pyenv</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

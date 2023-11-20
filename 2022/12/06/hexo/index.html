@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <title>【hexo】从零开始搭建一个博客 | HeartfiliaのBlogs</title>
+  
+  <meta name="author" content="Lodge Heartfilia" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="美化" />
+  
+  <meta name="description" content="从环境到项目部署成功一个hexo博客的教程~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【hexo】从零开始搭建一个博客">
+<meta property="og:url" content="https://heartfilia.github.io/2022/12/06/hexo/index.html">
+<meta property="og:site_name" content="HeartfiliaのBlogs">
+<meta property="og:description" content="从环境到项目部署成功一个hexo博客的教程~">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+<meta property="article:published_time" content="2022-12-06T04:27:27.000Z">
+<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:author" content="Lodge Heartfilia">
+<meta property="article:tag" content="美化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/about/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Heartfilia
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/friends/">
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                大佬友链
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                链接
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/heartfilia">
+                                                                
+                                                                github
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.yuque.com/heartfilia/oip3kg">
+                                                                
+                                                                语雀
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">HeartfiliaのBlogs</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>HeartfiliaのBlogs</h2> <br />
+                        <span>(_　_)。゜zｚＺ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2022/12/06/hexo/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【hexo】从零开始搭建一个博客</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-12-06T04:27:27.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-12-06</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~7.57K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">一、前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-node"><span class="toc-number">1.1.</span> <span class="toc-text">1.node</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%A8%E6%84%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-git"><span class="toc-number">1.2.</span> <span class="toc-text">2.git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E8%BF%99%E4%B8%AA"><span class="toc-number">1.3.</span> <span class="toc-text">3. 为啥要写这个</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81GithubPages%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">二、GithubPages操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-github%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">1.github设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8git%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">2.服务器git配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E9%85%8D%E7%BD%AEgit"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1配置git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E5%85%B3%E8%81%94%E5%88%B0hexo"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 如何关联到hexo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81hexo%E7%9A%84%E5%90%AF%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-number">3.</span> <span class="toc-text">三、hexo的启动部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A8%A1%E5%9E%8B%E9%A2%84%E8%A7%88"><span class="toc-number">3.1.1.</span> <span class="toc-text">1.1 模型预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">2.初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BE%8E%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">3. 美化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8C%91%E9%80%89%E4%B8%BB%E9%A2%98"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.1 挑选主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.2 下载主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.3.3.</span> <span class="toc-text">3.3 项目配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8F%8F%E8%BF%B0%E4%BF%A1%E6%81%AF"><span class="toc-number">3.3.3.1.</span> <span class="toc-text">&gt; 一些描述信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.3.2.</span> <span class="toc-text">&gt; 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHubPage%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.3.3.</span> <span class="toc-text">&gt; GitHubPage配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.3.4.</span> <span class="toc-text">3.4 主题配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E4%B8%8B%E9%9D%A2%E7%9A%84"><span class="toc-number">3.3.4.1.</span> <span class="toc-text">&gt; 主题下面的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.4.2.</span> <span class="toc-text">&gt; 常用配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E5%B8%B8%E6%9B%B4%E6%96%B0"><span class="toc-number">3.4.</span> <span class="toc-text">4.日常更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-number">3.4.1.</span> <span class="toc-text">4.1 项目创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%A0%87%E7%AD%BE%E8%A7%A3%E9%87%8A"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">&gt; 博客内容标签解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83"><span class="toc-number">3.4.2.</span> <span class="toc-text">4.2 项目发布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%95%99%E8%A8%80%E5%8A%9F%E8%83%BD"><span class="toc-number">3.5.</span> <span class="toc-text">5.留言功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">4.</span> <span class="toc-text">题外话</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>从环境到项目部署成功一个hexo博客的教程~</p>
+<span id="more"></span>
+
+<p>我们这里是讲把项目部署到<code>github pages</code> 服务器部署自己搞 很简单的 都一样<br>我这里是在linux服务器上面弄的，如果你是windows本地弄的话 基本都一样 就是弄git密钥的时候有点差别百度一下就好了</p>
+<h1 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h1><h2 id="1-node"><a href="#1-node" class="headerlink" title="1.node"></a>1.node</h2><h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h3><p>这里没啥好说的，直接去官网下载或者直接用服务器的镜像源的，但是建议–&gt;node版本不要太低了,去官网下载就下载最新的长期支持版本就好了，用服务器源的话最好不要低于10版本，我这里懒得去官网弄，我直接用我服务器的yum源里的nodejs，我的node是12+版本的</p>
+<h3 id="1-2-注意"><a href="#1-2-注意" class="headerlink" title="1.2 注意"></a>1.2 注意</h3><p>因为国内源比较慢，我们这里建议更新一下npm的源，后续下载任务操作会快很多，我这里直接用了<code>cnpm</code>的安装源(没有用<code>cnpm</code>只是用了他的镜像哈哈)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+<p>配置完后可以查看一下<br><img src="https://static.litetools.top/blogs/hexo/0.png" alt="查看npm的配置"></p>
+<h2 id="2-git"><a href="#2-git" class="headerlink" title="2.git"></a>2.git</h2><p>这里是教如何搭建<code>github pages</code>并和<code>hexo</code>关联<br>安装git就不用这里教了，网上一大把教程 我这里还是直接  <code>yum install git</code></p>
+<h2 id="3-为啥要写这个"><a href="#3-为啥要写这个" class="headerlink" title="3. 为啥要写这个"></a>3. 为啥要写这个</h2><p><strong>来源于hexo官网下面的评论</strong><br><strong>确实很多地方看着迷迷糊糊的，都是自己去多试试，然后想记录下来</strong><br><img src="https://static.litetools.top/blogs/hexo/1.png" alt="官网亮点评论"></p>
+<h1 id="二、GithubPages操作"><a href="#二、GithubPages操作" class="headerlink" title="二、GithubPages操作"></a>二、GithubPages操作</h1><h2 id="1-github设置"><a href="#1-github设置" class="headerlink" title="1.github设置"></a>1.github设置</h2><p>在主页这里创建一个仓库 <strong>建议先别创建README 我们就只要一个空仓库，里面会有很多绑定仓库的提示，不会玩的话搞不好会冲突哈哈哈</strong><br><img src="https://static.litetools.top/blogs/hexo/2.png" alt="创建github仓库"></p>
+<h2 id="2-服务器git配置"><a href="#2-服务器git配置" class="headerlink" title="2.服务器git配置"></a>2.服务器git配置</h2><h3 id="2-1配置git"><a href="#2-1配置git" class="headerlink" title="2.1配置git"></a>2.1配置git</h3><p>我们这里需要配置一下git，我们现在在服务器上面先绑定github啦</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">&quot;你gihub的用户名&quot;</span></span><br><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">&quot;你gihub的邮箱&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后生成sshkey</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你gihub的邮箱&quot;</span></span><br><span class="line"><span class="comment"># 然后把 id_rsa.pub 里面的内容复制出来我们要贴在github里面</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>登录了github后，在Settings里面找到 <code>SSH and GPG keys</code><br>然后点击<code>New SSH key</code><br>标题随便取，我是要做页面的我标注一下 <code>github.io</code>  下面的<code>key</code>把上面cat出来的内容复制过来粘贴上去除首位空字符<br><img src="https://static.litetools.top/blogs/hexo/3.png" alt="github密钥"><br>然后我们测试一下<br><code>ssh -T git@github.com</code><br>出现了用户名就是ok的，如下<br><img src="https://static.litetools.top/blogs/hexo/4.png" alt="测试和git的链接"></p>
+<h3 id="2-2-如何关联到hexo"><a href="#2-2-如何关联到hexo" class="headerlink" title="2.2 如何关联到hexo"></a>2.2 如何关联到hexo</h3><p>这里我们先不描述 上面操作完了后就先等等，我们接下来看看代码那边如何配置先<br><strong>这里是后面配置完了再翻回来看这里的</strong><br><strong>等hexo项目创建好了后</strong>，我们根据创建的仓库页面的提示信息 我们在hexo项目里面初始化git<br>然后把本地的绑定到远程main(老版本可能叫master) 这里就是无脑复制github空白仓库里面的提示信息，以后每次操作前建议先 <code>git pull</code> 一下，然后再改文件测试 然后再进行<code>git</code>三连</p>
+<ol>
+<li>git add .       # 因为有<code>.gitignore</code>文件 所以我们直接<code>add .</code> </li>
+<li>git commit -m 提交的信息</li>
+<li>git push origin main         # 老版本可能叫master</li>
+</ol>
+<p>然后我们在github 我们创建的这个仓库上面点击</p>
+<ol>
+<li>setttings</li>
+<li>Pages</li>
+<li>Branch 这里选择 我们<code>deploy</code> 那里填的那个分支，我这里填写的 <code>pages</code></li>
+</ol>
+<p><img src="https://static.litetools.top/blogs/hexo/5.png" alt="默认分支情况"><br>后面只要<code>hexo d</code> 等传输完毕后，github这里会构建，我们可以在 github仓库页面上面的 <code>Actions</code>目录下面看到构建的进度<br><img src="https://static.litetools.top/blogs/hexo/6.png" alt="actions情况"><br><strong>如果这里绿了就可以访问啦～</strong><br>是不是很奇怪，这里才是文章的最终结束～</p>
+<h1 id="三、hexo的启动部署"><a href="#三、hexo的启动部署" class="headerlink" title="三、hexo的启动部署"></a>三、hexo的启动部署</h1><h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>我们打开 <a target="_blank" rel="noopener" href="https://hexo.io/">hexo官网</a>，因为开发者是一个台湾人，所以中文支持比较好，可以直接中文阅读网站<br>直接输入主页给我们的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="comment"># 顺道安装一下下面的东西 部署到git要用</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后面如果要弄live2d啥的还需要装下面的</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># 下载 lieve2d模型</span></span><br><span class="line">npm install --save live2d-widget-model-模型名字</span><br></pre></td></tr></table></figure>
+<h3 id="1-1-模型预览"><a href="#1-1-模型预览" class="headerlink" title="1.1 模型预览"></a>1.1 模型预览</h3><p>这里参考可以去这里看看，然后下载自己喜欢的模型就ok了 <a target="_blank" rel="noopener" href="https://blog.csdn.net/wang_123_zy/article/details/87181892">模型预览</a><br>我这里用的是 <code>npm install --save live2d-widget-model-shizuku</code><br>然后在主配置文件下面加上这个就好了， 页面加载这个东西会有点点慢 但是不会太久</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/   <span class="comment"># 如果加载有问题可以关闭这个</span></span><br><span class="line">  pluginJsPath: lib/         <span class="comment"># 如果加载有问题可以关闭这个</span></span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-shizuku   <span class="comment"># 这里换上下载好的模型就好了</span></span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: <span class="number">150</span></span><br><span class="line">    height: <span class="number">300</span></span><br><span class="line">  mobile:</span><br><span class="line">    show: false   <span class="comment"># 这里一定要关 要不然手机端体验不好</span></span><br><span class="line">  react:</span><br><span class="line">    opacity: <span class="number">0.7</span></span><br></pre></td></tr></table></figure>
+
+<p>装完了后 可以在终端测试一下  <code>hexo version</code> 查看一下是否正常输出内容，如果ok的话我们进行接下来的操作步骤</p>
+<h2 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2.初始化"></a>2.初始化</h2><p>我们找到一个目录里面就专门放以后存放的各种博客网站，<strong>不找目录</strong>直接在 <code>~</code>目录下也可以操作<br><code>hexo init myBlogs</code>这样会初始化一个<code>myBlogs</code>目录出来，这里的名称随意<br>我是<strong>自己创建了一个blogs父目录</strong>，然后在里面init项目，这样子方便多个项目管理好看<br><img src="https://static.litetools.top/blogs/hexo/7.png" alt="初始化目录"><br><strong>上面操作在配置了前期准备里面换源后是会比较快完成</strong><br><img src="https://static.litetools.top/blogs/hexo/8.png" alt="当前目录文件"><br>然后进入我们刚才init好的项目这里我进入<code>cd myBlogs</code>,然后执行 <code>npm install</code>即可<br>后续页面有改动那些，可以先使用<code>hexo cl</code>清理之前的缓存然后再执行下面的操作<br>然后<code>hexo g</code> 计算一下文件<br>然后<code>hexo server -p 80</code>在80端口开启一个服务<br>最后我们直接浏览器输入ip访问一下，看看是不是会出来如下一个页面<br>测试完没有问题可以直接<code>ctrl + c</code>停止服务<br><img src="https://static.litetools.top/blogs/hexo/9.png" alt="大概情况"><br>如果到这里都可以，那么最基础的搭建已经完成了，接下来就是 <code>美化</code>及 <code>日常更新</code>了</p>
+<h2 id="3-美化"><a href="#3-美化" class="headerlink" title="3. 美化"></a>3. 美化</h2><h3 id="3-1-挑选主题"><a href="#3-1-挑选主题" class="headerlink" title="3.1 挑选主题"></a>3.1 挑选主题</h3><p>我们去<a target="_blank" rel="noopener" href="https://hexo.io/themes/">这里</a>挑选喜欢的主题<br>**我这里选择的是 **<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX</a></p>
+<p>再推荐两个好看的主题 后面我也要换一下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">https://github.com/Candinya/Kratos-Rebirth</a>  (目前我用的这个这个好看)<br><a target="_blank" rel="noopener" href="https://github.com/tangyuxian/hexo-theme-tangyuxian">https://github.com/tangyuxian/hexo-theme-tangyuxian</a><br><a target="_blank" rel="noopener" href="https://github.com/auroral-ui/hexo-theme-aurora">https://github.com/auroral-ui/hexo-theme-aurora</a></p>
+</blockquote>
+<h3 id="3-2-下载主题"><a href="#3-2-下载主题" class="headerlink" title="3.2 下载主题"></a>3.2 下载主题</h3><p>按照github页面介绍 我们在<strong>主题目录下</strong>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/argvchs/hexo-theme-particlex.git themes\particlex</span><br></pre></td></tr></table></figure>
+<p><img src="https://static.litetools.top/blogs/hexo/10.png" alt="下载主题位置"><br>然后返回项目主目录 我这里的 <code>/root/blogs/myBlogs</code>下面找到 <code>_config.yml</code>我们进行一些基础的配置，后面还有主题的配置我们单独再说</p>
+<h3 id="3-3-项目配置文件"><a href="#3-3-项目配置文件" class="headerlink" title="3.3 项目配置文件"></a>3.3 项目配置文件</h3><h4 id="一些描述信息"><a href="#一些描述信息" class="headerlink" title="&gt; 一些描述信息"></a>&gt; 一些描述信息</h4><p>注意下面是yaml文件，<code>:</code>后面必须要空格, 单引号可写可不写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我没有单独写的都是用默认值就好了 </span></span><br><span class="line"></span><br><span class="line">title: HeartfiliaのBlogs <span class="comment"># 标题</span></span><br><span class="line">subtitle: 个人博客啦 <span class="comment"># 副标题</span></span><br><span class="line">description: 往下滑动可以浏览更多啦~ <span class="comment"># 描述</span></span><br><span class="line">keywords: <span class="comment"># 关键字</span></span><br><span class="line">author: Lodge Heartfilia <span class="comment"># 作者</span></span><br><span class="line">language: zh <span class="comment"># 语言</span></span><br><span class="line">timezone: <span class="string">&#x27;Asia/Shanghai&#x27;</span> <span class="comment"># 时区</span></span><br><span class="line"></span><br><span class="line">url: https://heartfilia.github.io <span class="comment"># 网址</span></span><br><span class="line">root: <span class="comment"># 根目录 这里注意 这里要是写错了可能网站访问不到 默认即可 有需要再调整</span></span><br><span class="line">permalink: <span class="comment"># 文章链接格式</span></span><br><span class="line">permalink_defaults: <span class="comment"># 链接默认值</span></span><br><span class="line">source_dir: <span class="comment"># 源文件夹，内容的存储位置</span></span><br><span class="line">public_dir: <span class="comment"># 公用文件夹，静态文件的生成位置</span></span><br><span class="line">tag_dir: <span class="comment"># 标签目录</span></span><br><span class="line">archive_dir: <span class="comment"># 存档目录</span></span><br><span class="line">category_dir: <span class="comment"># 分类目录</span></span><br><span class="line">skip_render: <span class="comment"># 复制到原始路径，不进行渲染</span></span><br><span class="line">new_post_name: <span class="comment"># 新帖子的文件名格式</span></span><br><span class="line">titlecase: <span class="comment"># 将标题转换为小写1/大写2 *</span></span><br><span class="line">external_link.enable: <span class="comment"># 在新标签页中打开外部链接</span></span><br><span class="line">post_asset_folder: <span class="comment"># 启用资源文件夹功能 建议默认false 文章里面的图片啥的用图床，本地图片多了巨卡</span></span><br><span class="line">filename_case: <span class="comment"># 将文件名转换小写小写1/大写2</span></span><br><span class="line">relative_link: <span class="comment"># 是否创建相对于根文件夹的链接</span></span><br><span class="line">index_generator.per_page: <span class="comment"># 每页显示的文章数</span></span><br><span class="line">index_generator.order_by: <span class="comment"># 发布顺序</span></span><br><span class="line">date_format: <span class="comment"># 日期格式</span></span><br><span class="line">time_format: <span class="comment"># 时间格式</span></span><br><span class="line">per_page: <span class="comment"># 每个页面上显示的文章数</span></span><br><span class="line">pagination_dir: <span class="comment"># 网址格式</span></span><br><span class="line">theme: <span class="comment"># 主题名称</span></span><br><span class="line">theme_config: <span class="comment"># 主题配置，覆盖主题默认值</span></span><br><span class="line">deploy: <span class="comment"># 部署设置</span></span><br><span class="line">include: <span class="comment"># 包括隐藏文件</span></span><br><span class="line">exclude: <span class="comment"># 排除文件/文件夹</span></span><br><span class="line">ignore: <span class="comment"># 忽略文件/文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置"><a href="#配置" class="headerlink" title="&gt; 配置"></a>&gt; 配置</h4><ol>
+<li>按照github网站介绍，关闭<code>highlight</code>和<code>prismjs</code></li>
+</ol>
+<ul>
+<li>上面两个主配置这里 <code>enable: false</code>只需要把这里设置为<code>false</code> 即可</li>
+</ul>
+<ol start="2">
+<li>然后把主题那里换乘我们<code>theme</code>文件夹下面的主题名称</li>
+</ol>
+<ul>
+<li>我这里是<code>themesparticlex</code>我就换成这个</li>
+<li><img src="https://static.litetools.top/blogs/hexo/10_1.png" alt="主题预览"></li>
+</ul>
+<ol start="3">
+<li><strong>每次要重新测试啥的最好都按照如下操作执行一下</strong></li>
+</ol>
+<ul>
+<li><code>hexo cl</code> 清理静态文件缓存</li>
+<li><code>hexo g</code>   重新生成静态文件</li>
+<li><code>hexo s -p 80</code>  开启一个80端口的服务，不加<code>-p 80</code>默认是4000端口</li>
+</ul>
+<ol start="4">
+<li>后续配置 <code>deploy</code></li>
+</ol>
+<h4 id="GitHubPage配置"><a href="#GitHubPage配置" class="headerlink" title="&gt; GitHubPage配置"></a>&gt; GitHubPage配置</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Heartfilia/Heartfilia.github.io.git</span>  <span class="comment"># 这里就是你git那里复制的</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">pages</span>   <span class="comment"># 分支名，git那边没有也没事，我们这里弄了后会自动创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后我们自己的项目代码就在git的 main 分支</span></span><br><span class="line"><span class="comment"># github pages展示的项目就是 这里的 pages 分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-4-主题配置文件"><a href="#3-4-主题配置文件" class="headerlink" title="3.4 主题配置文件"></a>3.4 主题配置文件</h3><h4 id="主题下面的"><a href="#主题下面的" class="headerlink" title="&gt; 主题下面的"></a>&gt; 主题下面的</h4><p>这里的配置文件是在<code>theme/xxxx/_config.yml</code><br>可以看到里面很多图片其实是空的我这里先添加一些图片，这里为了图片长久可以使用，我这里注册了一个<code>七牛云</code> 每个用户有10G的存储空间，我把一些图片视频啥的就往里面放的</p>
+<h4 id="常用配置"><a href="#常用配置" class="headerlink" title="&gt; 常用配置"></a>&gt; 常用配置</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">head_img:</span> <span class="string">头像图标链接</span></span><br><span class="line"><span class="attr">home_background:</span> <span class="string">背景图链接</span></span><br><span class="line"></span><br><span class="line"><span class="attr">footer:</span></span><br><span class="line">    <span class="attr">since:</span> <span class="number">2022</span></span><br><span class="line">    <span class="comment"># Customize the server domain name ICP</span></span><br><span class="line">    <span class="attr">ICP:</span></span><br><span class="line">        <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">code:</span> <span class="string">这里是ICP备案码</span></span><br><span class="line">        <span class="attr">link:</span> <span class="string">https://www.beian.gov.cn/</span></span><br></pre></td></tr></table></figure>
+<p>我这里简单的配置了一下 然后返回项目目录下执行**老三样, **然后我们去浏览器看一下，如果之前有浏览过，可能会有浏览器缓存，看不出来新样式，这里建议，测试的时候用 <strong>浏览器无痕浏览</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面两个看你自己部署情况 二选一 二选二都可以</span></span><br><span class="line">hexo s -p 80   <span class="comment"># 如果直接用服务器或者本地部署</span></span><br><span class="line">hexo d   <span class="comment"># 这里就会根据上面的配置自动把项目部署到 github pages 这里别忘记了前面还要装包哦</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://static.litetools.top/blogs/hexo/11.png" alt="预览"></p>
+<h2 id="4-日常更新"><a href="#4-日常更新" class="headerlink" title="4.日常更新"></a>4.日常更新</h2><p>接下来我们就来讲讲日常的博客日志更新维护，在这之前先留意一下这里<br><img src="https://static.litetools.top/blogs/hexo/12.png" alt="标签"><br>这里我们目前直接去点 很多东西都没有反馈的，那是因为我们没有项目填充，如果不想要这里可以直接在配置文件里面注释掉对应的板块</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">    <span class="attr">home:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">house</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">about:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">id-card</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/about</span></span><br><span class="line">    <span class="attr">archives:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">box-archive</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/archives</span></span><br><span class="line">    <span class="attr">categories:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">bookmark</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/categories</span></span><br><span class="line">    <span class="attr">tags:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">tags</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
+<p>如果要把上面写的改成自己写的内容的话如图<br><img src="https://static.litetools.top/blogs/hexo/13.png" alt="改过后"><br>直接如下demo那样子修改就好了</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">    <span class="string">关于我:</span>    <span class="comment"># 只需要改这里 下面的板块不要动 要不然会导致图标加载不出来或者路由出错</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">id-card</span></span><br><span class="line">        <span class="attr">theme:</span> <span class="string">solid</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/about</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>为了能正常显示上面的内容 我们这里需要手动创建几个页面，如果你需要添加其它页面也需要同样的创建一下</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories    <span class="comment"># 后面内容的分类都会在这里面显示</span></span><br><span class="line">hexo new page tags          <span class="comment"># 后面内容的标签都会在这里显示</span></span><br><span class="line">hexo new page about         <span class="comment"># 这里就是一个个人的介绍页面，可以放自己的简介啥的</span></span><br></pre></td></tr></table></figure>
+<p>创建了上面的页面后，<strong>目前来说这里是不需要做任何操作的</strong> 这些东西都在  <code>source/</code>这个目录下面 点进去就可以看到对应了上面创建出来的目录，里面有一个 <code>index.md</code> 然后要做啥就在里面操作就好了</p>
+<h3 id="4-1-项目创建"><a href="#4-1-项目创建" class="headerlink" title="4.1 项目创建"></a>4.1 项目创建</h3><p>具体详细的命令啥的去<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官网</a>查看<br>我们直接在主目录下面执行<br><code>hexo new 文章标题</code>   &gt;&gt; 这里的标题一般来说中文英文都可以建议这里用 英文 然后标题在markdown文件里面去修改<br>然后我们会在主目录下面的<code>source/_posts</code>下面有一个同名的<code>md</code>文件<br><img src="https://static.litetools.top/blogs/hexo/14.png" alt="创建项目"><br>这里默认会有一个<code>hello-world.md</code>存在，我这里面删除了<br>接下来我们就可以直接编辑这个markdown文件了</p>
+<blockquote>
+<p>我们用hexo new 创建的文件里面会有一些默认的参数在里面<br>这里创建是只创建一个md文件，如果里面有本地图片的话，可以在<br>config.yml 文件中的 post_asset_folder 选项设为 true 来打开，然后再创建就是一个文件夹，然后就可以在文件夹里面引用本地的静态文件了，不建议自己弄，图片多了巨卡巨卡巨卡巨卡巨卡巨卡</p>
+</blockquote>
+<h4 id="博客内容标签解释"><a href="#博客内容标签解释" class="headerlink" title="&gt; 博客内容标签解释"></a>&gt; 博客内容标签解释</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 用了英文名创建后这里可以创建你想要的标题，中文创建的就不用管这个，反正页面显示的内容是根据这里</span><br><span class="line">date: 2022-11-17 10:10:23</span><br><span class="line">tags: </span><br><span class="line"><span class="bullet">  -</span> note</span><br><span class="line"><span class="bullet">  -</span> blog</span><br><span class="line"><span class="section">categories: 随笔</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line">更多语法可以查这里: https://hexo.io/zh-cn/docs/front-matter</span><br><span class="line"></span><br><span class="line">引言 使用可以查看: https://hexo.io/zh-cn/docs/tag-plugins</span><br><span class="line"></span><br><span class="line">大概如此 我这里省略了一些东西</span><br></pre></td></tr></table></figure>
+
+<p>想看看可以浏览一下<a href="https://heartfilia.github.io/">我的博客</a></p>
+<p>关于草稿 还有 资源文件 还有啥东西的 可以去</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins">标签插件</a></li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders">资源文件夹</a></li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/data-files">数据文件夹</a></li>
+</ul>
+<h3 id="4-2-项目发布"><a href="#4-2-项目发布" class="headerlink" title="4.2 项目发布"></a>4.2 项目发布</h3><p>只要弄好了都弄好了我们就</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="5-留言功能"><a href="#5-留言功能" class="headerlink" title="5.留言功能"></a>5.留言功能</h2><p>我们可以从我们上面这个主题那里看到其实是有两个默认的留言功能选择给我们</p>
+<p>我这里选择了第二个 <code>waline</code> 这东西有个不好的，就是后面要用的一个服务端得有科学才可以正常使用，不过问题不大是吧<br>我们去 <a target="_blank" rel="noopener" href="https://waline.js.org/">waline官网</a>  跟着他们的教程其实也可以直接搭建好，我这里直接用它提供的文档来弄</p>
+<p>熟悉按照这里 我们先去注册一个 <a target="_blank" rel="noopener" href="https://waline.js.org/guide/get-started.html#waline-%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B">存储服务</a><br> 这里使用的是 <code>leancloud</code> 这东西国际版要科学， 国内版需要备案</p>
+<p>我们直接点页面上很明显的<br><img src="https://static.litetools.top/blogs/hexo/15.png" alt="部署"><br>然后用github绑定登录一下就好了，按照它下面贴的那两个B站教学视频可以完成这里的操作，不懂得反复看一下就好了<br>最后我们拿到属于自己的一个服务地址</p>
+<p>然后我们填入主题的配置里面 </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">waline:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">serverURL:</span> <span class="string">https://***********.vercel.app/</span></span><br></pre></td></tr></table></figure>
+<p>然后我们在部署好的博客的单篇文章下面就会有一个评论框了<br><img src="https://static.litetools.top/blogs/hexo/16.png" alt="评论框"></p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>其他主题很多配置不太一样，可以根据主题的作者写出来的教程慢慢来配置就好啦<br>目前我这里还有很多没有美化完，后面继续美化</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://heartfilia.github.io/2022/12/06/hexo/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://heartfilia.github.io/2022/12/06/hexo/";
+            const title         = "「【hexo】从零开始搭建一个博客」";
+            const excerpt       = `从环境到项目部署成功一个hexo博客的教程~`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E7%BE%8E%E5%8C%96/" rel="tag">美化</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 【表格资源】资源链接分享" href="/2022/12/05/resoure-link/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 【应用破解】Navicat重置试用" href="/2022/12/08/navicat-reset/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/017e486829.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">一个在追寻大佬脚步的菜鸡~</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                5
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                17
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">一、前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-node"><span class="toc-text">1.node</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85"><span class="toc-text">1.1 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B3%A8%E6%84%8F"><span class="toc-text">1.2 注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-git"><span class="toc-text">2.git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E8%BF%99%E4%B8%AA"><span class="toc-text">3. 为啥要写这个</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81GithubPages%E6%93%8D%E4%BD%9C"><span class="toc-text">二、GithubPages操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-github%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.github设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8git%E9%85%8D%E7%BD%AE"><span class="toc-text">2.服务器git配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E9%85%8D%E7%BD%AEgit"><span class="toc-text">2.1配置git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E5%85%B3%E8%81%94%E5%88%B0hexo"><span class="toc-text">2.2 如何关联到hexo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81hexo%E7%9A%84%E5%90%AF%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-text">三、hexo的启动部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-text">1.安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A8%A1%E5%9E%8B%E9%A2%84%E8%A7%88"><span class="toc-text">1.1 模型预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">2.初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BE%8E%E5%8C%96"><span class="toc-text">3. 美化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8C%91%E9%80%89%E4%B8%BB%E9%A2%98"><span class="toc-text">3.1 挑选主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98"><span class="toc-text">3.2 下载主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.3 项目配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8F%8F%E8%BF%B0%E4%BF%A1%E6%81%AF"><span class="toc-text">&gt; 一些描述信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">&gt; 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHubPage%E9%85%8D%E7%BD%AE"><span class="toc-text">&gt; GitHubPage配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.4 主题配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E4%B8%8B%E9%9D%A2%E7%9A%84"><span class="toc-text">&gt; 主题下面的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">&gt; 常用配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E5%B8%B8%E6%9B%B4%E6%96%B0"><span class="toc-text">4.日常更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-text">4.1 项目创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%A0%87%E7%AD%BE%E8%A7%A3%E9%87%8A"><span class="toc-text">&gt; 博客内容标签解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83"><span class="toc-text">4.2 项目发布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%95%99%E8%A8%80%E5%8A%9F%E8%83%BD"><span class="toc-text">5.留言功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-text">题外话</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%98%E8%A6%81/">摘要</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/TLS/" style="font-size: 0.6em;">TLS</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/go/" style="font-size: 0.8em;">go</a> <a href="/tags/grpc/" style="font-size: 0.6em;">grpc</a> <a href="/tags/jupyter/" style="font-size: 0.6em;">jupyter</a> <a href="/tags/nginx/" style="font-size: 0.6em;">nginx</a> <a href="/tags/pandas/" style="font-size: 0.6em;">pandas</a> <a href="/tags/pyenv/" style="font-size: 0.6em;">pyenv</a> <a href="/tags/python/" style="font-size: 0.73em;">python</a> <a href="/tags/windows/" style="font-size: 0.6em;">windows</a> <a href="/tags/wsl/" style="font-size: 0.6em;">wsl</a> <a href="/tags/yaml/" style="font-size: 0.6em;">yaml</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.67em;">工具</a> <a href="/tags/%E6%B3%A8%E5%86%8C%E6%9C%BA/" style="font-size: 0.6em;">注册机</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 0.6em;">系统</a> <a href="/tags/%E7%BE%8E%E5%8C%96/" style="font-size: 0.6em;">美化</a> <a href="/tags/%E8%A1%A8%E6%A0%BC/" style="font-size: 0.6em;">表格</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/20/closeWindowsUpdate/"><i class="fa  fa-book"></i> 【windows】永久关闭这个烦人的自动更新</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/11/10/nginx-jupyterlab/"><i class="fa  fa-book"></i> 【Jupyter】搭配nginx可能出现问题食用方法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/05/11/pythonpackages/"><i class="fa  fa-book"></i> 【打包】简述几种源码打包工具</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/pyenv/"><i class="fa  fa-book"></i> 【pyenv】python版本管理神器</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/02/wslsolve/"><i class="fa  fa-book"></i> 【wsl】在windows的linux子系统问题整体</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 HeartfiliaのBlogs 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Lodge Heartfilia.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">粤ICP备2022145961号</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="363892671"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
