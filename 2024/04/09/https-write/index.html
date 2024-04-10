@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
-  <title>【泛型】go语言泛型编程 | HeartfiliaのBlogs</title>
+  <title>【https】原来自己签https网站这么简单 | HeartfiliaのBlogs</title>
   
   <meta name="author" content="Lodge Heartfilia" />
   <meta http-equiv="Cache-Control" content="no-transform" />
@@ -15,20 +15,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="go" />
+    <meta name="keywords" content="ssl" />
   
-  <meta name="description" content="go 1.18 后面才有的内容">
+  <meta name="description" content="自己签https证书">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【泛型】go语言泛型编程">
-<meta property="og:url" content="https://heartfilia.github.io/2023/02/07/goGenericbase/index.html">
+<meta property="og:title" content="【https】原来自己签https网站这么简单">
+<meta property="og:url" content="https://heartfilia.github.io/2024/04/09/https-write/index.html">
 <meta property="og:site_name" content="HeartfiliaのBlogs">
-<meta property="og:description" content="go 1.18 后面才有的内容">
+<meta property="og:description" content="自己签https证书">
 <meta property="og:locale">
 <meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
-<meta property="article:published_time" content="2023-02-07T08:02:44.000Z">
-<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:published_time" content="2024-04-09T15:44:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T02:02:54.817Z">
 <meta property="article:author" content="Lodge Heartfilia">
-<meta property="article:tag" content="go">
+<meta property="article:tag" content="ssl">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
@@ -211,15 +211,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/02/07/goGenericbase/">
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2024/04/09/https-write/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">【泛型】go语言泛型编程</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【https】原来自己签https网站这么简单</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2023-02-07T08:02:44.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-02-07</time></li>
+                <li><time datetime="2024-04-09T15:44:33.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-04-09</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
                 </li>
@@ -228,7 +228,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~1.59K
+                            989
                         
                         字
                     </li>
@@ -240,49 +240,68 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1712714574817"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
             <hr />
-            <div itemprop="articleBody"><p><code>go 1.18</code> 后面才有的内容</p>
+            <div itemprop="articleBody"><p>自己签https证书</p>
 <span id="more"></span>
 
-<p>更详细的推荐下面这篇文章:</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041634906">Go 1.18 泛型全面讲解：一篇讲清泛型的全部</a></p>
-<p>按照往常我们用<code>interface</code> 实现不同类型的参数接收，但是我们需要对它类型断言判断，如果有多种不同类型参数，那么我们就要多个<code>if</code> 判断，如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	printArray([]<span class="type">string</span>&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>&#125;)</span><br><span class="line">	printArray([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按照以往操作 如果要对不同类型的数组或者切片遍历需要断言</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span><span class="params">(arr <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 类型断言 x.(T) 其实就是判断T是否实现了x接口，如果实现了，就把x接口类型具体化为T类型</span></span><br><span class="line">    <span class="comment">// 如果传入的是string 那么我这里就要写string 如果其他的就要写其他的 就很麻烦</span></span><br><span class="line">	<span class="keyword">for</span> _, a := <span class="keyword">range</span> arr.([]<span class="type">string</span>) &#123;   </span><br><span class="line">		fmt.Println(a)</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 比如我这里只判断了string 那么上面传入的int类型的就会报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很多时候我们访问一些http的网站，浏览器总是会提示我们不安全。我们自己搭建一个博客，由于买不起高贵的ssl证书费用，所以我们大多数时候都是裸奔的http。</p>
+<p>今天，我们自己来签，免费的 <code>https</code></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
+<li>有服务器</li>
+<li>有域名</li>
+</ol>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>我们采用的 <a target="_blank" rel="noopener" href="https://letsencrypt.org/zh-cn/">Let’s Encrypt - 免费的SSL&#x2F;TLS证书 (letsencrypt.org)</a>  这个网站里面的工具，但是里面的东西晦涩难懂，所以我这里直接就讲干的。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li><p>安装 <code>snapd</code> 工具，后续无脑安装：这个我用的centos，直接<code>yum install snapd</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">安装操作也可以参考这里: 根据自己的系统选择安装方法即可</span><br><span class="line">https://snapcraft.io/docs/installing-snapd/</span><br></pre></td></tr></table></figure>
 
 
+</li>
+<li><p>确保你没有安装过旧版的 <code>certbot</code>:如果安装了，试试下面的删除方式</p>
+<ol>
+<li><code>sudo apt-get remove certbot</code></li>
+<li><code>sudo dnf remove certbot</code></li>
+<li><code>sudo yum remove certbot</code></li>
+</ol>
+</li>
+<li><p>然后我们用<code>snapd</code>工具安装<code>certbot</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install --classic certbot</span><br></pre></td></tr></table></figure>
 
-<p>现在我们多了<strong>泛型</strong>,可以大大的简化这个过程</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	printArray([]<span class="type">string</span>&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>&#125;)</span><br><span class="line">	printArray([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;)</span><br><span class="line">    printParam(<span class="number">3.14</span>)</span><br><span class="line">    printParam(<span class="string">&quot;666&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以我们不限定它的类型，让调用者直接去定义类型： go1.18后才有这个泛型的</span></span><br><span class="line"><span class="comment">// 函数名后面加入中括号限定 arr的类型  我这里限定了只能传入string或者int</span></span><br><span class="line"><span class="comment">// 因为我这里是数组类型 所以传入形式类型 []T</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span>[<span class="title">T</span> <span class="title">string</span> | <span class="title">int</span>]<span class="params">(arr []T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, a := <span class="keyword">range</span> arr &#123;</span><br><span class="line">		fmt.Println(a)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里是普通的单值类型 所以我们可以这样子 T</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printParam</span>[<span class="title">T</span> <span class="title">string</span> | <span class="title">int</span> | <span class="title">float64</span>]<span class="params">(p T)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%v %T\n&quot;</span>, p, p)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这样子我们就可以对限定了类型的参数进行合并操作了</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://static.litetools.top/blogs/https/image-20240409232442552.png" alt="image-20240409232442552"></p>
+</li>
+<li><p>安装好了之后绑定一下软连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -s /snap/bin/certbot /usr/bin/certbot</span><br></pre></td></tr></table></figure>
 
 
-
+</li>
+<li><p>然后就可以直接一键操作了，因为我用的nginx，并且之前没有<code>https</code>，所以我直接一键操作</p>
 <blockquote>
-<p>内置的泛型 <code>any</code> 和 <code>comparable</code></p>
-<blockquote>
-<p><code>any</code>: 表示go里面所有的内置基本类型，等价于<code>interface&#123;&#125;</code></p>
-<p><code>comparable</code>: 表示go里面所有内置的可比较类型–&gt; <code>int,uint,float,bool,struct,指针</code>等一切可以比较的类型</p>
+<p>操作之前可以先备份一下原始的nginx配置文件，以防万一</p>
 </blockquote>
-</blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span>[<span class="title">T</span> <span class="title">any</span>]<span class="params">(arr []T)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, a := <span class="keyword">range</span> arr &#123;</span><br><span class="line">        fmt.Println(a)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot --nginx</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以只生成证书</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly --nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我是无脑操作，操作中会提示你输入一些选项，会自动识别你nginx配置的域名，根据提示操作即可</p>
+<p><img src="https://static.litetools.top/blogs/https/image-20240409232442553.png" alt="Snipaste_2024-04-09_23-05-22"></p>
+</li>
+</ol>
+<p>有上面的提示后，就签名成功了，注意你要用<code>https</code> ，你的服务器**安全组(防火墙)**，一定要把<code>443</code>端口对外开放</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>浏览器直接访问你自己的域名，https访问通过即成功</p>
+<h2 id="续签"><a href="#续签" class="headerlink" title="续签"></a>续签</h2><p>官方推荐以下操作续签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+
+<p>可以把上面的指令写进<code>crontab</code> 里面每天更新一下,如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 * * * certbot renew --dry-run</span><br></pre></td></tr></table></figure>
 
 
 
-<blockquote>
-<p>总结：泛型的作用</p>
-</blockquote>
-<p>泛型减少重复代码并提高类型的安全性</p>
-<blockquote>
-<p>泛型最佳适配场合</p>
-</blockquote>
-<ul>
-<li>需要针对不同类型书写同样的逻辑</li>
-<li>使用泛型简化代码</li>
-</ul>
 </div>
         </div>
         
@@ -336,7 +355,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "https://heartfilia.github.io/2023/02/07/goGenericbase/",
+                text: "https://heartfilia.github.io/2024/04/09/https-write/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -348,9 +367,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "https://heartfilia.github.io/2023/02/07/goGenericbase/";
-            const title         = "「【泛型】go语言泛型编程」";
-            const excerpt       = `go 1.18 后面才有的内容`;
+            const hostUrl       = "https://heartfilia.github.io/2024/04/09/https-write/";
+            const title         = "「【https】原来自己签https网站这么简单」";
+            const excerpt       = `自己签https证书`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -369,10 +388,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/go/" rel="tag">go</a>
+                    <a class="tag-none-link" href="/tags/ssl/" rel="tag">ssl</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                    <time datetime="2024-04-10T02:02:54.817Z" itemprop="dateModified">最后编辑：2024-04-10</time>
                 </div>
             </div>
         </footer>
@@ -381,13 +400,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 【Go web】后台框架入门" href="/2023/02/07/go-webbase/">&lt; 上一篇</a>
+                <a title=" 【windows】永久关闭这个烦人的自动更新" href="/2023/11/20/closeWindowsUpdate/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 【goSwagger】goswagger+gin配置踩坑" href="/2023/02/10/goSwagger/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
