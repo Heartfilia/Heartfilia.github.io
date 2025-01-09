@@ -287,7 +287,7 @@ for a, b in mysql.select("SELECT a, b FROM xxxx WHERE ..."):  # 可以选择的f
     pass  # a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组
 
 # 大量的数据建议用这个
-for a, b in mysql.select_iter("SELECT a, b FROM xxxx WHERE ...", "这里写主键用来记录游标位置的"):
+for a, b in mysql.select_iter("SELECT a, b FROM xxxx WHERE ..."):
     pass  # a, b 对应后面sql语句查出的个数 不确定的话 for xxx in  一个参数就行 是个元组
 
 # 统计
@@ -295,42 +295,49 @@ count = mysql.count()  # 不写统计全部 可以写规则
 e = mysql.exists({"a": 66})  # 判断a=66是否存在 
 ```
 
+> 最新版本 去掉了 insert和update的batch的操作，全部统一到insert/batch里面 api有改动
+
 ```python
 # 假如返回字典格式的
-mysql = MySql(MySqlConfig(database="test", host="xxx", user="aaaaa", password="xxxx", cursor='dict', port=6666)) 
-# 这里其实可以不写 表名 ，只实例化一次 后续可以在每个操作位置单独指定表名
-
+mysql = MySql(
+    config=MySqlConfig(
+        database="test", 
+        host="xxx", 
+        user="aaaaa", 
+        password="xxxx", 
+        # cursor='dict',   # 新版这里四种游标 有两种流式游标只适用于 查询 默认已经加在 select_iter 这个方法上面 巨快
+        port=6666
+    ), 
+    table_name="xxxxx",     # 这个优先级高于在 MySqlConfig里面写的table_name;方法里面写的table_name优先级高于这里
+) 
 # --------------------
 # 注意：实例化位置和下面方法的位置 至少有一个地方写表名 两个地方都写 优先采取方法位置的表名来进行操作
 # -------------------
 
-# 如 增
-mysql.insert({"a": 123}, ignore=True, table_name="这里可以单独指定表名")  # 所以程序里可以只实例化一次 插入同一个库的不同表
+# insert 的新版api如下
+:param item  : -> dict模式 直接处理为单条 {"a": 1, "b": False} -> a=1,b=0
+               -> list模式 传入的是多组[{"a": 1, "b": False}, {"a": 1, "b": False}]
+:param table_name      : 表名,这里优先级高于全局
+:param duplicate_except: 这里是排除法一般这里建议把你不需要替换的字段名称写上去 None的话就不 insert... on duplicate
+:param ignore          : 一般这里是忽略表里已经存在的时候 这里优先级高于上面 这个和上面都写了的话 是直接忽略重复异常
+:param log             : 打印日志
 
-# 批量插入  批量插入支持以下两个形式 字段都要对应 长度也要对应
-items1 = {
-	"_id": ["0015", "0016", "0017", "0018"],
-	"api": ["5", "6", "7", "8"],
-	"platform": ["a", "b", "c", "d"],
-	"status_code": [1, 1, 6, 9]
-}
-items2 = [
-	{"_id": "1111", "api": "11", "platform": "aaa", "status_code": 5}, 
-	{"_id": "2222", "api": "22", "platform": "bbb", "status_code": 7},
-	{"_id": "3333", "api": "33", "platform": "ccc", "status_code": 7},
-	{"_id": "4444", "api": "44", "platform": "ddd", "status_code": 8},
-]
-mysql.insert_batch(itemsX)  # 直接操作 如果碰到主键重复 这一堆会插入异常 会提示错误
-mysql.insert_batch(itemsX, duplicate="ignore")   # 去重模式选择 ignore 那么重复的主键将会跳过 不会修改原值
-mysql.insert_batch(items, duplicate="update", update_field=["status_code"], table_name="表名")
-# 插入模式采用更新，如果有主键重复的数据 会更新 update_field 里面的字段的数据
+# 示例
+mysql.insert({"a": 1, "b": False, "c": "xxx"})
+mysql.insert([{"a": 1, "b": False, "c": "xxx"}, {"a": 2, "b": True, "c": "yyy"}], duplicate_except=['a'])
 
 
-# 批量更新 这个 目前 暂时 只支持 上面 items1 的格式 更新域和条件长度的一致
-mysql.update_batch({"a": [1, 2, 3], "b": ["x", "y", "z"]}, {"c": ["aa", "bb", "cc"]}, table_name="同理这里不写就得全局写 二选一")
-# 上面的意思是 把 "c" 值等于"aa"的内容的 "a" 更新为 1, "b" 更新为 "x" 
-# 上面的意思是 把 "c" 值等于"bb"的内容的 "a" 更新为 2, "b" 更新为 "y" 
-# 上面的意思是 把 "c" 值等于"cc"的内容的 "a" 更新为 3, "b" 更新为 "z" 
+# update 的新版api如下
+:param item : 更新的结果 字典表示
+:param where: 需要更新数据的时候使用的条件
+:param table_name: 表名 这里和全局二选一 优先级这里最高
+:param log       : 打印日志
+
+# 示例
+mysql.update({"a": 1, "b": 2}, {"c": 5})
+mysql.update({"a": 1, "b": 2}, "c IS NULL AND d > 50")
+mysql.update({"a": 1, "b": 2}, ["c IS NULL", "d > 50"])   # 对于多个条件的 不属于等值的最好用这种方法或者单独的字符串方法
+mysql.update([{"a": 1}, {"a": 2}, {"a": 3}], [{"d": 5}, {"d": 1}, {"d": 10}])   # 批量操作只处理等值，并且每个域里面的字段名称一致
 ```
 
 
