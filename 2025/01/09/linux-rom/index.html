@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
-  <title>【泛型】go语言泛型编程 | HeartfiliaのBlogs</title>
+  <title>【linux】磁盘挂载相关问题 | HeartfiliaのBlogs</title>
   
   <meta name="author" content="Lodge Heartfilia" />
   <meta http-equiv="Cache-Control" content="no-transform" />
@@ -15,20 +15,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="go" />
+    <meta name="keywords" content="docker, linux" />
   
-  <meta name="description" content="go 1.18 后面才有的内容">
+  <meta name="description" content="记录一下在ubuntu中遇到的一些问题及相关的解决方法 ：root 登陆； 磁盘挂载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【泛型】go语言泛型编程">
-<meta property="og:url" content="https://heartfilia.github.io/2023/02/07/goGenericbase/index.html">
+<meta property="og:title" content="【linux】磁盘挂载相关问题">
+<meta property="og:url" content="https://heartfilia.github.io/2025/01/09/linux-rom/index.html">
 <meta property="og:site_name" content="HeartfiliaのBlogs">
-<meta property="og:description" content="go 1.18 后面才有的内容">
+<meta property="og:description" content="记录一下在ubuntu中遇到的一些问题及相关的解决方法 ：root 登陆； 磁盘挂载">
 <meta property="og:locale">
 <meta property="og:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
-<meta property="article:published_time" content="2023-02-07T08:02:44.000Z">
-<meta property="article:modified_time" content="2023-11-01T06:21:47.814Z">
+<meta property="article:published_time" content="2025-01-09T07:59:06.000Z">
+<meta property="article:modified_time" content="2025-01-09T07:59:06.370Z">
 <meta property="article:author" content="Lodge Heartfilia">
-<meta property="article:tag" content="go">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-bbs.mihoyo.com/upload/2022/11/18/72767371/a8bfd430d9a497a0e814d895ad597eaf_8767624718181318815.jpg?x-oss-process=image/resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,jpg">
   
@@ -211,15 +212,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2023/02/07/goGenericbase/">
+    <link itemprop="mainEntityOfPage" href="https://heartfilia.github.io/2025/01/09/linux-rom/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">【泛型】go语言泛型编程</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">【linux】磁盘挂载相关问题</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2023-02-07T08:02:44.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-02-07</time></li>
+                <li><time datetime="2025-01-09T07:59:06.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-01-09</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">Lodge Heartfilia</span>
                 </li>
@@ -228,7 +229,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~1.59K
+                            ~2.61K
                         
                         字
                     </li>
@@ -240,49 +241,177 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698819707814"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1736409546370"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81root%E6%9D%83%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">一、root权限</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98"><span class="toc-number">2.</span> <span class="toc-text">二、挂载磁盘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text">1. 查看磁盘信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">2. 分区管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%A6%82%E6%9E%9C%E5%B7%B2%E7%BB%8F%E6%9C%89%E5%88%86%E5%8C%BA-%E5%88%A0%E9%99%A4-%E5%8F%AF%E9%80%89"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 如果已经有分区 - 删除(可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%B2%A1%E6%9C%89%E5%88%86%E5%8C%BA-%E5%8F%AF%E9%80%89"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 没有分区(可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E6%9B%B4%E6%94%B9%E5%88%86%E5%8C%BA%E6%A0%BC%E5%BC%8F%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3更改分区格式（可选）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="toc-number">2.3.</span> <span class="toc-text">3.格式化分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="toc-number">2.4.</span> <span class="toc-text">4. 配置开机自动挂载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text">额外信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E7%9A%84%E5%86%85%E5%AE%B9%E5%92%8C%E6%9C%AC%E6%96%87%E5%85%B3%E7%B3%BB%E4%B8%8D%E5%A4%A7"><span class="toc-number">3.1.</span> <span class="toc-text">下面的内容和本文关系不大</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E6%98%AF%E7%94%A8%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%A4%87%E4%BB%BD"><span class="toc-number">3.1.1.</span> <span class="toc-text">只是用作记录备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E6%9B%B4%E6%94%B9%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="toc-number">3.2.</span> <span class="toc-text">docker 更改镜像下载目录</span></a></li></ol></li></ol>
+                </div>
+            
             <hr />
-            <div itemprop="articleBody"><p><code>go 1.18</code> 后面才有的内容</p>
+            <div itemprop="articleBody"><p>记录一下在ubuntu中遇到的一些问题及相关的解决方法 ：root 登陆； 磁盘挂载</p>
 <span id="more"></span>
 
-<p>更详细的推荐下面这篇文章:</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041634906">Go 1.18 泛型全面讲解：一篇讲清泛型的全部</a></p>
-<p>按照往常我们用<code>interface</code> 实现不同类型的参数接收，但是我们需要对它类型断言判断，如果有多种不同类型参数，那么我们就要多个<code>if</code> 判断，如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	printArray([]<span class="type">string</span>&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>&#125;)</span><br><span class="line">	printArray([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按照以往操作 如果要对不同类型的数组或者切片遍历需要断言</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span><span class="params">(arr <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 类型断言 x.(T) 其实就是判断T是否实现了x接口，如果实现了，就把x接口类型具体化为T类型</span></span><br><span class="line">    <span class="comment">// 如果传入的是string 那么我这里就要写string 如果其他的就要写其他的 就很麻烦</span></span><br><span class="line">	<span class="keyword">for</span> _, a := <span class="keyword">range</span> arr.([]<span class="type">string</span>) &#123;   </span><br><span class="line">		fmt.Println(a)</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 比如我这里只判断了string 那么上面传入的int类型的就会报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="一、root权限"><a href="#一、root权限" class="headerlink" title="一、root权限"></a>一、root权限</h1><p>因为有些操作老是输入 <code>sudo</code> 很麻烦，所以我们最好还是像 centos 之类的默认就是root劝降来的舒服，首先我们进入账号 给root账号创建密码</p>
+<ol>
+<li>设置root账号的密码</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<p>然后输入并确认root账号的密码，可能会问你要密码先，如果没有配置的话，大概率是和你当前账号一样的密码</p>
+<ol start="2">
+<li>允许 root用户通过ssh登陆</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config   <span class="comment"># 打开配置文件</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们输入 <code>? </code>然后输入 <code>PermitRoot </code> 直接回车</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109115600453.png" alt="image-20250109115600453"></p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109115644045.png" alt="image-20250109115644045"></p>
+<p>然后按 <code>n</code> 切换下一个匹配，找到这一行，我这里是改过的，如果没有改的话，这里应该是</p>
+<p><code>PermitRootLogin prohibit-password</code>  如果是 <code>yes</code> 那么忽略</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109115722248.png" alt="image-20250109115722248"></p>
+<p>如果是 <code>PermitRootLogin prohibit-password</code> 就改成我图中的 <code>yes</code></p>
+<p>在vim里面 可以用 (a i o或者其大写做一些插入，新手的话 直接用 <code>i</code> 就好了) 然后进入插入模式，然后按 <code>end</code>挪光标到末尾，删除<code>prohibit-password</code>  然后改成 <code>yes</code> </p>
+<p>最后按<code>ESC</code> 退出插入模式 然后按 <code>:</code> 进入编辑模式 输入 <code>wq</code> 保存退出</p>
+<ol start="3">
+<li>重启 SSH 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart ssh</span><br></pre></td></tr></table></figure>
 
 
 
-<p>现在我们多了<strong>泛型</strong>,可以大大的简化这个过程</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	printArray([]<span class="type">string</span>&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>&#125;)</span><br><span class="line">	printArray([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;)</span><br><span class="line">    printParam(<span class="number">3.14</span>)</span><br><span class="line">    printParam(<span class="string">&quot;666&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以我们不限定它的类型，让调用者直接去定义类型： go1.18后才有这个泛型的</span></span><br><span class="line"><span class="comment">// 函数名后面加入中括号限定 arr的类型  我这里限定了只能传入string或者int</span></span><br><span class="line"><span class="comment">// 因为我这里是数组类型 所以传入形式类型 []T</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span>[<span class="title">T</span> <span class="title">string</span> | <span class="title">int</span>]<span class="params">(arr []T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, a := <span class="keyword">range</span> arr &#123;</span><br><span class="line">		fmt.Println(a)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里是普通的单值类型 所以我们可以这样子 T</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printParam</span>[<span class="title">T</span> <span class="title">string</span> | <span class="title">int</span> | <span class="title">float64</span>]<span class="params">(p T)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%v %T\n&quot;</span>, p, p)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这样子我们就可以对限定了类型的参数进行合并操作了</span></span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>内置的泛型 <code>any</code> 和 <code>comparable</code></p>
-<blockquote>
-<p><code>any</code>: 表示go里面所有的内置基本类型，等价于<code>interface&#123;&#125;</code></p>
-<p><code>comparable</code>: 表示go里面所有内置的可比较类型–&gt; <code>int,uint,float,bool,struct,指针</code>等一切可以比较的类型</p>
+<p>然后接下来我们就可以用 <code>root</code> 账号进行登陆了</p>
+<h1 id="二、挂载磁盘"><a href="#二、挂载磁盘" class="headerlink" title="二、挂载磁盘"></a>二、挂载磁盘</h1><blockquote>
+<p>走到这里，下面所有的内容我默认是root权限下运行的了，如果你不是，自己在命令前加 sudo ,下面截图均为示例</p>
 </blockquote>
+<h2 id="1-查看磁盘信息"><a href="#1-查看磁盘信息" class="headerlink" title="1. 查看磁盘信息"></a>1. 查看磁盘信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109134328138.png" alt="image-20250109134328138"></p>
+<p>可以看到并没有挂载磁盘或者说没有我们目标中的~大磁盘</p>
+<p>然后我们查看一下磁盘的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109134549771.png" alt="image-20250109134549771"></p>
+<p>看到我们有一个4T的盘没有挂载，如上示例 <code>nveme0n1</code> 即是我们要的盘</p>
+<p>如果已经挂载了会有如下情况,下面两个情况都是已经创建了分区</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109134732240.png" alt="image-20250109134732240"></p>
+<h2 id="2-分区管理"><a href="#2-分区管理" class="headerlink" title="2. 分区管理"></a>2. 分区管理</h2><h3 id="2-1-如果已经有分区-删除-可选"><a href="#2-1-如果已经有分区-删除-可选" class="headerlink" title="2.1 如果已经有分区 - 删除(可选)"></a>2.1 如果已经有分区 - 删除(可选)</h3><blockquote>
+<p> 可选–我们可以删除分区（<em>不一定要实现这个操作啊</em>）</p>
 </blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printArray</span>[<span class="title">T</span> <span class="title">any</span>]<span class="params">(arr []T)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, a := <span class="keyword">range</span> arr &#123;</span><br><span class="line">        fmt.Println(a)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109135123019.png" alt="image-20250109135123019"></p>
+<p>操作完之后 磁盘就是如下情况</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109135148583.png" alt="image-20250109135148583"></p>
+<h3 id="2-2-没有分区-可选"><a href="#2-2-没有分区-可选" class="headerlink" title="2.2 没有分区(可选)"></a>2.2 没有分区(可选)</h3><ol>
+<li>创建分区</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/nvme0n1</span><br></pre></td></tr></table></figure>
 
-
-
+<p>出来输入行后先输入<code>n</code>  即 new 创建分区</p>
+<p>后续操作后我们全部默认即可，然后输入 <code>w</code>退出，如下</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109135430019.png" alt="image-20250109135430019"></p>
+<p>操作完之后可以输入<code>lsblk</code> 查看一下 </p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109135519035.png" alt="image-20250109135519035"></p>
 <blockquote>
-<p>总结：泛型的作用</p>
+<p>注意这里，可能有的时候默认是2T，根据情况自己操作</p>
 </blockquote>
-<p>泛型减少重复代码并提高类型的安全性</p>
+<p><strong>如下情况</strong></p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109135822725.png" alt="image-20250109135822725"></p>
+<p>这个是因为磁盘的分区格式问题 之前是 MBR分区，所以我们可以转成GPT分区，这样子可以挂载更大的空间容量</p>
+<h3 id="2-3更改分区格式（可选）"><a href="#2-3更改分区格式（可选）" class="headerlink" title="2.3更改分区格式（可选）"></a>2.3更改分区格式（可选）</h3><p>操作如下：我们先按照上面的流程，<code>先删除磁盘的分区</code>，然后我们 使用 <code>parted</code>工具将磁盘格式化为GPT</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/nvme0n1</span><br></pre></td></tr></table></figure>
+
+<p>进入交互页面后输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklabel gpt</span><br></pre></td></tr></table></figure>
+
+<p>然后输入 <code>yes</code>  然后输入 <code>quit</code> 退出</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109140157319.png" alt="image-20250109140157319"></p>
+<p>然后我们就可以 继续上面<code>2.2</code>的流程 挂载全盘了(就是重新操作一遍)</p>
+<h2 id="3-格式化分区"><a href="#3-格式化分区" class="headerlink" title="3.格式化分区"></a>3.格式化分区</h2><ol>
+<li>格式化为文件系统（ext4）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/nvme0n1p1</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建挂载点</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /mnt/data    <span class="comment"># 这里是我创建到这里的，可以自己根据情况创建</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>挂载分区 - 临时挂载分区以验证：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/nvme0n1p1 /mnt/data</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>验证是否挂载成功</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p>如果出现了如下情况，就是成功了</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109141650093.png" alt="image-20250109141650093"></p>
+<h2 id="4-配置开机自动挂载"><a href="#4-配置开机自动挂载" class="headerlink" title="4. 配置开机自动挂载"></a>4. 配置开机自动挂载</h2><p>因为上面是临时挂载，如果电脑重启了，那么就还需要手动挂载一次，所以为了方便，我们都要进行一下开机自动挂载</p>
+<ol>
+<li>获取UUID</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid /dev/nvme0n1p1</span><br></pre></td></tr></table></figure>
+
+<p>输入之后会出现如下情况</p>
+<p><code>/dev/nvme0n1p1: UUID=&quot;1234-ABCD&quot; TYPE=&quot;ext4&quot; ...</code></p>
+<p>我们复制UUID的内容 拼接这个字符串,后面粘贴进fs的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=替换成你的UUID盘<span class="built_in">id</span>  /mnt/data  ext4  defaults  0  2</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>打开文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p>然后我们刚才组合好的字符串放到文件后面就好了(这里的操作就不教了)</p>
+<p>如下</p>
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109142427534.png" alt="image-20250109142427534"></p>
+<p>保存退出，</p>
+<p>3.校验</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+
+<p>如果上面的命令，没有报错，则挂载配置完成</p>
+<h1 id="额外信息"><a href="#额外信息" class="headerlink" title="额外信息"></a>额外信息</h1><h2 id="下面的内容和本文关系不大"><a href="#下面的内容和本文关系不大" class="headerlink" title="下面的内容和本文关系不大"></a>下面的内容和本文关系不大</h2><h3 id="只是用作记录备份"><a href="#只是用作记录备份" class="headerlink" title="只是用作记录备份"></a>只是用作记录备份</h3><p>方便后面查看</p>
+<h2 id="docker-更改镜像下载目录"><a href="#docker-更改镜像下载目录" class="headerlink" title="docker 更改镜像下载目录"></a>docker 更改镜像下载目录</h2><p>因为我们现在有很大的空间了，我们可以把docker的镜像啥的东西搞到我们新弄的磁盘下面了</p>
+<ol>
+<li>停止docker（可选，不停也没关系）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建数据挂载磁盘</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设你想将 Docker 的数据存储到我们的大空间磁盘 /mnt/data/docker，可以创建该目录</span></span><br><span class="line"><span class="comment"># 然后把权限配置好</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/data/docker</span><br><span class="line"><span class="built_in">chown</span> -R root:root /mnt/data/docker</span><br><span class="line"><span class="built_in">chmod</span> -R 755 /mnt/data/docker</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编辑docker的配置文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件不存在会自动创建的 你没有动过的话 大概率里面是空的</span></span><br><span class="line">vim /etc/docker/daemon.json    <span class="comment"># 用你喜欢的编辑器就可以  nano 也可以</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>把下面的内容贴进去</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;data-root&quot;</span>: <span class="string">&quot;/mnt/data/docker&quot;</span>   <span class="comment"># 就是我们上面创建的挂载的目录</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>重启docker服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker   <span class="comment"># 如果你上面是stop了的 可以试试把restart换成start</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>校验是否成功</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker info | grep <span class="string">&quot;Docker Root Dir&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============ 如果成功的话，你会看到下面的的输出内容</span></span><br><span class="line">Docker Root Dir: /mnt/data/docker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://static.litetools.top/blogs/linux_rom/image-20250109155232104.png" alt="image-20250109155232104"></p>
 <blockquote>
-<p>泛型最佳适配场合</p>
+<p> 到此 docker的镜像下载目录就替换成功了</p>
 </blockquote>
-<ul>
-<li>需要针对不同类型书写同样的逻辑</li>
-<li>使用泛型简化代码</li>
-</ul>
 </div>
         </div>
         
@@ -336,7 +465,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "https://heartfilia.github.io/2023/02/07/goGenericbase/",
+                text: "https://heartfilia.github.io/2025/01/09/linux-rom/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -348,9 +477,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "https://heartfilia.github.io/2023/02/07/goGenericbase/";
-            const title         = "「【泛型】go语言泛型编程」";
-            const excerpt       = `go 1.18 后面才有的内容`;
+            const hostUrl       = "https://heartfilia.github.io/2025/01/09/linux-rom/";
+            const title         = "「【linux】磁盘挂载相关问题」";
+            const excerpt       = `记录一下在ubuntu中遇到的一些问题及相关的解决方法 ：root 登陆； 磁盘挂载`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -369,10 +498,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/go/" rel="tag">go</a>
+                    <a class="tag-none-link" href="/tags/docker/" rel="tag">docker</a>, <a class="tag-none-link" href="/tags/linux/" rel="tag">linux</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-01T06:21:47.814Z" itemprop="dateModified">最后编辑：2023-11-01</time>
+                    <time datetime="2025-01-09T07:59:06.370Z" itemprop="dateModified">最后编辑：2025-01-09</time>
                 </div>
             </div>
         </footer>
@@ -381,13 +510,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 【Go web】后台框架入门" href="/2023/02/07/go-webbase/">&lt; 上一篇</a>
+                <a title=" 【https】原来自己签https网站这么简单" href="/2024/04/09/https-write/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 【goSwagger】goswagger+gin配置踩坑" href="/2023/02/10/goSwagger/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
@@ -446,6 +571,18 @@
 </aside>
             
                     <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81root%E6%9D%83%E9%99%90"><span class="toc-text">一、root权限</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98"><span class="toc-text">二、挂载磁盘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF"><span class="toc-text">1. 查看磁盘信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-text">2. 分区管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%A6%82%E6%9E%9C%E5%B7%B2%E7%BB%8F%E6%9C%89%E5%88%86%E5%8C%BA-%E5%88%A0%E9%99%A4-%E5%8F%AF%E9%80%89"><span class="toc-text">2.1 如果已经有分区 - 删除(可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%B2%A1%E6%9C%89%E5%88%86%E5%8C%BA-%E5%8F%AF%E9%80%89"><span class="toc-text">2.2 没有分区(可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E6%9B%B4%E6%94%B9%E5%88%86%E5%8C%BA%E6%A0%BC%E5%BC%8F%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">2.3更改分区格式（可选）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="toc-text">3.格式化分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="toc-text">4. 配置开机自动挂载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E4%BF%A1%E6%81%AF"><span class="toc-text">额外信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E7%9A%84%E5%86%85%E5%AE%B9%E5%92%8C%E6%9C%AC%E6%96%87%E5%85%B3%E7%B3%BB%E4%B8%8D%E5%A4%A7"><span class="toc-text">下面的内容和本文关系不大</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E6%98%AF%E7%94%A8%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%A4%87%E4%BB%BD"><span class="toc-text">只是用作记录备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E6%9B%B4%E6%94%B9%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="toc-text">docker 更改镜像下载目录</span></a></li></ol></li></ol>
+    </div>
+</aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
